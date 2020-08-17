@@ -1,7 +1,8 @@
-package com.bijumondal.doctorhealthcare
+package com.bijumondal.doctorhealthcare.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bijumondal.doctorhealthcare.R
 
 class MainActivity : AppCompatActivity() {
 

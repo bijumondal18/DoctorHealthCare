@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DoctorHealthCare</string>
+    <string name="text_choose_one">Share Via</string>
 </resources>
