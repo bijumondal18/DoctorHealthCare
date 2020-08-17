@@ -107,6 +107,15 @@ class Helper {
             return deviceType!!
         }
 
+        fun userType(type: Int): String {
+            var userType: String? = null
+            when (type) {
+                1 -> userType = "Patient"
+                2 -> userType = "Doctor"
+            }
+            return userType!!
+        }
+
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun showLoading(context: Context) {

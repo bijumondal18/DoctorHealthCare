@@ -21,6 +21,7 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_AUTH_KEY = "AUTH_KEY"
         private const val KEY_USER_ID = "USER_ID"
         private const val KEY_CTT_ID = "CTT_ID"
+        private const val KEY_USER_TYPE = "USER_TYPE_ID"
 
 
     }
@@ -68,6 +69,19 @@ class HealthCarePreference(val context: Context) {
         return sharedPref.getInt(KEY_USER_ID, 0)
 
     }
+
+    fun setUserType(id: Int) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putInt(KEY_USER_TYPE, id)
+        editor.apply()
+    }
+
+    fun getUserType(): Int? {
+        return sharedPref.getInt(KEY_USER_TYPE, 0)
+
+    }
+
+
     fun setCttId(id: Int) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putInt(KEY_CTT_ID, id)
