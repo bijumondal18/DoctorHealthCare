@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context=".activities.LoginActivity">
+    tools:context=".activities.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_marginLeft="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_32"
             android:fontFamily="@font/roboto_bold"
-            android:text="Sign In"
+            android:text="Create Account"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_22" />
 
@@ -32,16 +32,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16"
-                android:text="Don't have an account?"
+                android:text="Already have an account?"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_18" />
 
             <TextView
-                android:id="@+id/tv_goto_sign_up"
+                android:id="@+id/tv_goto_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text=" Sign Up!"
+                android:text=" Sign In!"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_18" />
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_64"
-            android:text="Email or Phone number"
+            android:text="Username"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/font_16" />
 
@@ -64,7 +64,54 @@
             android:layout_marginTop="@dimen/margin_8"
             android:layout_marginRight="@dimen/margin_16"
             android:background="@drawable/edit_text_background_style"
-            android:hint="Username or Mobile number"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:paddingLeft="@dimen/padding_12"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="Email"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_16"
+            android:background="@drawable/edit_text_background_style"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/padding_12"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="Phone"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <EditText
+            android:id="@+id/edt_phone_numbe"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_16"
+            android:background="@drawable/edit_text_background_style"
+            android:hint="Phone number"
+            android:inputType="number"
             android:paddingLeft="@dimen/padding_12"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16" />
@@ -92,12 +139,35 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="Confirm password"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <EditText
+            android:id="@+id/edt_cnf_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginRight="@dimen/margin_16"
+            android:background="@drawable/edit_text_background_style"
+            android:hint="********"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/padding_12"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16" />
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_in"
+            android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="@dimen/material_button_height"
             android:layout_margin="@dimen/margin_16"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="@color/colorBackground"
             android:textSize="@dimen/font_16" />

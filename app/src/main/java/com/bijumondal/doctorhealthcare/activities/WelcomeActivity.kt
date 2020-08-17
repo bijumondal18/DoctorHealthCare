@@ -16,5 +16,9 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
             finish()
         }
+
+
     }
+
+
 }
