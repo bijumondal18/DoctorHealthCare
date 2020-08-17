@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">DoctorHealthCare</string>
+
     <string name="text_choose_one">Share Via</string>
+    <string name="splash_title">Doctor <b><style fontFamily="roboto_extra_bold">HealthCare</style></b></string>
+    <string name="agree_and_continue">Tap "Agree &amp; Continue" to accept the Doctor\nHealthCare <b><u><style color="#FDAD3F">Terms of Service</style></u></b> &amp; <b><u><style color="#FDAD3F">Privacy Policy.</style></u></b></string>
+
+
 </resources>

@@ -130,27 +130,27 @@ class Helper {
         }
 
         fun setBoldTypeface(context: Context, textView: TextView) {
-            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Bold.ttf")
+            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_bold.ttf")
         }
 
         fun setMediumTypeface(context: Context, textView: TextView) {
-            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Medium.ttf")
+            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_medium.ttf")
         }
 
         fun setMediumTypefaceButton(context: Context, btn: Button) {
-            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Medium.ttf")
+            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_medium.ttf")
         }
 
         fun setMediumTypefaceRadioButton(context: Context, btn: RadioButton) {
-            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Medium.ttf")
+            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_medium.ttf")
         }
 
         fun setRegularTypefaceButton(context: Context, btn: Button) {
-            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Regular.ttf")
+            btn.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_regular.ttf")
         }
 
         fun setRegularTypeface(context: Context, textView: TextView) {
-            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/Roboto-Regular.ttf")
+            textView.typeface = Typeface.createFromAsset(context.assets, "fonts/roboto_regular.ttf")
         }
 
         /*fun showRefresh(refresh: SwipeRefreshLayout) {

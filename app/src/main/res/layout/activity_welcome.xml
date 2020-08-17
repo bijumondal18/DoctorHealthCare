@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.WelcomeActivity">
+
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_48"
+        android:text="Welcome to"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/font_16" />
+
+    <ImageView
+        android:id="@+id/app_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_text"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_64"
+        android:src="@drawable/logo_splash" />
+
+    <TextView
+        android:id="@+id/title_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/splash_title"
+        android:textAllCaps="true"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/font_16" />
+
+    <TextView
+        android:id="@+id/title_talk_to_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_app_name"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="Talk to patient"
+        android:textAllCaps="true"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_agree_and_continue"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/agree_and_continue"
+        android:textAlignment="center"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_16" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_agree_and_continue"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="@dimen/margin_24"
+        android:fontFamily="@font/roboto_extra_bold"
+        android:text="Agree &amp; Continue"
+        android:textAllCaps="false"
+        android:textSize="@dimen/font_16" />
+
+</RelativeLayout>
