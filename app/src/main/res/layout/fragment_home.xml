@@ -22,16 +22,13 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
             app:titleTextAppearance="@style/ToolbarTitleAppearance"
-            app:titleTextColor="@color/primaryTextColor">
-
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@color/primaryTextColor" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:scrollbars="none">
 
         <LinearLayout
@@ -39,6 +36,46 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding_8"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginRight="@dimen/margin_12">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Find your"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_20" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Specialist"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_28" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_search" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    if (supportFragmentManager.findFragmentByTag(homeFragment) != null) {
+                    /*if (supportFragmentManager.findFragmentByTag(homeFragment) != null) {
                         supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(homeFragment)!!).commit()
                     } else {
                         supportFragmentManager.beginTransaction().add(R.id.main_frame, HomeFragment.newInstance(), homeFragment).commit()
@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
                         supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
-                    }
-                    /*val homeFragment = HomeFragment.newInstance()
-                    openFragment(homeFragment)*/
-                    //return@OnNavigationItemSelectedListener true
+                    }*/
+                    val homeFragment = HomeFragment.newInstance()
+                    openFragment(homeFragment)
+                    return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_my_appointments -> {
-                    if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
+                   /* if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
                         supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(myAppointmentFragment)!!).commit()
                     } else {
                         supportFragmentManager.beginTransaction().add(R.id.main_frame, MyAppointmentFragment.newInstance(), myAppointmentFragment).commit()
@@ -54,14 +54,14 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
                         supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
-                    }
+                    }*/
 
-                    /*val myApptsFragment = MyAppointmentFragment.newInstance()
+                    val myApptsFragment = MyAppointmentFragment.newInstance()
                     openFragment(myApptsFragment)
-                    return@OnNavigationItemSelectedListener true*/
+                    return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-                    if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
+                   /* if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
                         supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
                     } else {
                         supportFragmentManager.beginTransaction().add(R.id.main_frame, ProfileFragment.newInstance(), profileFragment).commit()
@@ -72,14 +72,14 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
                         supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(myAppointmentFragment)!!).commit()
-                    }
-                    /*val profileFragment = ProfileFragment.newInstance()
+                    }*/
+                    val profileFragment = ProfileFragment.newInstance()
                     openFragment(profileFragment)
-                    return@OnNavigationItemSelectedListener true*/
+                    return@OnNavigationItemSelectedListener true
                 }
             }
 
-            true
+            false
         }
 
 
@@ -95,23 +95,23 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        // defaultFragment(HomeFragment)
+        defaultFragment(HomeFragment)
     }
 
-    /*private fun openFragment(fragment: Fragment): Fragment? {
+    private fun openFragment(fragment: Fragment): Fragment? {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_frame, fragment)
         //transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         transaction.commit()
         return fragment
-    }*/
+    }
 
-    /*private fun defaultFragment(fragment: HomeFragment.Companion) {
+    private fun defaultFragment(fragment: HomeFragment.Companion) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_frame, HomeFragment.newInstance())
         // transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         transaction.commit()
-    }*/
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressed()

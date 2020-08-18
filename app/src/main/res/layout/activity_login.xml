@@ -57,7 +57,7 @@
             android:textSize="@dimen/font_16" />
 
         <EditText
-            android:id="@+id/edt_username"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="@dimen/margin_16"
@@ -79,7 +79,7 @@
             android:textSize="@dimen/font_16" />
 
         <EditText
-            android:id="@+id/edt_password"
+            android:id="@+id/edt_password_login"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="@dimen/margin_16"

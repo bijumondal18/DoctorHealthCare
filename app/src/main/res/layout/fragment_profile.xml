@@ -47,105 +47,50 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_24"
-                android:src="@color/primaryTextColor" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_24"
-                android:text="Name" />
-
-            <TextView
-                android:id="@+id/tv_profile_name"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:gravity="center"
-                android:padding="@dimen/padding_12"
-                android:text="Rakesh Ghosh"
-                android:textAlignment="textStart"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/font_16"
-                tools:ignore="RtlCompat" />
+                android:layout_margin="@dimen/margin_16">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_12"
-                android:text="Email" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@color/primaryTextColor" />
 
-            <TextView
-                android:id="@+id/tv_profile_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:gravity="center"
-                android:padding="@dimen/padding_12"
-                android:text="rkshghos@gmail.com"
-                android:textAlignment="textStart"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/font_16"
-                tools:ignore="RtlCompat" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/padding_8"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_toEndOf="@id/iv_profile_image"
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_12"
-                android:text="Phone number" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rakesh Ghosh"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_18" />
 
-            <TextView
-                android:id="@+id/tv_profile_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:gravity="center"
-                android:padding="@dimen/padding_12"
-                android:text="+91 8585784857"
-                android:textAlignment="textStart"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/font_16"
-                tools:ignore="RtlCompat" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="abc@gmail.com"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_14" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_12"
-                android:text="Address" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+91 7548547547"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_16" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_profile_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:gravity="center"
-                android:padding="@dimen/padding_12"
-                android:text="79/2, Dn block, dumdum, Kolkata"
-                android:textAlignment="textStart"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/font_16"
-                tools:ignore="RtlCompat" />
+            </RelativeLayout>
+
 
         </LinearLayout>
 

@@ -95,16 +95,16 @@ class RegisterActivity : AppCompatActivity() {
                                 mPreference.setIsLoggedIn(true)
                             }
 
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.message)
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
 
                             } else if (response.body()!!.errors != null) {
                                 Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
                             }
 
                         } else {
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.message)
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
 
                             } else if (response.body()!!.errors != null) {
                                 Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
