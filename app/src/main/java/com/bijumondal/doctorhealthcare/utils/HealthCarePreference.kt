@@ -20,7 +20,6 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_NUMBER = "NUMBER"
         private const val KEY_AUTH_KEY = "AUTH_KEY"
         private const val KEY_USER_ID = "USER_ID"
-        private const val KEY_CTT_ID = "CTT_ID"
         private const val KEY_USER_TYPE = "USER_TYPE_ID"
 
 
@@ -29,13 +28,11 @@ class HealthCarePreference(val context: Context) {
     private val sharedPref: SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-
     fun setIsFirstTimeAppLoad(status: Boolean) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putBoolean(KEY_FIRST_TIME_APP_LOAD, status)
         editor.apply()
     }
-
 
     fun isFirstTimeAppLoad(): Boolean {
         return sharedPref.getBoolean(KEY_FIRST_TIME_APP_LOAD, true)
@@ -52,11 +49,14 @@ class HealthCarePreference(val context: Context) {
         return sharedPref.getString(KEY_AUTH_KEY, null)
     }
 
-
     fun setIsEmailAndNumberAvailable(status: Boolean) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putBoolean(KEY_EMAIL_AND_NUMBER_AVAILABLE, status)
         editor.apply()
+    }
+
+    fun isEmailAndNumberAvailable(): Boolean {
+        return sharedPref.getBoolean(KEY_EMAIL_AND_NUMBER_AVAILABLE, false)
     }
 
     fun setUserId(id: Int) {
@@ -67,7 +67,6 @@ class HealthCarePreference(val context: Context) {
 
     fun getUserId(): Int? {
         return sharedPref.getInt(KEY_USER_ID, 0)
-
     }
 
     fun setUserType(id: Int) {
@@ -78,23 +77,6 @@ class HealthCarePreference(val context: Context) {
 
     fun getUserType(): Int? {
         return sharedPref.getInt(KEY_USER_TYPE, 0)
-
-    }
-
-
-    fun setCttId(id: Int) {
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putInt(KEY_CTT_ID, id)
-        editor.apply()
-    }
-
-    fun getCTTId(): Int? {
-        return sharedPref.getInt(KEY_CTT_ID, 0)
-
-    }
-
-    fun isEmailAndNumberAvailable(): Boolean {
-        return sharedPref.getBoolean(KEY_EMAIL_AND_NUMBER_AVAILABLE, false)
     }
 
     fun setIsLoggedIn(status: Boolean) {

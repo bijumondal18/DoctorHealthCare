@@ -64,7 +64,7 @@
             android:layout_marginTop="@dimen/margin_8"
             android:layout_marginRight="@dimen/margin_16"
             android:background="@drawable/edit_text_background_style"
-            android:hint="Username or Mobile number"
+            android:hint="Email or Mobile number"
             android:paddingLeft="@dimen/padding_12"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16" />
