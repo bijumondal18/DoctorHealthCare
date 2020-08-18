@@ -8,6 +8,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
+import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
+import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
 import com.bijumondal.doctorhealthcare.models.patientRegistration.ResponsePatientRegistration
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
@@ -47,21 +49,99 @@ class RegisterActivity : AppCompatActivity() {
 
         btn_sign_up.setOnClickListener {
 
-            if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
-                if (password == cnfPassword) {
+            if (mPreference.getUserType() == 1) {
 
-                    val request = RequestPatientRegistration(email, firstName, lastName, mobile, password)
-                    doPatientRegistration(request)
+                if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
+                    if (password == cnfPassword) {
+
+                        val request = RequestPatientRegistration(email, firstName, lastName, mobile, password)
+                        doPatientRegistration(request)
+
+                    } else {
+                        Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                    }
 
                 } else {
-                    Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                    Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+
                 }
 
-            } else {
-                Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+            } else if (mPreference.getUserType() == 2) {
 
+                if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
+                    if (password == cnfPassword) {
+
+                        val request = RequestDoctorRegistration(email, firstName, lastName, mobile, password)
+                        doDoctorRegistration(request)
+
+                    } else {
+                        Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                    }
+
+                } else {
+                    Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+
+                }
             }
 
+        }
+
+    }
+
+    private fun doDoctorRegistration(request: RequestDoctorRegistration) {
+        if (Helper.isConnectedToInternet(this@RegisterActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponseDoctorRegistration> = APIInterface.create().doctorRegistration(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponseDoctorRegistration> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorRegistration>,
+                    response: Response<ResponseDoctorRegistration>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.doctor_id != null) {
+                                    val doctorId = mData.doctor_id
+                                    mPreference.setUserId(doctorId)
+                                }
+                                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                                finish()
+                                mPreference.setIsLoggedIn(true)
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@RegisterActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorRegistration>, t: Throwable) {
+                    Helper.toastShort(this@RegisterActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
         }
 
     }

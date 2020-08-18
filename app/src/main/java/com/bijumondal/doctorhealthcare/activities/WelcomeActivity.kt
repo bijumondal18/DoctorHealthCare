@@ -1,54 +1,79 @@
 package com.bijumondal.doctorhealthcare.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.bijumondal.doctorhealthcare.R
-import com.bijumondal.doctorhealthcare.adapters.UserTypeAdapter
-import com.bijumondal.doctorhealthcare.models.userType.UserType
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : AppCompatActivity() {
 
-    var userTypeAdapter: UserTypeAdapter? = null
-    var userTypeList: ArrayList<UserType> = ArrayList()
-    private lateinit var mRecyclerView: RecyclerView
+    companion object {
+        private const val TAG = "WelcomeActivity"
+    }
+
     private lateinit var mPreferences: HealthCarePreference
+
+    private var userTypeDoctor: Boolean = false
+    private var userTypePatient: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
         mPreferences = HealthCarePreference(this@WelcomeActivity)
-        mRecyclerView = findViewById(R.id.rv_user_type)
 
-        btn_agree_and_continue.setOnClickListener {
-            if (mPreferences.getUserType() == 0) {
-                startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
-                finish()
-            } else if (mPreferences.getUserType() == 1) {
-                startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
-                finish()
+        mPreferences.clearSharedPreference()
+
+        rg_user_type.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener { group, checkedId ->
+                when (findViewById<RadioButton>(checkedId)) {
+                    findViewById<RadioButton>(R.id.rb_patient) -> {
+                        rb_patient.isChecked = true
+                        rb_doctor.isChecked = false
+                        userTypePatient = true
+                        userTypeDoctor = false
+                        mPreferences.setUserType(1)  //1 for patient
+                        rb_patient.setBackgroundColor(Color.parseColor("#FDAD3F"))
+                        rb_doctor.setBackgroundColor(Color.parseColor("#ebebeb"))
+                    }
+
+                    findViewById<RadioButton>(R.id.rb_doctor) -> {
+                        rb_doctor.isChecked = true
+                        rb_patient.isChecked = false
+                        userTypePatient = false
+                        userTypeDoctor = true
+                        mPreferences.setUserType(2)   //2 for doctor
+                        rb_doctor.setBackgroundColor(Color.parseColor("#FDAD3F"))
+                        rb_patient.setBackgroundColor(Color.parseColor("#ebebeb"))
+                    }
+                }
+            }
+        )
+
+        btn_next.setOnClickListener {
+            if (mPreferences.getUserType() != null) {
+
+                if (mPreferences.getUserType() == 1) {
+                    startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
+                    finish()
+                } else if (mPreferences.getUserType() == 2) {
+                    startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
+                    finish()
+                }else {
+                    Helper.toastShort(this@WelcomeActivity, "Please choose a user type!")
+                }
+
             } else {
                 Helper.toastShort(this@WelcomeActivity, "Please choose a user type!")
             }
 
         }
 
-        userTypeList.add(UserType(1, R.drawable.patient_thumbnail, "Patient"))
-        userTypeList.add(UserType(2, R.drawable.doctor_thumbnail, "Doctor"))
-
-        val layoutManager = GridLayoutManager(this@WelcomeActivity, 2)
-        mRecyclerView.layoutManager = layoutManager
-
-        userTypeAdapter = UserTypeAdapter(userTypeList, this@WelcomeActivity)
-        mRecyclerView.adapter = userTypeAdapter
-        userTypeAdapter!!.notifyDataSetChanged()
 
     }
 

@@ -26,53 +26,16 @@ class MainActivity : AppCompatActivity() {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    /*if (supportFragmentManager.findFragmentByTag(homeFragment) != null) {
-                        supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(homeFragment)!!).commit()
-                    } else {
-                        supportFragmentManager.beginTransaction().add(R.id.main_frame, HomeFragment.newInstance(), homeFragment).commit()
-                    }
-                    if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(myAppointmentFragment)!!).commit()
-
-                    }
-                    if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
-                    }*/
                     val homeFragment = HomeFragment.newInstance()
                     openFragment(homeFragment)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_my_appointments -> {
-                   /* if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
-                        supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(myAppointmentFragment)!!).commit()
-                    } else {
-                        supportFragmentManager.beginTransaction().add(R.id.main_frame, MyAppointmentFragment.newInstance(), myAppointmentFragment).commit()
-                    }
-                    if (supportFragmentManager.findFragmentByTag(homeFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(homeFragment)!!).commit()
-
-                    }
-                    if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
-                    }*/
-
                     val myApptsFragment = MyAppointmentFragment.newInstance()
                     openFragment(myApptsFragment)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-                   /* if (supportFragmentManager.findFragmentByTag(profileFragment) != null) {
-                        supportFragmentManager.beginTransaction().show(supportFragmentManager.findFragmentByTag(profileFragment)!!).commit()
-                    } else {
-                        supportFragmentManager.beginTransaction().add(R.id.main_frame, ProfileFragment.newInstance(), profileFragment).commit()
-                    }
-                    if (supportFragmentManager.findFragmentByTag(homeFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(homeFragment)!!).commit()
-
-                    }
-                    if (supportFragmentManager.findFragmentByTag(myAppointmentFragment) != null) {
-                        supportFragmentManager.beginTransaction().hide(supportFragmentManager.findFragmentByTag(myAppointmentFragment)!!).commit()
-                    }*/
                     val profileFragment = ProfileFragment.newInstance()
                     openFragment(profileFragment)
                     return@OnNavigationItemSelectedListener true

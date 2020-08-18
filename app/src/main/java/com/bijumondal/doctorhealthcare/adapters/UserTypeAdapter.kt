@@ -1,3 +1,4 @@
+/*
 package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
@@ -69,4 +70,4 @@ class UserTypeAdapter(
         val llParent = view.ll_parent
     }
 
-}
+}*/
