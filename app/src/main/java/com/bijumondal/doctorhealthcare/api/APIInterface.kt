@@ -8,10 +8,14 @@ import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreat
 import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
 import com.bijumondal.doctorhealthcare.models.doctorLogin.RequestDoctorLogin
 import com.bijumondal.doctorhealthcare.models.doctorLogin.ResponseDoctorLogin
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctorProfileDetails
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
 import com.bijumondal.doctorhealthcare.models.patientRegistration.ResponsePatientRegistration
 import com.google.gson.Gson
@@ -61,6 +65,9 @@ interface APIInterface {
     @POST(Constants.PATIENT_CREATE_PROFILE_URL)
     fun createPatientProfile(@Body request: RequestCreatePatientProfile): Call<ResponseCreatePatientProfile>
 
+    @POST(Constants.PATIENT_PROFILE_DETAILS_URL)
+    fun getPatientProfileDetails(@Body request: RequestPatientProfileDetails): Call<ResponsePatientProfileDetails>
+
 
     /*
     * DOCTOR SECTION
@@ -77,5 +84,8 @@ interface APIInterface {
 
     @GET(Constants.DOCTOR_DEPARTMENT_URL)
     fun getDoctorDepartments(): Call<ResponseDoctorDepartment>
+
+    @POST(Constants.DOCTOR_PROFILE_DETAILS_URL)
+    fun getDoctorProfileDetails(@Body request: RequestDoctorProfileDetails): Call<ResponseDoctorProfileDetails>
 
 }

@@ -5,8 +5,15 @@
     <string name="splash_title">Doctor <b><style fontFamily="roboto_extra_bold">HealthCare</style></b></string>
     <string name="agree_and_continue">Tap "Agree &amp; Continue" to accept the Doctor\nHealthCare <b><u><style color="#FDAD3F">Terms of Service</style></u></b> &amp; <b><u><style color="#FDAD3F">Privacy Policy.</style></u></b></string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_appointments">My Appointments</string>
+    <string name="share">Share</string>
+    <string name="rate_app">Rate us</string>
+    <string name="logout">Logout</string>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="drawer_open">Drawer Open</string>
 
 
 </resources>

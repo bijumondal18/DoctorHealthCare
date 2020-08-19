@@ -17,6 +17,7 @@ object Constants {
     const val PATIENT_LOGIN_URL = "patientlogin"
     const val PATIENT_CREATE_PROFILE_URL = "createpatientprofile"
     const val PATIENT_PHOTO_URL = "patientphoto"
+    const val PATIENT_PROFILE_DETAILS_URL = "getpatientprofile"
 
 
     /*
@@ -28,6 +29,7 @@ object Constants {
     const val DOCTOR_CREATE_PROFILE_URL = "createdoctorprofile"
     const val DOCTOR_DEPARTMENT_URL = "getdepartment"
     const val DOCTOR_PHOTO_URL = "doctorphoto"
+    const val DOCTOR_PROFILE_DETAILS_URL = "getdoctorprofile"
 
 
 }
