@@ -38,31 +38,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         mPreference = HealthCarePreference(this@LoginActivity)
 
-        validateLogin()
+        validateLoginField()
 
         btn_sign_in.setOnClickListener {
-
-            if (mPreference.getUserType() == 1) {
-
-                if (email.isNotEmpty() && password.isNotEmpty()) {
-                    val request = RequestPatientLogin(password, email)
-                    doPatientLogin(request)
-                } else {
-                    Helper.toastShort(this@LoginActivity, "Field's should not be empty!")
-                }
-
-            } else if (mPreference.getUserType() == 2) {
-
-                if (email.isNotEmpty() && password.isNotEmpty()) {
-                    val requestDoctorLogin = RequestDoctorLogin(password, email)
-                    doDoctorLogin(requestDoctorLogin)
-                } else {
-                    Helper.toastShort(this@LoginActivity, "Field's should not be empty!")
-                }
-
-            }
-
-
+            doLoginValidation()
         }
 
         tv_goto_sign_up.setOnClickListener {
@@ -72,8 +51,29 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun doDoctorLogin(request: RequestDoctorLogin) {
+    private fun doLoginValidation() {
+        if (mPreference.getUserType() == 1) {
 
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                val request = RequestPatientLogin(password, email)
+                doPatientLogin(request)
+            } else {
+                Helper.toastShort(this@LoginActivity, "Field's should not be empty!")
+            }
+
+        } else if (mPreference.getUserType() == 2) {
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                val requestDoctorLogin = RequestDoctorLogin(password, email)
+                doDoctorLogin(requestDoctorLogin)
+            } else {
+                Helper.toastShort(this@LoginActivity, "Field's should not be empty!")
+            }
+
+        }
+    }
+
+    private fun doDoctorLogin(request: RequestDoctorLogin) {
         if (Helper.isConnectedToInternet(this@LoginActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this)
@@ -91,15 +91,14 @@ class LoginActivity : AppCompatActivity() {
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
                             if (mData != null) {
-
                                 if (mData.doctor_id != null) {
                                     val doctorId = mData.doctor_id
                                     mPreference.setUserId(doctorId)
                                 }
-
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
                                 mPreference.setIsLoggedIn(true)
+
                             }
 
                             if (response.body()!!.data.message != null) {
@@ -149,7 +148,6 @@ class LoginActivity : AppCompatActivity() {
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
                             if (mData != null) {
-
                                 if (mData.patient_id != null) {
                                     val patientId = mData.patient_id
                                     mPreference.setUserId(patientId)
@@ -157,6 +155,7 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finish()
                                 mPreference.setIsLoggedIn(true)
+
                             }
 
                             if (response.body()!!.data.message != null) {
@@ -189,7 +188,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun validateLogin() {
+    private fun validateLoginField() {
         edt_email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }

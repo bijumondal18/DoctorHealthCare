@@ -9,14 +9,25 @@ object Constants {
 
     //?XDEBUG_SESSION_START=netbeans-xdebug
 
+    /*
+    * PATIENT
+    * */
 
     const val PATIENT_REGISTRATION_URL = "patientregistration"
-
     const val PATIENT_LOGIN_URL = "patientlogin"
+    const val PATIENT_CREATE_PROFILE_URL = "createpatientprofile"
+    const val PATIENT_PHOTO_URL = "patientphoto"
+
+
+    /*
+    * DOCTOR
+    * */
 
     const val DOCTOR_REGISTRATION_URL = "doctorregistration"
-
     const val DOCTOR_LOGIN_URL = "doctorlogin"
+    const val DOCTOR_CREATE_PROFILE_URL = "createdoctorprofile"
+    const val DOCTOR_DEPARTMENT_URL = "getdepartment"
+    const val DOCTOR_PHOTO_URL = "doctorphoto"
 
 
 }

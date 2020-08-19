@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         mPreference = HealthCarePreference(this@RegisterActivity)
 
-        validateRegistration()
+        validateRegistrationField()
 
         tv_goto_sign_in.setOnClickListener {
             startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
@@ -49,41 +49,46 @@ class RegisterActivity : AppCompatActivity() {
 
         btn_sign_up.setOnClickListener {
 
-            if (mPreference.getUserType() == 1) {
+            doSignUpValidation()
 
-                if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
-                    if (password == cnfPassword) {
+        }
 
-                        val request = RequestPatientRegistration(email, firstName, lastName, mobile, password)
-                        doPatientRegistration(request)
+    }
 
-                    } else {
-                        Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
-                    }
+    private fun doSignUpValidation() {
+        if (mPreference.getUserType() == 1) {
 
-                } else {
-                    Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+            if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
+                if (password == cnfPassword) {
 
-                }
-
-            } else if (mPreference.getUserType() == 2) {
-
-                if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
-                    if (password == cnfPassword) {
-
-                        val request = RequestDoctorRegistration(email, firstName, lastName, mobile, password)
-                        doDoctorRegistration(request)
-
-                    } else {
-                        Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
-                    }
+                    val request = RequestPatientRegistration(email, firstName, lastName, mobile, password)
+                    doPatientRegistration(request)
 
                 } else {
-                    Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
-
+                    Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
                 }
+
+            } else {
+                Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+
             }
 
+        } else if (mPreference.getUserType() == 2) {
+
+            if (firstName.isNotEmpty() && lastName.isNotEmpty() && mobile.isNotEmpty() && password.isNotEmpty() && cnfPassword.isNotEmpty()) {
+                if (password == cnfPassword) {
+
+                    val request = RequestDoctorRegistration(email, firstName, lastName, mobile, password)
+                    doDoctorRegistration(request)
+
+                } else {
+                    Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                }
+
+            } else {
+                Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+
+            }
         }
 
     }
@@ -113,6 +118,12 @@ class RegisterActivity : AppCompatActivity() {
                                 }
                                 startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                                 finish()
+
+                                mPreference.setFirstName(firstName)
+                                mPreference.setLastName(lastName)
+                                mPreference.setEmail(email)
+                                mPreference.setNumber(mobile)
+
                                 mPreference.setIsLoggedIn(true)
                             }
 
@@ -172,6 +183,12 @@ class RegisterActivity : AppCompatActivity() {
                                 }
                                 startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                                 finish()
+
+                                mPreference.setFirstName(firstName)
+                                mPreference.setLastName(lastName)
+                                mPreference.setEmail(email)
+                                mPreference.setNumber(mobile)
+
                                 mPreference.setIsLoggedIn(true)
                             }
 
@@ -205,7 +222,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun validateRegistration() {
+    private fun validateRegistrationField() {
 
         edt_first_name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
