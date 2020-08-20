@@ -43,9 +43,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         actionBar.setCustomView(
             inflater, ActionBar.LayoutParams(
                 ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.RIGHT
+                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER
             )
         )
+
         mPreference = HealthCarePreference(this@MainActivity)
 
         initViews()
@@ -82,13 +83,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 drawer_layout.closeDrawer(GravityCompat.START)
             }
             R.id.nav_profile -> {
-                Handler().postDelayed(Runnable {
-                    startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
-                }, 500)
+                if (mPreference.getUserType() == 1) {  // patient profile details
+                    Handler().postDelayed(Runnable {
+                        startActivity(Intent(this@MainActivity, PatientProfileActivity::class.java))
+                    }, 500)
+                } else if (mPreference.getUserType() == 2) { // doctor profile details
+                    Handler().postDelayed(Runnable {
+                        startActivity(Intent(this@MainActivity, DoctorProfileActivity::class.java))
+                    }, 500)
+                }
+
             }
             R.id.nav_appointments -> {
                 Handler().postDelayed(Runnable {
-                    startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+                    startActivity(Intent(this@MainActivity, MyAppointmentsActivity::class.java))
                 }, 500)
             }
             R.id.nav_rate_app -> {

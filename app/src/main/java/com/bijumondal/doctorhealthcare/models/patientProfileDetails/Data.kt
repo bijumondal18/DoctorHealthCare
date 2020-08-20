@@ -8,6 +8,7 @@ data class Data(
     val email: String,
     val name: String,
     val phone: String,
-    val photo: Any,
-    val sex: String
+    val photo: String,
+    val sex: String,
+    val message: String
 )
