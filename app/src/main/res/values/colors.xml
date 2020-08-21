@@ -8,8 +8,12 @@
     <!--<color name="colorTransparent">#f1f3f4</color>-->
     <color name="colorBackground">#FFFFFF</color>
     <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#70000000</color>
+    <color name="secondaryTextColor">#90000000</color>
 
     <color name="colorRed">#DF2323</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorOrange">#FF5722</color>
+    <color name="colorYellow">#FFEB3B</color>
+    <color name="colorCyan">#00BCD4</color>
 
 </resources>

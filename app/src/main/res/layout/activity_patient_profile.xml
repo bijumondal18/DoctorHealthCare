@@ -73,12 +73,13 @@
                         android:id="@+id/iv_profile_image"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_margin="@dimen/margin_16" />
+                        android:src="@color/colorTransparent"
+                        android:layout_margin="@dimen/margin_12" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_margin="@dimen/margin_16"
+                        android:layout_margin="@dimen/margin_12"
                         android:layout_toRightOf="@id/iv_profile_image"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -98,7 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_call"
-                            android:drawablePadding="@dimen/padding_16"
+                            android:drawablePadding="@dimen/padding_8"
                             android:drawableTint="@color/secondaryTextColor"
                             android:padding="@dimen/padding_2"
                             android:textColor="@color/secondaryTextColor"
@@ -137,6 +138,11 @@
                     android:layout_margin="@dimen/margin_16"
                     android:background="@color/colorTransparent" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_my_appointments"
                     android:layout_width="match_parent"
@@ -147,7 +153,7 @@
                     android:drawableTint="@color/primaryTextColor"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/padding_12"
+                    android:padding="@dimen/padding_16"
                     android:text="My Appointments"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
@@ -163,7 +169,7 @@
                     android:drawableTint="@color/primaryTextColor"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/padding_12"
+                    android:padding="@dimen/padding_16"
                     android:text="My Prescriptions"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
@@ -178,7 +184,7 @@
                     android:drawableTint="@color/primaryTextColor"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/padding_12"
+                    android:padding="@dimen/padding_16"
                     android:text="Share App"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
@@ -193,10 +199,13 @@
                     android:drawableTint="@color/primaryTextColor"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:padding="@dimen/padding_12"
+                    android:padding="@dimen/padding_16"
                     android:text="Rate Us"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

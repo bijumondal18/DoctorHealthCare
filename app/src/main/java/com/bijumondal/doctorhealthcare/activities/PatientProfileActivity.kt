@@ -78,8 +78,6 @@ class PatientProfileActivity : AppCompatActivity() {
 
                                 if (mData.photo != null) {
                                     ImageLoader.loadCircleImageFromUrl(iv_profile_image, mData.photo, R.color.colorTransparent)
-                                } else {
-                                    ImageLoader.loadCircleImageFromUrl(iv_profile_image, "", R.color.colorTransparent)
                                 }
                                 if (mData.name != null) {
                                     tv_profile_name.text = mData.name
