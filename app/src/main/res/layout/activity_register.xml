@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="none"
+    android:background="@color/colorTransparent"
     tools:context=".activities.RegisterActivity">
 
     <LinearLayout
@@ -212,7 +213,7 @@
             android:layout_margin="@dimen/margin_16"
             android:text="Sign Up"
             android:textAllCaps="false"
-            android:textColor="@color/colorBackground"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/font_16" />
 
     </LinearLayout>

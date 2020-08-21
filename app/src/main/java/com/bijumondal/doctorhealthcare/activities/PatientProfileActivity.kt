@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
@@ -38,6 +39,11 @@ class PatientProfileActivity : AppCompatActivity() {
             fetchProfileDetails(request)
         }
 
+        btn_edit_profile.setOnClickListener {
+            //todo startActivityForResult
+            startActivity(Intent(this@PatientProfileActivity, UpdatePatientProfileActivity::class.java))
+        }
+
         tv_my_appointments.setOnClickListener {
             startActivity(Intent(this@PatientProfileActivity, MyAppointmentsActivity::class.java))
         }
@@ -52,6 +58,26 @@ class PatientProfileActivity : AppCompatActivity() {
 
         tv_share_app.setOnClickListener {
             Helper.appShare(this@PatientProfileActivity)
+        }
+
+        btn_logout.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Logout")
+            builder.setMessage("Are you sure want to logout?")
+            builder.setPositiveButton("Yes") { dialog, which ->
+                mPreference.clearSharedPreference()
+                startActivity(
+                    Intent(this, WelcomeActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                )
+                finish()
+            }
+            builder.setNegativeButton("No") { dialog, which ->
+                return@setNegativeButton
+            }
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
         }
 
 
@@ -128,7 +154,7 @@ class PatientProfileActivity : AppCompatActivity() {
     private fun setupToolbar() {
         setSupportActionBar(toolbar_profile_activity)
         val actionBar = supportActionBar
-        actionBar!!.title = "Profile"
+        actionBar!!.title = "My Profile"
         actionBar.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -137,4 +163,5 @@ class PatientProfileActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
+
 }

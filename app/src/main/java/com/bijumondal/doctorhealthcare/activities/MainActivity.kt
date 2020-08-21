@@ -79,9 +79,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+
             R.id.navigation_home -> {
                 drawer_layout.closeDrawer(GravityCompat.START)
             }
+
             R.id.nav_profile -> {
                 if (mPreference.getUserType() == 1) {  // patient profile details
                     Handler().postDelayed(Runnable {
@@ -92,20 +94,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         startActivity(Intent(this@MainActivity, DoctorProfileActivity::class.java))
                     }, 500)
                 }
-
             }
             R.id.nav_appointments -> {
                 Handler().postDelayed(Runnable {
                     startActivity(Intent(this@MainActivity, MyAppointmentsActivity::class.java))
                 }, 500)
             }
-            R.id.nav_rate_app -> {
 
+            R.id.nav_prescriptions -> {
+                Handler().postDelayed(Runnable {
+                    startActivity(Intent(this@MainActivity, MyPrescriptionsActivity::class.java))
+                }, 500)
+            }
+
+            R.id.nav_rate_app -> {
                 Helper.openPlayStore(this@MainActivity)
             }
+
             R.id.nav_share -> {
                 Helper.appShare(this@MainActivity)
             }
+
             R.id.nav_logout -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Logout")

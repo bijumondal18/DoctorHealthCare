@@ -15,6 +15,10 @@
             android:icon="@drawable/ic_appointment_outline"
             android:title="@string/my_appointments" />
         <item
+            android:id="@+id/nav_prescriptions"
+            android:icon="@drawable/ic_prescription"
+            android:title="@string/my_prescriptions" />
+        <item
             android:id="@+id/nav_rate_app"
             android:icon="@drawable/ic_rate_us"
             android:title="@string/rate_app" />

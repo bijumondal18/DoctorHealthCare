@@ -14,14 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.MyPrescriptionsActivity"></activity>
+        <activity android:name=".activities.UpdatePatientProfileActivity"></activity>
+        <activity android:name=".activities.MyPrescriptionsActivity" />
         <activity android:name=".activities.DoctorProfileActivity" />
         <activity android:name=".activities.MyAppointmentsActivity" />
         <activity android:name=".activities.PatientProfileActivity" />
         <activity android:name=".activities.CreateProfileActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.WelcomeActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/FullScreenTheme" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

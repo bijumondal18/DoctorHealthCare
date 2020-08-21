@@ -11,7 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorBackground"
+        android:backgroundTint="@color/colorWhite"
         android:visibility="gone"
         app:liftOnScroll="true">
 
@@ -303,7 +303,7 @@
                 android:layout_margin="@dimen/margin_16"
                 android:text="Create profile"
                 android:textAllCaps="false"
-                android:textColor="@color/colorBackground"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_16" />
 
         </LinearLayout>
