@@ -130,6 +130,7 @@
                             android:layout_marginLeft="@dimen/margin_16"
                             android:drawableLeft="@drawable/ic_call"
                             android:drawablePadding="@dimen/padding_16"
+                            android:visibility="gone"
                             android:drawableTint="@color/secondaryTextColor"
                             android:textColor="@color/secondaryTextColor"
                             android:textSize="@dimen/font_16" />
@@ -142,6 +143,7 @@
                             android:layout_marginTop="@dimen/margin_12"
                             android:drawableLeft="@drawable/ic_email"
                             android:drawablePadding="@dimen/padding_16"
+                            android:visibility="gone"
                             android:drawableTint="@color/secondaryTextColor"
                             android:textColor="@color/secondaryTextColor"
                             android:textSize="@dimen/font_16" />
@@ -152,6 +154,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_16"
                             android:layout_marginTop="@dimen/margin_12"
+                            android:visibility="gone"
                             android:drawableLeft="@drawable/ic_place"
                             android:drawablePadding="@dimen/padding_16"
                             android:drawableTint="@color/secondaryTextColor"

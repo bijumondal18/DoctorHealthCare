@@ -116,6 +116,31 @@ class Helper {
             return userType!!
         }
 
+        fun getGender(type: Int): String {
+            var getgender: String? = null
+            when (type) {
+                1 -> getgender = "Male"
+                2 -> getgender = "Female"
+                3 -> getgender = "Others"
+            }
+            return getgender!!
+        }
+
+        fun bloodGroup(type: Int): String {
+            var bloodGroup: String? = null
+            when (type) {
+                1 -> bloodGroup = "A+"
+                2 -> bloodGroup = "A-"
+                3 -> bloodGroup = "B+"
+                4 -> bloodGroup = "B-"
+                5 -> bloodGroup = "AB+"
+                6 -> bloodGroup = "AB-"
+                7 -> bloodGroup = "O+"
+                8 -> bloodGroup = "O-"
+            }
+            return bloodGroup!!
+        }
+
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun showLoading(context: Context) {

@@ -19,6 +19,9 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_EMAIL = "EMAIL"
         private const val KEY_CODE = "CODE"
         private const val KEY_NUMBER = "NUMBER"
+        private const val KEY_GENDER = "GENDER"
+        private const val KEY_BLOOD_GROUP = "BLOOD GROUP"
+        private const val KEY_DOB = "DATE OF BIRTH"
         private const val KEY_AUTH_KEY = "AUTH_KEY"
         private const val KEY_USER_ID = "USER_ID"
         private const val KEY_USER_TYPE = "USER_TYPE_ID"
@@ -162,6 +165,36 @@ class HealthCarePreference(val context: Context) {
     fun getNumber(): String? {
         return sharedPref.getString(KEY_NUMBER, "")
 
+    }
+
+    fun setGender(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_GENDER, text)
+        editor.apply()
+    }
+
+    fun getGender(): String? {
+        return sharedPref.getString(KEY_GENDER, null)
+    }
+
+    fun setDOB(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_DOB, text)
+        editor.apply()
+    }
+
+    fun getDOB(): String? {
+        return sharedPref.getString(KEY_DOB, null)
+    }
+
+    fun setBloodGroup(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_BLOOD_GROUP, text)
+        editor.apply()
+    }
+
+    fun getBloodGroup(): String? {
+        return sharedPref.getString(KEY_BLOOD_GROUP, null)
     }
 
     fun setAuth(value: String) {

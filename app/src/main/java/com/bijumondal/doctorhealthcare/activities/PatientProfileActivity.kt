@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
@@ -22,6 +23,7 @@ class PatientProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG: String = "ProfileActivity"
+        private const val REQUEST_CODE = 121
     }
 
     private lateinit var mPreference: HealthCarePreference
@@ -40,8 +42,10 @@ class PatientProfileActivity : AppCompatActivity() {
         }
 
         btn_edit_profile.setOnClickListener {
-            //todo startActivityForResult
-            startActivity(Intent(this@PatientProfileActivity, UpdatePatientProfileActivity::class.java))
+            startActivityForResult(
+                Intent(this@PatientProfileActivity, UpdatePatientProfileActivity::class.java),
+                REQUEST_CODE
+            )
         }
 
         tv_my_appointments.setOnClickListener {
@@ -83,6 +87,20 @@ class PatientProfileActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                tv_profile_name.text = data!!.getStringExtra("firstName") +" "+ data!!.getStringExtra("lastName")
+                tv_profile_email.text = data!!.getStringExtra("email")
+                tv_profile_address.text = data!!.getStringExtra("address")
+                //todo blood group. gender and dob
+            }
+        }
+
+    }
+
     private fun fetchProfileDetails(request: RequestPatientProfileDetails) {
         if (Helper.isConnectedToInternet(this@PatientProfileActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -110,12 +128,15 @@ class PatientProfileActivity : AppCompatActivity() {
                                 }
                                 if (mData.phone != null) {
                                     tv_profile_mobile_number.text = mData.phone
+                                    tv_profile_mobile_number.visibility = View.VISIBLE
                                 }
                                 if (mData.email != null) {
                                     tv_profile_email.text = mData.email
+                                    tv_profile_email.visibility = View.VISIBLE
                                 }
                                 if (mData.address != null) {
                                     tv_profile_address.text = mData.address
+                                    tv_profile_address.visibility = View.VISIBLE
                                 }
 
 
