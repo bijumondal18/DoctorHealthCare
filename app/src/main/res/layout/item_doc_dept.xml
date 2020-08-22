@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_doc_dept_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_marginRight="@dimen/margin_12"
+        android:drawableEnd="@drawable/ic_arrow_forward"
+        android:drawableTint="@color/secondaryTextColor"
+        android:paddingTop="@dimen/padding_12"
+        android:paddingBottom="@dimen/padding_12"
+        android:text="doctor department"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/font_18" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorTransparent" />
+
+    <TextView
+        android:id="@+id/tv_doc_dept_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_marginRight="@dimen/margin_12"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:padding="@dimen/padding_4"
+        android:text="doctor department desc"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14"
+        android:visibility="gone" />
+
+</LinearLayout>

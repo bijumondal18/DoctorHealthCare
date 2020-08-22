@@ -29,6 +29,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG: String = "UpdateDoctorProfileActivity"
+        private const val REQUEST_CODE = 212
     }
 
     private lateinit var mPreference: HealthCarePreference
@@ -41,6 +42,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     var email = ""
     var phone = ""
     var address = ""
+    var docDept = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,27 +64,34 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         }
 
         if (mPreference.getFirstName() != null) {
-            edt_first_name.setText(mPreference.getFirstName())
+            edt_first_name_doc.setText(mPreference.getFirstName())
         }
 
         if (mPreference.getLastName() != null) {
-            edt_last_name.setText(mPreference.getLastName())
+            edt_last_name_doc.setText(mPreference.getLastName())
         }
 
         if (mPreference.getEmail() != null) {
-            edt_email.setText(mPreference.getEmail())
+            edt_email_doc.setText(mPreference.getEmail())
         }
 
         if (mPreference.getAddress() != null) {
-            edt_address.setText(mPreference.getAddress())
+            edt_address_doc.setText(mPreference.getAddress())
         }
 
         if (mPreference.getNumber() != null) {
-            edt_phone_number.setText(mPreference.getNumber())
+            edt_phone_number_doc.setText(mPreference.getNumber())
+        }
+        if (mPreference.getDoctorDept() != null) {
+            edt_department_doc.text = mPreference.getDoctorDept()
         }
 
         imgEditProfilePic.setOnClickListener {
             CaptureImage.showPictureDialog(this@UpdateDoctorProfileActivity)
+        }
+
+        edt_department_doc.setOnClickListener {
+            startActivityForResult(Intent(this@UpdateDoctorProfileActivity, DoctorDepartmentActivity::class.java), REQUEST_CODE)
         }
 
         btn_update_doc_profile.setOnClickListener {
@@ -103,7 +112,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, "", email, phone, "${firstname} ${lastname}", userId, "")
+            val request = RequestCreateDoctorProfile(address, "Cardiology", email, phone, "${firstname} ${lastname}", userId, "")
             updateDoctorProfile(request)
 
         } else {
@@ -135,6 +144,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 mPreference.setLastName(lastname)
                                 mPreference.setEmail(email)
                                 mPreference.setNumber(phone)
+                                mPreference.setDoctorDept(docDept)
 
                                 val intent = Intent()
                                 intent.putExtra("firstName", firstname)
@@ -176,6 +186,16 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             })
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                docDept = data!!.getStringExtra("docDept")!!
+                edt_department_doc.text = docDept
+            }
+        }
     }
 
     private fun setupToolbar() {
