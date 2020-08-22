@@ -95,6 +95,7 @@ class PatientProfileActivity : AppCompatActivity() {
                 tv_profile_name.text = data!!.getStringExtra("firstName") + " " + data!!.getStringExtra("lastName")
                 tv_profile_email.text = data!!.getStringExtra("email")
                 tv_profile_address.text = data!!.getStringExtra("address")
+                tv_profile_address.visibility = View.VISIBLE
                 tv_blood_group.text = data!!.getStringExtra("bloodGroup")
                 tv_gender.text = data!!.getStringExtra("gender")
                 tv_dob.text = data!!.getStringExtra("dob")
@@ -191,6 +192,9 @@ class PatientProfileActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar_profile_activity)

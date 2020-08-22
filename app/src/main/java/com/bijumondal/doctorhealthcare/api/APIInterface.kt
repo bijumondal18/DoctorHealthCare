@@ -14,6 +14,7 @@ import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRe
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
+import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
@@ -68,6 +69,9 @@ interface APIInterface {
     @POST(Constants.PATIENT_PROFILE_DETAILS_URL)
     fun getPatientProfileDetails(@Body request: RequestPatientProfileDetails): Call<ResponsePatientProfileDetails>
 
+    /*@POST(Constants.PATIENT_PHOTO_URL)
+    fun getPatientProfilePhoto(@Body request: RequestPatientPhoto): Call<ResponsePatientProfileDetails>
+*/
 
     /*
     * DOCTOR SECTION

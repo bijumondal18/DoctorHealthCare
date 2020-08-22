@@ -1,6 +1,9 @@
 package com.bijumondal.doctorhealthcare
 
 object Constants {
+    const val LOCAL_IMAGE_DIRECTORY = "/DoctorHealthCare"
+    const val GALLERY = 1
+    const val CAMERA = 2
     const val API_DATE_FORMAT = "yyyy-MM-dd"
     const val API_TIME_FORMAT = "HH:mm:ss"
     const val API_CONTENT_TYPE = "application/json"

@@ -2,18 +2,26 @@ package com.bijumondal.doctorhealthcare.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.media.MediaScannerConnection
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
+import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.api.APIHandler
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
+import com.bijumondal.doctorhealthcare.utils.CaptureImage
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
@@ -25,6 +33,11 @@ import kotlinx.android.synthetic.main.activity_update_patient_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class UpdatePatientProfileActivity : AppCompatActivity() {
@@ -40,7 +53,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     var bloodGroup = ""
     private lateinit var spinnerBloodGroup: Spinner
     var dob = ""
-    var gender = ""
+    var gender: Int? = 0
     var firstname = ""
     var lastname = ""
     var email = ""
@@ -61,9 +74,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
         setupDateOfBirth()
         setupBloodGroupSpinner()
-        setupGender()
-
-
 
         btn_update_profile.setOnClickListener {
             validateProfile()
@@ -100,8 +110,18 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             edt_phone_number.setText(mPreference.getNumber())
         }
 
+
         if (mPreference.getDOB() != null) {
-            tv_date.setText(mPreference.getDOB())
+            tv_date.text = mPreference.getDOB()
+
+        } else {
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())  //current date
+            tv_date.text = date
+        }
+
+        imgEditProfilePic.setOnClickListener {
+
+            CaptureImage.showPictureDialog(this@UpdatePatientProfileActivity)
         }
 
     }
@@ -114,18 +134,32 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         phone = edt_phone_number.text.trim().toString()
         address = edt_address.text.trim().toString()
 
+        if (dob.isEmpty()){
+            dob = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            tv_date.text = dob
+        }
+
+        if (rb_male.isChecked) {
+            gender = 1
+        } else if (rb_female.isChecked) {
+            gender = 2
+        } else if (rb_others.isChecked) {
+            gender = 3
+        } else {
+            gender = 0
+        }
+
         if (!TextUtils.isEmpty(firstname) &&
             !TextUtils.isEmpty(lastname) &&
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreatePatientProfile(address, "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, gender)
+            val request = RequestCreatePatientProfile(address, "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
             updatePatientProfile(request)
 
         } else {
             Helper.toastLong(this@UpdatePatientProfileActivity, "Fields shouldn't be empty!")
         }
-
 
     }
 
@@ -152,7 +186,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 mPreference.setLastName(lastname)
                                 mPreference.setEmail(email)
                                 mPreference.setNumber(phone)
-                                mPreference.setGender(gender)
+                                mPreference.setGender(Helper.getGender(gender!!))
                                 mPreference.setDOB(dob)
                                 mPreference.setBloodGroup(bloodGroup)
 
@@ -162,7 +196,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 intent.putExtra("email", email)
                                 intent.putExtra("phone", phone)
                                 intent.putExtra("address", address)
-                                intent.putExtra("gender", gender)
+                                intent.putExtra("gender", Helper.getGender(gender!!))
                                 intent.putExtra("bloodGroup", bloodGroup)
                                 intent.putExtra("dob", dob)
                                 setResult(RESULT_OK, intent)
@@ -201,22 +235,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun setupGender() {
-        if (rb_male.isChecked) {
-            gender = Helper.getGender(1)
-            // Helper.toastShort(this, gender)
-
-        } else if (rb_female.isChecked) {
-            gender = Helper.getGender(2)
-            //Helper.toastShort(this, gender)
-
-        } else if (rb_others.isChecked) {
-            gender = Helper.getGender(3)
-            // Helper.toastShort(this, gender)
-        }
-    }
-
-
     private fun setupDateOfBirth() {
         ll_date_picker.setOnClickListener {
             showDatePicker()
@@ -249,7 +267,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-
         val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dayOfMonth, monthOfYear, year ->
 
             // Display Selected date in textbox
@@ -269,6 +286,81 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
     }
 
+
+    fun saveImage(myBitmap: Bitmap): String {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val wallpaperDirectory = File(
+            (Environment.getExternalStorageDirectory()).toString() + Constants.LOCAL_IMAGE_DIRECTORY
+        )
+        // have the object build the directory structure, if needed.
+        Helper.showLog("fee", wallpaperDirectory.toString())
+        if (!wallpaperDirectory.exists()) {
+
+            wallpaperDirectory.mkdirs()
+        }
+
+        try {
+            Helper.showLog("heel", wallpaperDirectory.toString())
+            val f = File(
+                wallpaperDirectory, ((Calendar.getInstance()
+                    .timeInMillis).toString() + ".jpg")
+            )
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(
+                this,
+                arrayOf(f.path),
+                arrayOf("image/jpeg"), null
+            )
+            fo.close()
+            Helper.showLog(TAG, "File Saved::--->" + f.absolutePath)
+
+            return f.absolutePath
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return ""
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Constants.GALLERY) {
+            if (data != null) {
+                val contentURI = data.data
+                try {
+                    val bitmap =
+                        MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                    //  val path = saveImage(bitmap)
+                    val file = File(saveImage(bitmap))
+                    // APIHandler.uploadImage(this@UpdatePatientProfileActivity, mPreference.getAuth()!!, imgProfilePic, file)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Helper.toastShort(this@UpdatePatientProfileActivity, "Failed!")
+                }
+
+            }
+
+        }
+
+        /* else if (requestCode == Constants.CAMERA) {
+             if (data != null) {
+                 val thumbnail = data!!.extras!!.get("data") as Bitmap
+                 // saveImage(thumbnail)
+                 val file = File(saveImage(thumbnail))
+                 //APIHandler.uploadImage(this@UpdatePatientProfileActivity, mPreference.getAuth()!!, imgProfilePic, file)
+
+                 iv_user_image.setImageBitmap(thumbnail)
+                 Helper.toastShort(this@UpdatePatientProfileActivity, "Image Saved")
+             }
+         }*/
+
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
