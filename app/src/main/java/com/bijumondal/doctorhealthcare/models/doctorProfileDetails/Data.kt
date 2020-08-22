@@ -7,5 +7,6 @@ data class Data(
     val name: String,
     val phone: String,
     val photo: String,
-    val profile: String
+    val profile: String,
+    val message: String
 )

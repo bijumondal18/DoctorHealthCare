@@ -22,7 +22,7 @@ import retrofit2.Response
 class PatientProfileActivity : AppCompatActivity() {
 
     companion object {
-        private const val TAG: String = "ProfileActivity"
+        private const val TAG: String = "PatientProfileActivity"
         private const val REQUEST_CODE = 121
     }
 
@@ -192,9 +192,6 @@ class PatientProfileActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar_profile_activity)

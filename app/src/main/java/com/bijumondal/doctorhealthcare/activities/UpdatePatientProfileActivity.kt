@@ -27,8 +27,6 @@ import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_create_profile.*
-import kotlinx.android.synthetic.main.activity_patient_profile.*
 import kotlinx.android.synthetic.main.activity_update_patient_profile.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,7 +59,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     var address = ""
 
     var userId = ""
-    private lateinit var imgProfilePic: ImageView
+    private lateinit var imgProfilePic: CircleImageView
     private lateinit var imgEditProfilePic: ImageView
 
 
