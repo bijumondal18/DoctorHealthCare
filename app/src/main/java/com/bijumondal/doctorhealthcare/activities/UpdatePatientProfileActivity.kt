@@ -92,6 +92,10 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             edt_email.setText(mPreference.getEmail())
         }
 
+        if (mPreference.getAddress() != null) {
+            edt_address.setText(mPreference.getAddress())
+        }
+
         if (mPreference.getNumber() != null) {
             edt_phone_number.setText(mPreference.getNumber())
         }

@@ -92,7 +92,7 @@ class PatientProfileActivity : AppCompatActivity() {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                tv_profile_name.text = data!!.getStringExtra("firstName") +" "+ data!!.getStringExtra("lastName")
+                tv_profile_name.text = data!!.getStringExtra("firstName") + " " + data!!.getStringExtra("lastName")
                 tv_profile_email.text = data!!.getStringExtra("email")
                 tv_profile_address.text = data!!.getStringExtra("address")
                 //todo blood group. gender and dob
@@ -129,14 +129,29 @@ class PatientProfileActivity : AppCompatActivity() {
                                 if (mData.phone != null) {
                                     tv_profile_mobile_number.text = mData.phone
                                     tv_profile_mobile_number.visibility = View.VISIBLE
+                                    mPreference.setNumber(mData.phone)
                                 }
                                 if (mData.email != null) {
                                     tv_profile_email.text = mData.email
                                     tv_profile_email.visibility = View.VISIBLE
+                                    mPreference.setEmail(mData.email)
                                 }
                                 if (mData.address != null) {
                                     tv_profile_address.text = mData.address
                                     tv_profile_address.visibility = View.VISIBLE
+                                    mPreference.setAddress(mData.address)
+                                }
+
+                                if (mData.birthdate != null) {
+                                    mPreference.setDOB(mData.birthdate)
+                                }
+
+                                if (mData.sex != null) {
+                                    mPreference.setGender(mData.sex)
+                                }
+
+                                if (mData.bloodgroup != null) {
+                                    mPreference.setBloodGroup(mData.bloodgroup)
                                 }
 
 

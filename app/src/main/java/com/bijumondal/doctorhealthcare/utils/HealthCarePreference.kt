@@ -22,6 +22,7 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_GENDER = "GENDER"
         private const val KEY_BLOOD_GROUP = "BLOOD GROUP"
         private const val KEY_DOB = "DATE OF BIRTH"
+        private const val KEY_ADDRESS = "ADDRESS"
         private const val KEY_AUTH_KEY = "AUTH_KEY"
         private const val KEY_USER_ID = "USER_ID"
         private const val KEY_USER_TYPE = "USER_TYPE_ID"
@@ -164,6 +165,17 @@ class HealthCarePreference(val context: Context) {
 
     fun getNumber(): String? {
         return sharedPref.getString(KEY_NUMBER, "")
+
+    }
+
+    fun setAddress(value: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_ADDRESS, value)
+        editor.apply()
+    }
+
+    fun getAddress(): String? {
+        return sharedPref.getString(KEY_ADDRESS, "")
 
     }
 
