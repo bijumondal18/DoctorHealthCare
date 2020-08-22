@@ -95,7 +95,9 @@ class PatientProfileActivity : AppCompatActivity() {
                 tv_profile_name.text = data!!.getStringExtra("firstName") + " " + data!!.getStringExtra("lastName")
                 tv_profile_email.text = data!!.getStringExtra("email")
                 tv_profile_address.text = data!!.getStringExtra("address")
-                //todo blood group. gender and dob
+                tv_blood_group.text = data!!.getStringExtra("bloodGroup")
+                tv_gender.text = data!!.getStringExtra("gender")
+                tv_dob.text = data!!.getStringExtra("dob")
             }
         }
 
@@ -143,14 +145,17 @@ class PatientProfileActivity : AppCompatActivity() {
                                 }
 
                                 if (mData.birthdate != null) {
+                                    tv_dob.text = mData.birthdate
                                     mPreference.setDOB(mData.birthdate)
                                 }
 
                                 if (mData.sex != null) {
+                                    tv_gender.text = mData.sex
                                     mPreference.setGender(mData.sex)
                                 }
 
                                 if (mData.bloodgroup != null) {
+                                    tv_blood_group.text = mData.bloodgroup
                                     mPreference.setBloodGroup(mData.bloodgroup)
                                 }
 
