@@ -35,4 +35,13 @@ object Constants {
     const val DOCTOR_PROFILE_DETAILS_URL = "getdoctorprofile"
 
 
+    /*
+    * Others
+    * */
+
+    const val BANNER_LIST_URL = "bannerlist"
+
+
+
+
 }
