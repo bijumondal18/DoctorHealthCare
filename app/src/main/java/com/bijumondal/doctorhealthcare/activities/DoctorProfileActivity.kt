@@ -131,6 +131,10 @@ class DoctorProfileActivity : AppCompatActivity() {
                                     mPreference.setAddress(mData.address)
                                 }
 
+                                if (mData.department != null) {
+                                    tv_doc_dept.text = mData.department
+                                }
+
 
                             }
 
@@ -169,10 +173,11 @@ class DoctorProfileActivity : AppCompatActivity() {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                tv_profile_name.text = data!!.getStringExtra("firstName") + " " + data!!.getStringExtra("lastName")
-                tv_profile_email.text = data!!.getStringExtra("email")
-                tv_profile_address.text = data!!.getStringExtra("address")
-                tv_profile_address.visibility = View.VISIBLE
+                tv_doc_profile_name.text = data!!.getStringExtra("firstName") + " " + data!!.getStringExtra("lastName")
+                tv_doc_profile_email.text = data!!.getStringExtra("email")
+                tv_doc_profile_address.text = data!!.getStringExtra("address")
+                tv_doc_profile_address.visibility = View.VISIBLE
+                tv_doc_dept.text = data.getStringExtra("docDept")
             }
         }
 
