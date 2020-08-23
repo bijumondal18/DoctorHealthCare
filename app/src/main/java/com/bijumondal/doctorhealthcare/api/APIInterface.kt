@@ -1,6 +1,8 @@
 package com.bijumondal.doctorhealthcare.api
 
 import com.bijumondal.doctorhealthcare.Constants
+import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
+import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
@@ -101,5 +103,7 @@ interface APIInterface {
     @GET(Constants.BANNER_LIST_URL)
     fun getBanners(): Call<ResponseBannersList>
 
+    @POST(Constants.ALL_DOCTORS_LIST_URL)
+    fun getAllDoctorsList(@Body request: RequestAllDoctorsList): Call<ResponseAllDoctorsList>
 
 }

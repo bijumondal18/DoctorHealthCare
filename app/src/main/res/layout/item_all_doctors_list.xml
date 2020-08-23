@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:background="@color/colorWhite"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="@dimen/padding_12">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_doc_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@color/colorRed" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_toRightOf="@+id/iv_doc_image"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_doc_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:maxLines="1"
+            android:text="Dr. biju mondal"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/tv_doc_department"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Cardiology"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/font_14" />
+
+        <TextView
+            android:id="@+id/tv_doc_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Dhaka, bangladesh"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/font_14" />
+
+    </LinearLayout>
+
+</RelativeLayout>

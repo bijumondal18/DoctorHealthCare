@@ -14,10 +14,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.adapters.AllDoctorsListAdapter
 import com.bijumondal.doctorhealthcare.adapters.BannerSliderAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
+import com.bijumondal.doctorhealthcare.models.allDoctorsList.Data
+import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
+import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
@@ -49,6 +55,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var timer: Timer = Timer()
     private var handler: Handler = Handler()
 
+    private lateinit var allDoctorsRecyclerView: RecyclerView
+    private var allDoctorsList: ArrayList<Data> = ArrayList()
+    private lateinit var allDoctorsAdapter: AllDoctorsListAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,6 +80,63 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setDrawerLayout()
         getBannerList()
 
+        val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+        allDoctorsRecyclerView.layoutManager = layoutManager
+        val request = RequestAllDoctorsList("ALL")
+        fetchAllDoctorsList(request)
+
+    }
+
+    private fun fetchAllDoctorsList(request: RequestAllDoctorsList) {
+        if (Helper.isConnectedToInternet(this@MainActivity)) {
+
+            val call: Call<ResponseAllDoctorsList> = APIInterface.create().getAllDoctorsList(request)
+            call.enqueue(object : Callback<ResponseAllDoctorsList> {
+                override fun onResponse(
+                    call: Call<ResponseAllDoctorsList>,
+                    response: Response<ResponseAllDoctorsList>
+                ) {
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                allDoctorsList = mData as ArrayList<Data>
+                                allDoctorsAdapter = AllDoctorsListAdapter(allDoctorsList, this@MainActivity)
+                                allDoctorsRecyclerView.adapter = allDoctorsAdapter
+                                allDoctorsAdapter.notifyDataSetChanged()
+
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@MainActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseAllDoctorsList>, t: Throwable) {
+                    Helper.toastShort(this@MainActivity, "${t.message}")
+                }
+
+            })
+        }
     }
 
     private fun getBannerList() {
@@ -97,13 +165,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                     bannerSliderViewPager.clipToPadding = false
                                     bannerSliderViewPager.pageMargin = 30
 
-                                    setupAutoSlider()
+                                    //setupAutoSlider()
                                 }
 
                             }
 
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(this@MainActivity, response.body()!!.message)
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
 
                             } else if (response.body()!!.errors != null) {
                                 Helper.toastShort(this@MainActivity, response.body()!!.errors)
@@ -111,8 +179,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             }
 
                         } else {
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(this@MainActivity, response.body()!!.message)
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
 
                             } else if (response.body()!!.errors != null) {
                                 Helper.toastShort(this@MainActivity, response.body()!!.errors)
@@ -139,6 +207,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
         bannerSliderViewPager = findViewById(R.id.banner_slider_view_pager)
+        allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
         val headerView: View = nav_view.inflateHeaderView(R.layout.nav_header_main)
     }
 
