@@ -1,63 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:background="@color/colorWhite"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:padding="@dimen/padding_12">
+    android:layout_margin="@dimen/margin_8"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="@dimen/radius_8"
+    app:cardElevation="@dimen/elevation_1dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_doc_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:src="@color/colorRed" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/margin_12"
-        android:layout_toRightOf="@+id/iv_doc_image"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingLeft="@dimen/padding_12"
+        android:paddingRight="@dimen/padding_12">
 
-        <TextView
-            android:id="@+id/tv_doc_name"
-            android:layout_width="match_parent"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_doc_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@color/colorTransparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:text="Book Appointment"
+            android:textAllCaps="false"
             android:fontFamily="@font/roboto_bold"
-            android:maxLines="1"
-            android:text="Dr. biju mondal"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_20" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorTransparent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_doc_address"
+            app:layout_constraintStart_toStartOf="@+id/tv_doc_address"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doc_address" />
 
         <TextView
             android:id="@+id/tv_doc_department"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="1"
+            android:drawableLeft="@drawable/ic_hospital"
+            android:drawablePadding="@dimen/padding_8"
+            android:drawableTint="@color/secondaryTextColor"
             android:text="Cardiology"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="@dimen/font_14" />
+            android:textSize="@dimen/font_13"
+            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doc_name" />
 
         <TextView
             android:id="@+id/tv_doc_address"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2"
+            android:drawableLeft="@drawable/ic_place"
+            android:drawablePadding="@dimen/padding_8"
+            android:drawableTint="@color/secondaryTextColor"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Dhaka, bangladesh"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="@dimen/font_14" />
+            android:textSize="@dimen/font_13"
+            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doc_department" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_doc_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:maxLines="1"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="@dimen/padding_8"
+            android:drawableTint="@color/secondaryTextColor"
+            android:text="Dr. biju mondal"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_doc_image" />
 
-</RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

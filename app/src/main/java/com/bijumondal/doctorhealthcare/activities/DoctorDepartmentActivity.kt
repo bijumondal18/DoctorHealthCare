@@ -99,7 +99,6 @@ class DoctorDepartmentActivity : AppCompatActivity() {
             })
         }
 
-
     }
 
     private fun initViews() {

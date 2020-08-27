@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTransparent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -24,13 +24,62 @@
                 android:layout_height="240dp"
                 android:padding="@dimen/padding_12" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_all_doctors"
+
+            <LinearLayout
+                android:id="@+id/layout_all_dr_dept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:layout_marginTop="@dimen/margin_12"
-                android:nestedScrollingEnabled="false" />
+                android:background="@color/colorTransparent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:padding="@dimen/margin_12"
+                    android:text="Top Specialities"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_18" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_dr_dept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_all_doctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorTransparent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:padding="@dimen/margin_12"
+                    android:text="All Doctors"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_18" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_doctors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false" />
+
+            </LinearLayout>
+
 
             <!--todo doc categories and all doctors-->
 
