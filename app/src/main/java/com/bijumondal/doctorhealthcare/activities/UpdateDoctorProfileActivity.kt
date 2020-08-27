@@ -30,6 +30,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     companion object {
         private const val TAG: String = "UpdateDoctorProfileActivity"
         private const val REQUEST_CODE = 212
+        private const val REQUEST_CODE1 = 213
     }
 
     private lateinit var mPreference: HealthCarePreference
@@ -43,6 +44,9 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     var phone = ""
     var address = ""
     var docDept = ""
+    var visitAmount = ""
+    var hospitalName = ""
+    var hospitalId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +86,17 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         if (mPreference.getNumber() != null) {
             edt_phone_number_doc.setText(mPreference.getNumber())
         }
+
         if (mPreference.getDoctorDept() != null) {
             edt_department_doc.text = mPreference.getDoctorDept()
+        }
+
+        if (mPreference.getHospitalName() != null) {
+            edt_hospital_doc.text = mPreference.getHospitalName()
+        }
+
+        if (mPreference.getVisitAmount() != null) {
+            edt_visit_amount_doc.setText(mPreference.getVisitAmount())
         }
 
         imgEditProfilePic.setOnClickListener {
@@ -92,6 +105,11 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
 
         edt_department_doc.setOnClickListener {
             startActivityForResult(Intent(this@UpdateDoctorProfileActivity, DoctorDepartmentActivity::class.java), REQUEST_CODE)
+        }
+
+        edt_hospital_doc.setOnClickListener {
+            startActivityForResult(Intent(this@UpdateDoctorProfileActivity, HospitalListActivity::class.java), REQUEST_CODE1)
+
         }
 
         btn_update_doc_profile.setOnClickListener {
@@ -108,6 +126,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         address = edt_address_doc.text.trim().toString()
         docDept = edt_department_doc.text.trim().toString()
         userId = mPreference.getUserId().toString()
+        visitAmount = edt_visit_amount_doc.text.trim().toString()
 
         if (!TextUtils.isEmpty(firstname) &&
             !TextUtils.isEmpty(lastname) &&
@@ -115,7 +134,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "",1,"")
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", 1, visitAmount)
             updateDoctorProfile(request)
 
         } else {
@@ -148,6 +167,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 mPreference.setEmail(email)
                                 mPreference.setNumber(phone)
                                 mPreference.setDoctorDept(docDept)
+                                mPreference.setVisitAmount(visitAmount)
+                                mPreference.setHospitalName(hospitalName)
 
                                 val intent = Intent()
                                 intent.putExtra("firstName", firstname)
@@ -197,6 +218,11 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             if (resultCode == RESULT_OK) {
                 docDept = data!!.getStringExtra("docDept")!!
                 edt_department_doc.text = docDept
+            }
+        } else if (requestCode == REQUEST_CODE1) {
+            if (resultCode == RESULT_OK) {
+                hospitalName = data!!.getStringExtra("hospitalName")!!
+                edt_hospital_doc.text = hospitalName
             }
         }
     }

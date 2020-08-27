@@ -196,12 +196,62 @@
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
-                android:gravity="center|start"
                 android:background="@drawable/edit_text_background_style"
+                android:gravity="center|start"
                 android:hint="Choose your Specialization"
                 android:paddingLeft="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Choose Hospital"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/edt_hospital_doc"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:gravity="center|start"
+                android:hint="Hospital Name"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Set Your Visit Amount"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <EditText
+                android:id="@+id/edt_visit_amount_doc"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:drawableLeft="@drawable/ic_rupee"
+                android:drawablePadding="@dimen/padding_8"
+                android:drawableTint="@color/primaryTextColor"
+                android:hint="Amount"
+                android:inputType="number"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
 
             <TextView
                 android:layout_width="wrap_content"

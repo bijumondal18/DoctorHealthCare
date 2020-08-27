@@ -111,6 +111,10 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
+                                mPreference.setVisitAmount(visitAmount)
+                                mPreference.setHospitalName(hospitalName)
+                                mPreference.setHospitalId(hospitalId!!)
+
                                 startActivity(Intent(this@CreateDoctorProfileActivity, MainActivity::class.java))
                                 finish()
                                 mPreference.setIsLoggedIn(true)
@@ -154,6 +158,7 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
                 edt_choose_department.text = docDept
 
             }
+
         } else if (requestCode == REQUEST_CODE1)
             if (resultCode == RESULT_OK) {
                 hospitalName = data!!.getStringExtra("hospitalName")!!

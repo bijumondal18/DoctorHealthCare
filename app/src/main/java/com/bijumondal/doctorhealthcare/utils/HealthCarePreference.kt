@@ -24,6 +24,9 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_DOCTOR_DEPT = "DOCTOR DEPT"
         private const val KEY_DOB = "DATE OF BIRTH"
         private const val KEY_ADDRESS = "ADDRESS"
+        private const val KEY_HOSPITAL_NAME = "HOSPITAL_NAME"
+        private const val KEY_HOSPITAL_ID = "HOSPITAL_ID"
+        private const val KEY_VISIT_AMOUNT = "VISIT_AMOUNT"
         private const val KEY_AUTH_KEY = "AUTH_KEY"
         private const val KEY_USER_ID = "USER_ID"
         private const val KEY_USER_TYPE = "USER_TYPE_ID"
@@ -73,6 +76,16 @@ class HealthCarePreference(val context: Context) {
 
     fun getUserId(): Int? {
         return sharedPref.getInt(KEY_USER_ID, 0)
+    }
+
+    fun setHospitalId(id: Int) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putInt(KEY_HOSPITAL_ID, id)
+        editor.apply()
+    }
+
+    fun getHospitalId(): Int? {
+        return sharedPref.getInt(KEY_HOSPITAL_ID, 0)
     }
 
     fun setUserType(id: Int) {
@@ -230,6 +243,26 @@ class HealthCarePreference(val context: Context) {
     fun getAuth(): String? {
         return sharedPref.getString(KEY_AUTH, "")
 
+    }
+
+    fun setHospitalName(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_HOSPITAL_NAME, text)
+        editor.apply()
+    }
+
+    fun getHospitalName(): String? {
+        return sharedPref.getString(KEY_HOSPITAL_NAME, null)
+    }
+
+    fun setVisitAmount(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_VISIT_AMOUNT, text)
+        editor.apply()
+    }
+
+    fun getVisitAmount(): String? {
+        return sharedPref.getString(KEY_VISIT_AMOUNT, null)
     }
 
     fun clearSharedPreference() {
