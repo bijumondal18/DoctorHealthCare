@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
                             if (mData != null) {
-
                                 topSpecialitiesList = mData as ArrayList<com.bijumondal.doctorhealthcare.models.doctorDepartment.Data>
                                 topSpecialitiesAdapter = TopSpecialistAdapter(topSpecialitiesList, this@MainActivity)
                                 topSpecialitiesRecyclerView.adapter = topSpecialitiesAdapter
@@ -328,6 +327,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 builder.setTitle("Logout")
                 builder.setMessage("Are you sure want to logout?")
                 builder.setPositiveButton("Yes") { dialog, which ->
+                    mPreference.setIsLoggedIn(false)
                     mPreference.clearSharedPreference()
                     startActivity(Intent(this, WelcomeActivity::class.java))
                     finish()

@@ -38,7 +38,7 @@ class WelcomeActivity : AppCompatActivity() {
                         userTypePatient = true
                         userTypeDoctor = false
                         mPreferences.setUserType(1)  //1 for patient
-                        rb_patient.setBackgroundColor(Color.parseColor("#FDAD3F"))
+                        rb_patient.setBackgroundColor(Color.parseColor("#3c4df7"))
                         rb_doctor.setBackgroundColor(Color.parseColor("#ebebeb"))
                     }
 
@@ -48,7 +48,7 @@ class WelcomeActivity : AppCompatActivity() {
                         userTypePatient = false
                         userTypeDoctor = true
                         mPreferences.setUserType(2)   //2 for doctor
-                        rb_doctor.setBackgroundColor(Color.parseColor("#FDAD3F"))
+                        rb_doctor.setBackgroundColor(Color.parseColor("#3c4df7"))
                         rb_patient.setBackgroundColor(Color.parseColor("#ebebeb"))
                     }
                 }

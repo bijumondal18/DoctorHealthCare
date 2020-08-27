@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CreateDoctorProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_create_doctor_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorWhite"
+        android:visibility="gone"
+        app:elevation="@dimen/elevation_0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_create_doctor_profile_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:titleTextAppearance="@style/ToolbarTitleAppearance"
+            app:titleTextColor="@color/primaryTextColor" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_32"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Create Profile"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_22" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:text="Please create your profile to get best services from us"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_18" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_32"
+                android:text="Department"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/edt_choose_department"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:gravity="center|start"
+                android:hint="Choose your Specialization"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Choose Hospital"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/edt_choose_hospital"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:hint="Hospital Name"
+                android:gravity="center|start"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Set Your Visit Amount"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <EditText
+                android:id="@+id/edt_set_visit_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:drawableLeft="@drawable/ic_rupee"
+                android:drawablePadding="@dimen/padding_8"
+                android:drawableTint="@color/primaryTextColor"
+                android:hint="Amount"
+                android:inputType="number"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Address"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <EditText
+                android:id="@+id/edt_set_address_doc"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:hint="Address (Optional)"
+                android:inputType="textPostalAddress"
+                android:maxLines="2"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_create_doc_profile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_margin="@dimen/margin_16"
+                android:text="Create Profile"
+                android:textAllCaps="false" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

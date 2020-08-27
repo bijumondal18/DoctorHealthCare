@@ -41,6 +41,7 @@ object Constants {
 
     const val BANNER_LIST_URL = "bannerlist"
     const val ALL_DOCTORS_LIST_URL = "doctorlist"
+    const val HOSPITAL_LIST_URL = "gethospitallist"
 
 
 }

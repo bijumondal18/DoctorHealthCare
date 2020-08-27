@@ -69,6 +69,7 @@ class PatientProfileActivity : AppCompatActivity() {
             builder.setTitle("Logout")
             builder.setMessage("Are you sure want to logout?")
             builder.setPositiveButton("Yes") { dialog, which ->
+                mPreference.setIsLoggedIn(false)
                 mPreference.clearSharedPreference()
                 startActivity(
                     Intent(this, WelcomeActivity::class.java)

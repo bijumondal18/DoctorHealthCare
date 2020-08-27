@@ -15,6 +15,7 @@ import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctor
 import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
+import com.bijumondal.doctorhealthcare.models.hospitalList.ResponseHospitalList
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
 import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
@@ -105,5 +106,8 @@ interface APIInterface {
 
     @POST(Constants.ALL_DOCTORS_LIST_URL)
     fun getAllDoctorsList(@Body request: RequestAllDoctorsList): Call<ResponseAllDoctorsList>
+
+    @GET(Constants.HOSPITAL_LIST_URL)
+    fun getHospitalList(): Call<ResponseHospitalList>
 
 }

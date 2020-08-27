@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.DoctorListActivity"></activity>
+        <activity android:name=".activities.HospitalListActivity"></activity>
+        <activity android:name=".activities.CreateDoctorProfileActivity" />
+        <activity android:name=".activities.DoctorListActivity" />
         <activity android:name=".activities.DoctorDepartmentActivity" />
         <activity android:name=".activities.UpdateDoctorProfileActivity" />
         <activity android:name=".activities.UpdatePatientProfileActivity" />

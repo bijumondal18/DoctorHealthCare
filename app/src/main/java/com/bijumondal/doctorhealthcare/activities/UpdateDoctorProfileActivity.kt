@@ -115,7 +115,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "")
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "",1,"")
             updateDoctorProfile(request)
 
         } else {
@@ -158,7 +158,6 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 intent.putExtra("docDept", docDept)
                                 setResult(RESULT_OK, intent)
                                 finish()
-
 
                             }
 

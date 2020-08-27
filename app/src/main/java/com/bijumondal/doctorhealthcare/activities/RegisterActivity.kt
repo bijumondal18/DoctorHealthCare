@@ -116,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
                                     val doctorId = mData.doctor_id
                                     mPreference.setUserId(doctorId)
                                 }
-                                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                                startActivity(Intent(this@RegisterActivity, CreateDoctorProfileActivity::class.java))
                                 finish()
 
                                 mPreference.setFirstName(firstName)
@@ -124,7 +124,6 @@ class RegisterActivity : AppCompatActivity() {
                                 mPreference.setEmail(email)
                                 mPreference.setNumber(mobile)
 
-                                mPreference.setIsLoggedIn(true)
                             }
 
                             if (response.body()!!.data.message != null) {

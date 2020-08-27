@@ -3,5 +3,6 @@ package com.bijumondal.doctorhealthcare.models.doctorDepartment
 data class Data(
     val description: String,
     val name: String,
-    val icon: String
+    val icon: String,
+    val message: String
 )

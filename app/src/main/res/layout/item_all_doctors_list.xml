@@ -16,9 +16,7 @@
         android:background="@color/colorWhite"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:paddingLeft="@dimen/padding_12"
-        android:paddingRight="@dimen/padding_12">
+        android:foreground="?attr/selectableItemBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_doc_image"
@@ -34,32 +32,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:text="Book Appointment"
-            android:textAllCaps="false"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_14"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@color/colorTransparent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_doc_address"
-            app:layout_constraintStart_toStartOf="@+id/tv_doc_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_doc_address" />
 
         <TextView
@@ -67,11 +48,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:drawableLeft="@drawable/ic_hospital"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Cardiology"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/font_13"
@@ -103,12 +84,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_bold"
-            android:maxLines="1"
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
+            android:maxLines="1"
             android:text="Dr. biju mondal"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
@@ -116,6 +97,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_doc_image" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Book Appointment"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
