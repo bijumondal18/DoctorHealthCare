@@ -65,11 +65,11 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="ToolbarTitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:typeface">serif</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">normal</item>
-        <item name="fontFamily">serif</item>
+        <item name="fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <!-- include other attributes you want to change: textColor, textStyle, etc -->
     </style>

@@ -18,17 +18,18 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_doc_image"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@color/colorTransparent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/radius_8" />
 
         <View
             android:id="@+id/view"
@@ -53,7 +54,7 @@
             android:maxLines="1"
             android:text="Cardiology"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="@dimen/font_13"
+            android:textSize="@dimen/font_14"
             app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
             app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_doc_name" />
@@ -67,9 +68,9 @@
             android:drawableTint="@color/secondaryTextColor"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Dhaka, bangladesh"
+            android:text="doctor address"
             android:textColor="@color/secondaryTextColor"
-            android:textSize="@dimen/font_13"
+            android:textSize="@dimen/font_14"
             app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image"
             app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
             app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
@@ -82,12 +83,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:fontFamily="@font/roboto_bold"
             android:maxLines="1"
             android:text="Dr. biju mondal"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_16"
+            android:textSize="@dimen/font_18"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_doc_image"
             app:layout_constraintTop_toTopOf="@+id/iv_doc_image" />
@@ -96,7 +96,7 @@
             android:id="@+id/btn_book_appointment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
             android:text="Book Appointment"
@@ -105,18 +105,30 @@
             android:textSize="@dimen/font_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_visit_amount" />
 
         <TextView
             android:id="@+id/tv_visit_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address"
+            tools:text="500 rs" />
+
+        <TextView
+            android:id="@+id/tv_hospital_name_and_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textSize="@dimen/font_16"
-            android:textColor="@color/primaryTextColor"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_book_appointment"
+            android:layout_marginTop="16dp"
+            android:text="hospital name - address"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_book_appointment" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
