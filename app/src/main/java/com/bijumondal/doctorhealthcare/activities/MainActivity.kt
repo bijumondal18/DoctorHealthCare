@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setDrawerLayout()
 
         if (mPreference.getUserType() == 1) {
+            layout_doctor_section.visibility = View.GONE
 
             getBannerList()
 
