@@ -52,10 +52,25 @@ class AllDoctorsListAdapter(
             )
         }
 
+        holder.btnBook.setOnClickListener {
+            context.startActivity(
+                Intent(context!!, BookingActivity::class.java)
+                    .putExtra("doctorPhoto", allDoctorsList[position].photo)
+                    .putExtra("doctorName", allDoctorsList[position].name)
+                    .putExtra("doctorPhone", allDoctorsList[position].phone)
+                    .putExtra("doctorAddress", allDoctorsList[position].address)
+                    .putExtra("doctorDept", allDoctorsList[position].department)
+                    .putExtra("hospitalPhone", allDoctorsList[position].hospitalphoneno)
+                    .putExtra("doctorVisitAmount", "₹ ${allDoctorsList[position].visit_amount}")
+                    .putExtra("hospitalNameAndAddress", "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}")
+            )
+        }
+
     }
 
     class AllDoctorsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val llParent = view.ll_parent
+        val btnBook = view.btn_book_appointment
         val doctorImage = view.iv_doc_image_booking
         val doctorName = view.tv_doc_name_booking
         val doctorDept = view.tv_doc_department_booking

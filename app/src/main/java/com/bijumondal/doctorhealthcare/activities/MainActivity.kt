@@ -35,6 +35,7 @@ import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -91,16 +92,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         initViews()
         setDrawerLayout()
-        getBannerList()
 
-        val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
-        allDoctorsRecyclerView.layoutManager = layoutManager
-        val request = RequestAllDoctorsList("ALL")
-        fetchAllDoctorsList(request)
+        if (mPreference.getUserType() == 1) {
 
-        val topSpecialitiesLayoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
-        topSpecialitiesRecyclerView.layoutManager = topSpecialitiesLayoutManager
-        fetchTopSpecialities()
+            getBannerList()
+
+            val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            allDoctorsRecyclerView.layoutManager = layoutManager
+            val request = RequestAllDoctorsList("ALL")
+            fetchAllDoctorsList(request)
+
+            val topSpecialitiesLayoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            topSpecialitiesRecyclerView.layoutManager = topSpecialitiesLayoutManager
+            fetchTopSpecialities()
+
+        } else if (mPreference.getUserType() == 2) {
+            banner_slider_view_pager.visibility = View.GONE
+            layout_all_dr_dept.visibility = View.GONE
+            layout_all_doctor.visibility = View.GONE
+
+        }
+
 
     }
 
