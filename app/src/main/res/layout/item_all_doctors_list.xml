@@ -26,9 +26,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:src="@color/colorTransparent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +45,7 @@
             android:id="@+id/tv_doc_department"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:drawableLeft="@drawable/ic_hospital"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
@@ -64,7 +62,6 @@
             android:id="@+id/tv_doc_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2"
             android:drawableLeft="@drawable/ic_place"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
@@ -73,6 +70,7 @@
             android:text="Dhaka, bangladesh"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/font_13"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image"
             app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
             app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_doc_department" />
@@ -81,12 +79,8 @@
             android:id="@+id/tv_doc_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
-            android:drawableLeft="@drawable/ic_person"
-            android:drawablePadding="@dimen/padding_8"
-            android:drawableTint="@color/secondaryTextColor"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_bold"
             android:maxLines="1"
@@ -95,24 +89,34 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_doc_image" />
+            app:layout_constraintStart_toEndOf="@+id/iv_doc_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_doc_image" />
 
-        <TextView
-            android:id="@+id/textView"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_book_appointment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:fontFamily="@font/roboto_bold"
             android:text="Book Appointment"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_16"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/tv_visit_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="@dimen/font_16"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_book_appointment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_book_appointment" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

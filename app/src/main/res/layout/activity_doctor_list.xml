@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
             app:titleTextAppearance="@style/ToolbarTitleAppearance"
-            app:titleTextColor="@color/primaryTextColor" />
+            app:titleTextColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

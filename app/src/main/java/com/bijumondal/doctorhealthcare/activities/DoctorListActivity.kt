@@ -47,7 +47,7 @@ class DoctorListActivity : AppCompatActivity() {
 
         setupToolbar()
 
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val layoutManager = LinearLayoutManager(this@DoctorListActivity, LinearLayoutManager.VERTICAL, false)
         allDoctorsRecyclerView.layoutManager = layoutManager
         val request = RequestAllDoctorsList(deptName)
         fetchDoctors(request)

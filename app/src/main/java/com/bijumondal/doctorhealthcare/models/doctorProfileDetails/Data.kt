@@ -8,5 +8,7 @@ data class Data(
     val phone: String,
     val photo: String,
     val profile: String,
-    val message: String
+    val message: String,
+    val visit_amount: String,
+    val hospitalname: String
 )

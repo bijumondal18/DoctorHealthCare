@@ -136,6 +136,12 @@ class DoctorProfileActivity : AppCompatActivity() {
                                     tv_doc_dept.text = mData.department
                                 }
 
+                                if (mData.visit_amount != null) {
+                                    tv_doc_profile_visit_amount.text = "${mData.visit_amount} (Visit amount)"
+                                }
+                                if (mData.hospitalname != null) {
+                                    tv_doc_profile_hospital_name.text = mData.hospitalname
+                                }
 
                             }
 
@@ -179,6 +185,8 @@ class DoctorProfileActivity : AppCompatActivity() {
                 tv_doc_profile_address.text = data!!.getStringExtra("address")
                 tv_doc_profile_address.visibility = View.VISIBLE
                 tv_doc_dept.text = data.getStringExtra("docDept")
+                tv_doc_profile_visit_amount.text = data!!.getStringExtra("docVisitAmount") + "  (Visit amount)"
+                tv_doc_profile_hospital_name.text = "${data!!.getStringExtra("docHospitalName")}"
             }
         }
 

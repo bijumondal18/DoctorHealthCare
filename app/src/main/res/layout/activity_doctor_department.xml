@@ -10,18 +10,18 @@
         android:id="@+id/appBarLayout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimary"
         app:elevation="@dimen/elevation_0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_doctor_dept_activity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ToolbarColoredBackArrow"
+            android:theme="@style/ToolbarWhiteBackArrow"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
             app:titleTextAppearance="@style/ToolbarTitleAppearance"
-            app:titleTextColor="@color/primaryTextColor" />
+            app:titleTextColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,8 +40,8 @@
                 android:id="@+id/rv_doctor_dept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:clipToPadding="false"/>
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

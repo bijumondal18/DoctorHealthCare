@@ -28,7 +28,8 @@ class AllDoctorsListAdapter(
     override fun onBindViewHolder(holder: AllDoctorsListAdapterViewHolder, position: Int) {
         holder.doctorName.text = allDoctorsList[position].name
         holder.doctorDept.text = allDoctorsList[position].department
-        holder.doctorAddress.text = allDoctorsList[position].address
+        holder.doctorAddress.text = allDoctorsList[position].hospitalname
+        holder.doctorVisitAmount.text = "₹ ${allDoctorsList[position].visit_amount} Consultation fees"
 
         if (allDoctorsList[position].photo != null) {
             ImageLoader.loadCircleImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.color.colorTransparent)
@@ -45,5 +46,6 @@ class AllDoctorsListAdapter(
         val doctorName = view.tv_doc_name
         val doctorDept = view.tv_doc_department
         val doctorAddress = view.tv_doc_address
+        val doctorVisitAmount = view.tv_visit_amount
     }
 }

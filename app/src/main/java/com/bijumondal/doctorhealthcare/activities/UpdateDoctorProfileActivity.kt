@@ -127,6 +127,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         docDept = edt_department_doc.text.trim().toString()
         userId = mPreference.getUserId().toString()
         visitAmount = edt_visit_amount_doc.text.trim().toString()
+        hospitalName = edt_hospital_doc.text.trim().toString()
+        hospitalId = mPreference.getHospitalId()
 
         if (!TextUtils.isEmpty(firstname) &&
             !TextUtils.isEmpty(lastname) &&
@@ -134,7 +136,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", 1, visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId!!, visitAmount)
             updateDoctorProfile(request)
 
         } else {
@@ -177,6 +179,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 intent.putExtra("phone", phone)
                                 intent.putExtra("address", address)
                                 intent.putExtra("docDept", docDept)
+                                intent.putExtra("docVisitAmount", visitAmount)
+                                intent.putExtra("docHospitalName", hospitalName)
                                 setResult(RESULT_OK, intent)
                                 finish()
 

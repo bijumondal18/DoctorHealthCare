@@ -10,14 +10,14 @@
         android:id="@+id/appBarLayout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorWhite"
+        android:backgroundTint="@color/colorPrimary"
         app:elevation="@dimen/elevation_0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_doctor_profile_activity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ToolbarColoredBackArrow"
+            android:theme="@style/ToolbarWhiteBackArrow"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
             app:titleTextAppearance="@style/ToolbarTitleAppearance"
@@ -34,12 +34,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:drawableLeft="@drawable/ic_edit_profile"
-                    android:drawableTint="@color/colorRed"
-                    android:fontFamily="@font/roboto_bold"
+                    android:drawableTint="@color/colorWhite"
                     android:gravity="start|center"
-                    android:text="Edit"
+                    android:text="Edit profile"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorRed"
+                    android:textColor="@color/colorWhite"
                     android:textSize="@dimen/font_16" />
 
             </RelativeLayout>

@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setDrawerLayout()
         getBannerList()
 
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
         allDoctorsRecyclerView.layoutManager = layoutManager
         val request = RequestAllDoctorsList("ALL")
         fetchAllDoctorsList(request)

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/splash_title"
-        android:textColor="@color/primaryTextColor"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/font_16" />
 
 </LinearLayout>

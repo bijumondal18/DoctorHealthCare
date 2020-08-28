@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="196dp">
+    android:layout_height="196dp"
+    android:background="@drawable/nav_header_background_style"
+    android:fitsSystemWindows="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile_image_nav_header"
@@ -10,7 +11,7 @@
         android:layout_height="65dp"
         android:layout_above="@id/tv_profile_name_nav_header"
         android:layout_marginLeft="@dimen/margin_16"
-        android:src="@color/primaryTextColor" />
+        android:src="@color/colorTransparent" />
 
     <TextView
         android:id="@+id/tv_profile_name_nav_header"
@@ -19,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_16"
         android:text="Rakesh Ghosh"
-        android:textColor="@color/primaryTextColor"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/font_18" />
 
     <View
