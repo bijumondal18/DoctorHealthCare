@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8"
@@ -11,6 +10,7 @@
     app:cardElevation="@dimen/elevation_1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
@@ -19,7 +19,7 @@
         android:foreground="?attr/selectableItemBackground">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/iv_doc_image"
+            android:id="@+id/iv_doc_image_booking"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentStart="true"
@@ -40,27 +40,29 @@
             android:background="@color/colorTransparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_doc_address" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_doc_address_booking" />
 
         <TextView
-            android:id="@+id/tv_doc_department"
+            android:id="@+id/tv_doc_department_booking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
             android:drawableLeft="@drawable/ic_hospital"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
             android:ellipsize="end"
+            android:fontFamily="@font/roboto_bold"
             android:maxLines="1"
             android:text="Cardiology"
+            android:textAllCaps="true"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/font_14"
-            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
-            app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_doc_name" />
+            app:layout_constraintBottom_toTopOf="@+id/tv_doc_address_booking"
+            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name_booking"
+            app:layout_constraintStart_toStartOf="@+id/tv_doc_name_booking" />
 
         <TextView
-            android:id="@+id/tv_doc_address"
+            android:id="@+id/tv_doc_address_booking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_place"
@@ -71,13 +73,12 @@
             android:text="doctor address"
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/font_14"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image"
-            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name"
-            app:layout_constraintStart_toStartOf="@+id/tv_doc_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_doc_department" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image_booking"
+            app:layout_constraintEnd_toEndOf="@+id/tv_doc_name_booking"
+            app:layout_constraintStart_toStartOf="@+id/tv_doc_name_booking" />
 
         <TextView
-            android:id="@+id/tv_doc_name"
+            android:id="@+id/tv_doc_name_booking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -89,8 +90,8 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_18"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_doc_image"
-            app:layout_constraintTop_toTopOf="@+id/iv_doc_image" />
+            app:layout_constraintStart_toEndOf="@+id/iv_doc_image_booking"
+            app:layout_constraintTop_toTopOf="@+id/iv_doc_image_booking" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_book_appointment"
@@ -105,10 +106,10 @@
             android:textSize="@dimen/font_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/tv_visit_amount" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_visit_amount_booking" />
 
         <TextView
-            android:id="@+id/tv_visit_amount"
+            android:id="@+id/tv_visit_amount_booking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -116,12 +117,12 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address"
+            app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking"
             tools:text="500 rs" />
 
         <TextView
-            android:id="@+id/tv_hospital_name_and_address"
+            android:id="@+id/tv_hospital_name_and_address_booking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

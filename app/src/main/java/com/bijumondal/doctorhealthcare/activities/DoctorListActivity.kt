@@ -70,16 +70,14 @@ class DoctorListActivity : AppCompatActivity() {
                         Helper.showLog(TAG, "Response : ${response.body()}")
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
-                            if (mData != null) {
+                            if (mData != null && !mData.isEmpty()) {
                                 allDoctorsList = mData as ArrayList<Data>
                                 allDoctorsAdapter = AllDoctorsListAdapter(allDoctorsList, this@DoctorListActivity)
                                 allDoctorsRecyclerView.adapter = allDoctorsAdapter
                                 allDoctorsAdapter.notifyDataSetChanged()
-                                rv_doctors.visibility = View.VISIBLE
-                                iv_no_data.visibility = View.GONE
 
                             } else {
-                                rv_doctors.visibility = View.GONE
+                                allDoctorsRecyclerView.visibility = View.GONE
                                 iv_no_data.visibility = View.VISIBLE
                             }
 

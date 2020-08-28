@@ -46,18 +46,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_8"
                     android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
-                    android:visibility="gone" />
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <ImageView
+        <TextView
             android:id="@+id/iv_no_data"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/no_data"
+            android:text="No Doctors Found !"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16"
             android:visibility="gone" />
 
     </RelativeLayout>

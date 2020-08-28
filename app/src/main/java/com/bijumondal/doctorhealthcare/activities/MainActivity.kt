@@ -35,6 +35,7 @@ import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,6 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var topSpecialitiesList: ArrayList<com.bijumondal.doctorhealthcare.models.doctorDepartment.Data> = ArrayList()
     private lateinit var topSpecialitiesAdapter: TopSpecialistAdapter
 
+
+    private var profileName: String = ""
+    private var profileImage: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -266,6 +270,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
         topSpecialitiesRecyclerView = findViewById(R.id.rv_dr_dept)
         val headerView: View = nav_view.inflateHeaderView(R.layout.nav_header_main)
+
+        if (mPreference.getFirstName() != null && mPreference.getLastName() != null) {
+            headerView.tv_profile_name_nav_header.text = "${mPreference.getFirstName()} ${mPreference.getLastName()}"
+        }
+
     }
 
     private fun setDrawerLayout() {

@@ -46,7 +46,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     var docDept = ""
     var visitAmount = ""
     var hospitalName = ""
-    var hospitalId: Int? = null
+    var hospitalId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +128,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         userId = mPreference.getUserId().toString()
         visitAmount = edt_visit_amount_doc.text.trim().toString()
         hospitalName = edt_hospital_doc.text.trim().toString()
-        hospitalId = mPreference.getHospitalId()
+        hospitalId = mPreference.getHospitalId().toString()
 
         if (!TextUtils.isEmpty(firstname) &&
             !TextUtils.isEmpty(lastname) &&
@@ -136,7 +136,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId!!, visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId.toString(), visitAmount)
             updateDoctorProfile(request)
 
         } else {
@@ -223,10 +223,13 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                 docDept = data!!.getStringExtra("docDept")!!
                 edt_department_doc.text = docDept
             }
+
         } else if (requestCode == REQUEST_CODE1) {
             if (resultCode == RESULT_OK) {
                 hospitalName = data!!.getStringExtra("hospitalName")!!
                 edt_hospital_doc.text = hospitalName
+                hospitalId = data!!.getStringExtra("hospitalId")!!
+                mPreference.setHospitalId(hospitalId)
             }
         }
     }

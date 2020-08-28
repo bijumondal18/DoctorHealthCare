@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.BookingActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/elevation_0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_booking_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarWhiteBackArrow"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:titleTextAppearance="@style/ToolbarTitleAppearance"
+            app:titleTextColor="@color/colorWhite" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTransparent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_doc_image_booking"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@color/colorTransparent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/radius_8" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorTransparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_doc_address_booking" />
+
+                <TextView
+                    android:id="@+id/tv_doc_department_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:drawableLeft="@drawable/ic_hospital"
+                    android:drawablePadding="@dimen/padding_8"
+                    android:drawableTint="@color/secondaryTextColor"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:text="Cardiology"
+                    android:textAllCaps="true"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/font_15"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_doc_address_booking"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_doc_name_booking"
+                    app:layout_constraintStart_toStartOf="@+id/tv_doc_name_booking" />
+
+                <TextView
+                    android:id="@+id/tv_doc_address_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_place"
+                    android:drawablePadding="@dimen/padding_8"
+                    android:drawableTint="@color/secondaryTextColor"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="doctor address"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/font_15"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image_booking"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_doc_name_booking"
+                    app:layout_constraintStart_toStartOf="@+id/tv_doc_name_booking" />
+
+                <TextView
+                    android:id="@+id/tv_doc_name_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Dr. biju mondal"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doc_image_booking"
+                    app:layout_constraintTop_toTopOf="@+id/iv_doc_image_booking" />
+
+
+                <TextView
+                    android:id="@+id/tv_visit_amount_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_18"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hospital_phone_booking"
+                    tools:text="500 rs" />
+
+                <TextView
+                    android:id="@+id/tv_hospital_name_and_address_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="hospital name - address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                <TextView
+                    android:id="@+id/tv_hospital_phone_booking"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Choose Date &amp; Time : "
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16" />
+
+                <!--todo setup date and time for appontments-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Appointment for : "
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="Full Name"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/edt_appointment_for_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:background="@drawable/edit_text_background_style"
+                    android:hint="Full Name"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="Phone number"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/font_14" />
+
+                <EditText
+                    android:id="@+id/edt_appointment_for_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:background="@drawable/edit_text_background_style"
+                    android:hint="Phone number"
+                    android:inputType="number"
+                    android:maxLength="13"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_14" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_confirm_and_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_margin="@dimen/margin_16"
+                android:text="Confirm &amp; Pay"
+                android:textAllCaps="false"
+                android:textSize="@dimen/font_14" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

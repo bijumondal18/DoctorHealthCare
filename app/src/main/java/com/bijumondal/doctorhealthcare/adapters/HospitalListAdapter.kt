@@ -31,10 +31,13 @@ class HospitalListAdapter(
 
         holder.hospitalName.text = hospitalList[position].name
 
+        val hospitalId = hospitalList[position].id
+
+
         holder.llParent.setOnClickListener {
             val intent = Intent()
             intent.putExtra("hospitalName", hospitalList[position].name)
-            intent.putExtra("hospitalId", hospitalList[position].id)
+            intent.putExtra("hospitalId", hospitalId)
             (context as AppCompatActivity).setResult(Activity.RESULT_OK, intent)
             context.finish()
         }

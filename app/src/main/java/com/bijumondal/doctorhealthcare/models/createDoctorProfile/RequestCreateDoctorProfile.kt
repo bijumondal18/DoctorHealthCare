@@ -8,6 +8,6 @@ data class RequestCreateDoctorProfile(
     val mobile: String,
     val name: String,
     val profile: String,
-    val hospital_id: Int,
+    val hospital_id: String,
     val visit_amount: String
 )

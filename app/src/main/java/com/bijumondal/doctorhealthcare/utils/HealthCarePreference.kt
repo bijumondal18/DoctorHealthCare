@@ -78,15 +78,6 @@ class HealthCarePreference(val context: Context) {
         return sharedPref.getInt(KEY_USER_ID, 0)
     }
 
-    fun setHospitalId(id: Int) {
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putInt(KEY_HOSPITAL_ID, id)
-        editor.apply()
-    }
-
-    fun getHospitalId(): Int? {
-        return sharedPref.getInt(KEY_HOSPITAL_ID, 0)
-    }
 
     fun setUserType(id: Int) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -169,6 +160,16 @@ class HealthCarePreference(val context: Context) {
     fun getCode(): String? {
         return sharedPref.getString(KEY_CODE, "")
 
+    }
+
+    fun setHospitalId(value: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_HOSPITAL_ID, value)
+        editor.apply()
+    }
+
+    fun getHospitalId(): String? {
+        return sharedPref.getString(KEY_HOSPITAL_ID, "")
     }
 
     fun setNumber(value: String) {

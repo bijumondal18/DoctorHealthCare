@@ -13,7 +13,6 @@ import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_create_doctor_profile.*
-import kotlinx.android.synthetic.main.activity_update_doctor_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +37,7 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
     var lastname = ""
     var email = ""
     var phone = ""
-    var hospitalId: Int? = null
+    var hospitalId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,12 +78,13 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
         lastname = mPreference.getLastName().toString()
         email = mPreference.getEmail().toString()
         phone = mPreference.getNumber().toString()
+        hospitalId = mPreference.getHospitalId().toString()
 
         if (!TextUtils.isEmpty(docDept)
             && !TextUtils.isEmpty(visitAmount)
             && !TextUtils.isEmpty(hospitalName)
         ) {
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId!!, visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId, visitAmount)
             createDoctorProfile(request)
 
         } else {
@@ -163,7 +163,8 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
             if (resultCode == RESULT_OK) {
                 hospitalName = data!!.getStringExtra("hospitalName")!!
                 edt_choose_hospital.text = hospitalName
-                hospitalId = data.getIntExtra("hospitalId", 0)
+                hospitalId = data.getStringExtra("hospitalId")!!
+                hospitalId = mPreference.setHospitalId(hospitalId).toString()
             }
     }
 
