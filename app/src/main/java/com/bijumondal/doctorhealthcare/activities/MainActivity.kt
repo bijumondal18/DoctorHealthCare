@@ -115,6 +115,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
+        card_appointments.setOnClickListener {
+            startActivity(Intent(this@MainActivity, MyAppointmentsActivity::class.java))
+        }
+        card_prescriptions.setOnClickListener {
+            startActivity(Intent(this@MainActivity, MyPrescriptionsActivity::class.java))
+        }
+        card_set_holidays.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SetHolidaysActivity::class.java))
+        }
+        card_set_timings.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SetTimingsActivity::class.java))
+        }
+
     }
 
     private fun fetchTopSpecialities() {

@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.BookingActivity"></activity>
+        <activity android:name=".activities.SetTimingsActivity"></activity>
+        <activity android:name=".activities.SetHolidaysActivity" />
+        <activity android:name=".activities.BookingActivity" />
         <activity android:name=".activities.HospitalListActivity" />
         <activity android:name=".activities.CreateDoctorProfileActivity" />
         <activity android:name=".activities.DoctorListActivity" />
@@ -25,7 +27,6 @@
         <activity android:name=".activities.DoctorProfileActivity" />
         <activity android:name=".activities.MyAppointmentsActivity" />
         <activity android:name=".activities.PatientProfileActivity" />
-        <activity android:name=".activities.CreateProfileActivity" />
         <activity
             android:name=".activities.RegisterActivity"
             android:theme="@style/FullScreenTheme" />

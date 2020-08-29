@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_parent_dept"
-    android:layout_width="100dp"
+    android:layout_width="130dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_12"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground">
+    app:cardBackgroundColor="#E1F6FF"
+    app:cardElevation="@dimen/elevation_0dp"
+    app:cardCornerRadius="@dimen/radius_8">
 
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/iv_dept_icon"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_corner_radius="@dimen/radius_8"
-        app:srcCompat="@drawable/doctor_thumbnail" />
-
-    <TextView
-        android:id="@+id/tv_dept_title"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_parent_dept"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="end"
-        android:lines="2"
-        android:maxLines="2"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/primaryTextColor"
-        android:textSize="@dimen/font_14"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_dept_icon" />
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_dept_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/radius_8"
+            app:srcCompat="@drawable/doctor_thumbnail" />
+
+        <TextView
+            android:id="@+id/tv_dept_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_dept_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
 
