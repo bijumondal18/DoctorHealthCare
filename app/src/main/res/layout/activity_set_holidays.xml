@@ -53,11 +53,11 @@
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
-                android:hint="Choose date"
                 android:gravity="center"
-                android:textAlignment="textStart"
+                android:hint="Choose date"
                 android:inputType="date"
                 android:paddingLeft="@dimen/padding_12"
+                android:textAlignment="textStart"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16"
                 tools:ignore="RtlCompat" />
@@ -78,6 +78,24 @@
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/margin_16"
                 android:background="@color/colorTransparent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="My Holidays"
+                android:textStyle="bold"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_holidays_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false" />
 
 
         </LinearLayout>
