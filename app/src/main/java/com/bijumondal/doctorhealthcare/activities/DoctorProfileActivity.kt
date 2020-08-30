@@ -142,6 +142,9 @@ class DoctorProfileActivity : AppCompatActivity() {
                                 if (mData.hospitalname != null) {
                                     tv_doc_profile_hospital_name.text = mData.hospitalname
                                 }
+                                if (mData.hospital_id != null) {
+                                    mPreference.setHospitalId(mData.hospital_id)
+                                }
 
                             }
 

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_8"
-    app:cardBackgroundColor="@color/colorWhite"
+    android:layout_marginLeft="@dimen/margin_8"
+    android:layout_marginRight="@dimen/margin_8"
+    android:layout_marginTop="@dimen/margin_8"
     app:cardCornerRadius="@dimen/radius_8"
-    app:cardElevation="@dimen/elevation_1dp">
+    app:cardElevation="@dimen/elevation_0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@drawable/card_background_style"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground">
@@ -37,7 +38,7 @@
             android:layout_height="1dp"
             android:layout_gravity="bottom"
             android:layout_marginTop="16dp"
-            android:background="@color/colorTransparent"
+            android:background="@color/colorGray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_doc_address_booking" />
@@ -51,7 +52,7 @@
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/secondaryTextColor"
             android:ellipsize="end"
-            android:fontFamily="@font/roboto_bold"
+            android:textStyle="bold"
             android:maxLines="1"
             android:text="Cardiology"
             android:textAllCaps="true"

@@ -1,12 +1,29 @@
 package com.bijumondal.doctorhealthcare.activities
 
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.adapters.DoctorDeptAdapter
+import com.bijumondal.doctorhealthcare.adapters.DoctorTimeSlotsAdapter
+import com.bijumondal.doctorhealthcare.api.APIInterface
+import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
+import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
+import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
+import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
+import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.activity_booking.*
 import kotlinx.android.synthetic.main.activity_doctor_list.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BookingActivity : AppCompatActivity() {
 
@@ -16,13 +33,90 @@ class BookingActivity : AppCompatActivity() {
 
     private lateinit var mPreference: HealthCarePreference
 
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var timeSlotsListAdapter: DoctorTimeSlotsAdapter
+    private var timeSlotsList: ArrayList<Data> = ArrayList()
+
+    var doctorId = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         mPreference = HealthCarePreference(this@BookingActivity)
-
+        mRecyclerView = findViewById(R.id.rv_timeslots)
         setupToolbar()
 
+        if (intent.hasExtra("doctorId") != null) {
+            doctorId = intent.getStringExtra("doctorId").toString()
+        }
+
+        val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
+        mRecyclerView.layoutManager = layoutManager
+        val request = RequestDoctorTimeSlotsList(doctorId)
+        fetchTimeSlots(request)
+
+
+
+        btn_confirm_and_pay.setOnClickListener {
+            startActivity(Intent(this@BookingActivity,BookingSuccessfulActivity::class.java))
+        }
+
+    }
+
+    private fun fetchTimeSlots(request: RequestDoctorTimeSlotsList) {
+        if (Helper.isConnectedToInternet(this@BookingActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponseDoctorTimeSlotsList> = APIInterface.create().getDoctorTimeSlotsList(request)
+            call.enqueue(object : Callback<ResponseDoctorTimeSlotsList> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorTimeSlotsList>,
+                    response: Response<ResponseDoctorTimeSlotsList>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null && !mData.isEmpty()) {
+                                timeSlotsList = mData as ArrayList<Data>
+                                timeSlotsListAdapter = DoctorTimeSlotsAdapter(timeSlotsList, this@BookingActivity)
+                                mRecyclerView.adapter = timeSlotsListAdapter
+                                timeSlotsListAdapter.notifyDataSetChanged()
+
+                            } else {
+                                tv_no_time_slots.visibility = View.VISIBLE
+                                mRecyclerView.visibility = View.GONE
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@BookingActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorTimeSlotsList>, t: Throwable) {
+                    Helper.toastShort(this@BookingActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
 
     }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3c4df7</color>
-    <color name="colorPrimaryDark">#3c4df7</color>
-    <color name="colorAccent">#3c4df7</color>
+    <color name="colorPrimary">#0cada2</color>
+    <color name="colorPrimaryDark">#0cada2</color>
+    <color name="colorAccent">#0cada2</color>
 
-    <color name="colorTransparent">#f1f2f3</color>
-    <color name="colorGray">#dddddd</color>
+    <color name="colorTransparent">#f1f3f4</color>
+    <color name="colorGray">#E6E6E6</color>
     <color name="colorWhite">#FFFFFF</color>
 
     <color name="primaryTextColor">#000000</color>
@@ -17,7 +17,7 @@
     <color name="colorYellow">#FFEB3B</color>
     <color name="colorCyan">#00BCD4</color>
 
-    <color name="gradientStartColor">#3345FA</color>
-    <color name="gradientEndColor">#6F7BEC</color>
+    <color name="gradientStartColor">#0cada2</color>
+    <color name="gradientEndColor">#FFFFFF</color>
 
 </resources>

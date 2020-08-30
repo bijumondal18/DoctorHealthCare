@@ -18,6 +18,7 @@ class AllDoctorsListAdapter(
 ) :
     RecyclerView.Adapter<AllDoctorsListAdapter.AllDoctorsListAdapterViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllDoctorsListAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_all_doctors_list, parent, false)
         return AllDoctorsListAdapterViewHolder(view)
@@ -38,10 +39,13 @@ class AllDoctorsListAdapter(
             ImageLoader.loadImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.color.colorTransparent)
         }
 
+        val doctorId = allDoctorsList[position].id  //doctorId
+
         holder.llParent.setOnClickListener {
             context.startActivity(
                 Intent(context!!, BookingActivity::class.java)
                     .putExtra("doctorPhoto", allDoctorsList[position].photo)
+                    .putExtra("doctorId", doctorId)
                     .putExtra("doctorName", allDoctorsList[position].name)
                     .putExtra("doctorPhone", allDoctorsList[position].phone)
                     .putExtra("doctorAddress", allDoctorsList[position].address)
@@ -57,6 +61,7 @@ class AllDoctorsListAdapter(
                 Intent(context!!, BookingActivity::class.java)
                     .putExtra("doctorPhoto", allDoctorsList[position].photo)
                     .putExtra("doctorName", allDoctorsList[position].name)
+                    .putExtra("doctorId", doctorId)
                     .putExtra("doctorPhone", allDoctorsList[position].phone)
                     .putExtra("doctorAddress", allDoctorsList[position].address)
                     .putExtra("doctorDept", allDoctorsList[position].department)

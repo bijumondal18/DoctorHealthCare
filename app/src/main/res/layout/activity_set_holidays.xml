@@ -28,13 +28,57 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorWhite"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Choose Date of Holidays"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/edt_holidays"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:hint="Choose date"
+                android:gravity="center"
+                android:textAlignment="textStart"
+                android:inputType="date"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16"
+                tools:ignore="RtlCompat" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_holidays"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/margin_16"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_16"
+                android:background="@color/colorTransparent" />
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

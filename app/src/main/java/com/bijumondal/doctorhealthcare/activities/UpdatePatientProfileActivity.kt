@@ -133,7 +133,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         address = edt_address.text.trim().toString()
 
         if (dob.isEmpty()){
-            dob = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            dob = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
             tv_date.text = dob
         }
 

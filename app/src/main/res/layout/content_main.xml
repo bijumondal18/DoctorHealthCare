@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTransparent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -35,15 +35,15 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="@dimen/radius_8"
-                    app:cardElevation="@dimen/elevation_1dp"
+                    app:cardElevation="@dimen/elevation_0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_width="180dp"
+                        android:layout_height="170dp"
+                        android:background="@drawable/card_background_style">
 
                         <ImageView
                             android:id="@+id/image_appointment"
@@ -89,16 +89,16 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="@dimen/radius_8"
-                    app:cardElevation="@dimen/elevation_1dp"
+                    app:cardElevation="@dimen/elevation_0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/card_appointments"
                     app:layout_constraintTop_toTopOf="@+id/card_appointments">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_background_style">
 
                         <ImageView
                             android:id="@+id/image_holidays"
@@ -144,9 +144,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="@dimen/radius_8"
-                    app:cardElevation="@dimen/elevation_1dp"
+                    app:cardElevation="@dimen/elevation_0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/card_appointments"
                     app:layout_constraintStart_toStartOf="@+id/card_appointments"
@@ -154,7 +153,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_background_style">
 
                         <ImageView
                             android:id="@+id/image_timings"
@@ -199,16 +199,16 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="@dimen/radius_8"
-                    app:cardElevation="@dimen/elevation_1dp"
+                    app:cardElevation="@dimen/elevation_0dp"
                     app:layout_constraintEnd_toEndOf="@+id/card_set_holidays"
                     app:layout_constraintStart_toStartOf="@+id/card_set_holidays"
                     app:layout_constraintTop_toBottomOf="@+id/card_set_holidays">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_background_style">
 
                         <ImageView
                             android:id="@+id/image_prescriptions"
@@ -253,7 +253,6 @@
                 android:layout_height="240dp"
                 android:padding="@dimen/padding_12" />
 
-
             <LinearLayout
                 android:id="@+id/layout_all_dr_dept"
                 android:layout_width="match_parent"
@@ -264,12 +263,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
                     android:padding="@dimen/margin_12"
                     android:text="Find doctors in top specialities"
                     android:textAllCaps="false"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/font_16"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_dr_dept"
@@ -286,13 +285,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
-                android:background="@color/colorTransparent"
+                android:background="@color/colorWhite"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
+                    android:textStyle="bold"
                     android:padding="@dimen/margin_12"
                     android:text="All doctors"
                     android:textAllCaps="false"

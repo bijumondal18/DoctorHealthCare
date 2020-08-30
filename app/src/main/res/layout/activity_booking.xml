@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.BookingActivity">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout_booking"
         android:layout_width="match_parent"
@@ -79,8 +78,8 @@
                     android:drawablePadding="@dimen/padding_8"
                     android:drawableTint="@color/secondaryTextColor"
                     android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
                     android:maxLines="1"
+                    android:textStyle="bold"
                     android:text="Cardiology"
                     android:textAllCaps="true"
                     android:textColor="@color/secondaryTextColor"
@@ -174,12 +173,30 @@
                     android:layout_marginLeft="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Choose Date &amp; Time : "
+                    android:textStyle="bold"
+                    android:text="Timings : "
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
 
-                <!--todo setup date and time for appontments-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_timeslots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:padding="@dimen/padding_12" />
+
+                <TextView
+                    android:id="@+id/tv_no_time_slots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:text="No time slots found !"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="@dimen/font_14"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -196,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:fontFamily="@font/roboto_bold"
+                    android:textStyle="bold"
                     android:text="Appointment for : "
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16" />
@@ -251,14 +268,23 @@
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_confirm_and_pay"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/material_button_height"
-                android:layout_margin="@dimen/margin_16"
-                android:text="Confirm &amp; Pay"
-                android:textAllCaps="false"
-                android:textSize="@dimen/font_14" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_confirm_and_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/material_button_height"
+                    android:layout_margin="@dimen/margin_16"
+                    android:text="Confirm &amp; Pay"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/font_14" />
+
+            </LinearLayout>
 
 
         </LinearLayout>

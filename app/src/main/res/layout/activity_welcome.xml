@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTransparent"
+    android:background="@color/colorWhite"
     tools:context=".activities.WelcomeActivity">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_below="@id/app_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_24"
-        android:fontFamily="@font/roboto_bold"
+        android:textStyle="bold"
         android:text="Who are you?"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/font_22" />
@@ -71,7 +71,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_24"
-        android:fontFamily="@font/roboto_extra_bold"
+        android:textStyle="bold"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"

@@ -45,6 +45,16 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="You don't have any prescriptions !"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

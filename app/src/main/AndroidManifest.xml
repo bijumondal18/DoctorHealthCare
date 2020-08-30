@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.SetTimingsActivity"></activity>
+        <activity android:name=".activities.BookingSuccessfulActivity"></activity>
+        <activity android:name=".activities.SetTimingsActivity" />
         <activity android:name=".activities.SetHolidaysActivity" />
         <activity android:name=".activities.BookingActivity" />
         <activity android:name=".activities.HospitalListActivity" />

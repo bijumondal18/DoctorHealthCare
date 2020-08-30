@@ -51,7 +51,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorWhite"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
@@ -71,7 +71,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhite">
+                    android:background="@drawable/card_background_style">
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/iv_profile_image"
@@ -93,7 +93,7 @@
                             android:id="@+id/tv_profile_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:textStyle="bold"
                             android:padding="@dimen/padding_2"
                             android:textAllCaps="true"
                             android:textColor="@color/primaryTextColor"
@@ -109,7 +109,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                app:cardBackgroundColor="@color/colorWhite"
                 app:cardCornerRadius="@dimen/radius_8"
                 app:cardElevation="@dimen/elevation_0dp">
 
@@ -117,6 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:background="@drawable/card_background_style"
                     android:weightSum="3">
 
                     <LinearLayout
@@ -131,7 +131,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:fontFamily="@font/roboto_bold"
+                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="@dimen/font_18" />
@@ -160,7 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:fontFamily="@font/roboto_bold"
+                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="@dimen/font_18" />
@@ -189,7 +189,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:fontFamily="@font/roboto_bold"
+                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="@dimen/font_18" />
@@ -214,7 +214,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                app:cardBackgroundColor="@color/colorWhite"
                 app:cardCornerRadius="@dimen/radius_8"
                 app:cardElevation="@dimen/elevation_0dp">
 
@@ -223,6 +222,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/padding_12"
+                    android:background="@drawable/card_background_style"
                     android:paddingBottom="@dimen/padding_12">
 
                     <TextView
@@ -277,13 +277,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                app:cardBackgroundColor="@color/colorWhite"
                 app:cardCornerRadius="@dimen/radius_8"
                 app:cardElevation="@dimen/elevation_0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/card_background_style"
                     android:orientation="vertical">
 
                     <TextView

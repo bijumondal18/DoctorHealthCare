@@ -1,6 +1,10 @@
 package com.bijumondal.doctorhealthcare.api
 
 import com.bijumondal.doctorhealthcare.Constants
+import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.RequestAddDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.ResponseAddDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDoctorTimeslots
+import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
@@ -8,6 +12,10 @@ import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateD
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
+import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.RequestDeleteDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.ResponseDeleteDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.RequestDeleteDoctorTimeSlots
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.ResponseDeleteDoctorTimeSlots
 import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
 import com.bijumondal.doctorhealthcare.models.doctorLogin.RequestDoctorLogin
 import com.bijumondal.doctorhealthcare.models.doctorLogin.ResponseDoctorLogin
@@ -15,6 +23,8 @@ import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctor
 import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
+import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
+import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.hospitalList.ResponseHospitalList
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
@@ -95,6 +105,21 @@ interface APIInterface {
 
     @POST(Constants.DOCTOR_PROFILE_DETAILS_URL)
     fun getDoctorProfileDetails(@Body request: RequestDoctorProfileDetails): Call<ResponseDoctorProfileDetails>
+
+    @POST(Constants.DOCTOR_TIME_SLOT_LIST_URL)
+    fun getDoctorTimeSlotsList(@Body request: RequestDoctorTimeSlotsList): Call<ResponseDoctorTimeSlotsList>
+
+    @POST(Constants.ADD_DOCTOR_HOLIDAYS_URL)
+    fun addDoctorHolidays(@Body request: RequestAddDoctorHolidays): Call<ResponseAddDoctorHolidays>
+
+    @POST(Constants.ADD_DOCTOR_TIMESLOTS_URL)
+    fun addDoctorTimeSlots(@Body request: RequestAddDoctorTimeslots): Call<ResponseAddDoctorTimeslots>
+
+    @POST(Constants.DELETE_DOCTOR_HOLIDAYS_URL)
+    fun deleteDoctorHolidays(@Body request: RequestDeleteDoctorHolidays): Call<ResponseDeleteDoctorHolidays>
+
+    @POST(Constants.DELETE_DOCTOR_TIMESLOTS_URL)
+    fun deleteDoctorTimeSlots(@Body request: RequestDeleteDoctorTimeSlots): Call<ResponseDeleteDoctorTimeSlots>
 
 
     /*

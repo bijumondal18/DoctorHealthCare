@@ -5,7 +5,6 @@
     android:layout_width="130dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_12"
-    app:cardBackgroundColor="#E1F6FF"
     app:cardElevation="@dimen/elevation_0dp"
     app:cardCornerRadius="@dimen/radius_8">
 
@@ -15,6 +14,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:background="@drawable/card_background_style"
         android:foreground="?attr/selectableItemBackground">
 
 
@@ -36,7 +36,9 @@
             android:id="@+id/tv_dept_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:lines="2"

@@ -85,7 +85,6 @@ class PatientProfileActivity : AppCompatActivity() {
             dialog.show()
         }
 
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

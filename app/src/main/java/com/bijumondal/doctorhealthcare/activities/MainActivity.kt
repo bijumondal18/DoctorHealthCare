@@ -30,10 +30,18 @@ import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsLi
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
 import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctorProfileDetails
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
+import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_doctor_profile.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_patient_profile.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -70,6 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var topSpecialitiesList: ArrayList<com.bijumondal.doctorhealthcare.models.doctorDepartment.Data> = ArrayList()
     private lateinit var topSpecialitiesAdapter: TopSpecialistAdapter
 
+    private lateinit var headerView: View
 
     private var profileName: String = ""
     private var profileImage: String = ""
@@ -77,6 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mPreference = HealthCarePreference(this@MainActivity)
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         actionBar!!.title = ""
@@ -91,6 +101,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
 
         initViews()
+
         setDrawerLayout()
 
         if (mPreference.getUserType() == 1) {
@@ -114,7 +125,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
-
         card_appointments.setOnClickListener {
             startActivity(Intent(this@MainActivity, MyAppointmentsActivity::class.java))
         }
@@ -128,6 +138,131 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this@MainActivity, SetTimingsActivity::class.java))
         }
 
+        fetchProfileDetails()
+
+    }
+
+    private fun fetchProfileDetails() {
+        if (mPreference.getUserType() == 1) {
+            val request = RequestPatientProfileDetails(mPreference.getUserId().toString())
+            fetchPatientProfileDetails(request)
+
+        } else if (mPreference.getUserType() == 2) {
+            val request = RequestDoctorProfileDetails(mPreference.getUserId().toString())
+            fetchDoctorProfileDetails(request)
+        }
+
+    }
+
+    private fun fetchDoctorProfileDetails(request: RequestDoctorProfileDetails) {
+        if (Helper.isConnectedToInternet(this@MainActivity)) {
+            val call: Call<ResponseDoctorProfileDetails> = APIInterface.create().getDoctorProfileDetails(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponseDoctorProfileDetails> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorProfileDetails>,
+                    response: Response<ResponseDoctorProfileDetails>
+                ) {
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.photo != null) {
+                                    ImageLoader.loadCircleImageFromUrl(headerView.iv_profile_image_nav_header, mData.photo, R.color.colorTransparent)
+                                }
+                                if (mData.name != null) {
+                                    profileName = mData.name
+                                    headerView.tv_profile_name_nav_header.text = profileName
+                                }
+
+                                if (mData.hospital_id != null) {
+                                    mPreference.setHospitalId(mData.hospital_id)
+                                }
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@MainActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorProfileDetails>, t: Throwable) {
+                    Helper.toastShort(this@MainActivity, "${t.message}")
+                }
+            })
+        }
+    }
+
+    private fun fetchPatientProfileDetails(request: RequestPatientProfileDetails) {
+        if (Helper.isConnectedToInternet(this@MainActivity)) {
+            val call: Call<ResponsePatientProfileDetails> = APIInterface.create().getPatientProfileDetails(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponsePatientProfileDetails> {
+                override fun onResponse(
+                    call: Call<ResponsePatientProfileDetails>,
+                    response: Response<ResponsePatientProfileDetails>
+                ) {
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.photo != null) {
+                                    ImageLoader.loadCircleImageFromUrl(headerView.iv_profile_image_nav_header, mData.photo, R.color.colorTransparent)
+                                }
+
+                                if (mData.name != null) {
+                                    profileName = mData.name
+                                    headerView.tv_profile_name_nav_header.text = profileName
+                                }
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MainActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@MainActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponsePatientProfileDetails>, t: Throwable) {
+                    Helper.toastShort(this@MainActivity, "${t.message}")
+                }
+            })
+        }
     }
 
     private fun fetchTopSpecialities() {
@@ -289,18 +424,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initViews() {
-        mPreference = HealthCarePreference(this@MainActivity)
         navigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
         bannerSliderViewPager = findViewById(R.id.banner_slider_view_pager)
         allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
         topSpecialitiesRecyclerView = findViewById(R.id.rv_dr_dept)
-        val headerView: View = nav_view.inflateHeaderView(R.layout.nav_header_main)
-
-        if (mPreference.getFirstName() != null && mPreference.getLastName() != null) {
-            headerView.tv_profile_name_nav_header.text = "${mPreference.getFirstName()} ${mPreference.getLastName()}"
-        }
-
+        headerView = nav_view.inflateHeaderView(R.layout.nav_header_main)
     }
 
     private fun setDrawerLayout() {
