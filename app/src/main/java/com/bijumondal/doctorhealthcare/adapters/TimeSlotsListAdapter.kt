@@ -9,63 +9,64 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.RequestDeleteDoctorHolidays
-import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.ResponseDeleteDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.RequestDeleteDoctorTimeSlots
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.ResponseDeleteDoctorTimeSlots
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.Data
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_holidays_list.view.*
+import kotlinx.android.synthetic.main.item_time_slots_list.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HolidaysListAdapter(
-    private val holidaysList: ArrayList<Data>,
+class TimeSlotsListAdapter(
+    private val timeSlotsList: ArrayList<com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data>,
     val context: Context
 ) :
-    RecyclerView.Adapter<HolidaysListAdapter.HolidaysListAdapterViewHolder>() {
+    RecyclerView.Adapter<TimeSlotsListAdapter.TimeSlotsListAdapterViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolidaysListAdapterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_holidays_list, parent, false)
-        return HolidaysListAdapterViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeSlotsListAdapterViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_time_slots_list, parent, false)
+        return TimeSlotsListAdapterViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return holidaysList.size
+        return timeSlotsList.size
     }
 
-    override fun onBindViewHolder(holder: HolidaysListAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TimeSlotsListAdapterViewHolder, position: Int) {
 
-        holder.holidaysDate.text = holidaysList[position].date
+        holder.timeslotsName.text = "${timeSlotsList[position].weekday} (${timeSlotsList[position].starttime} - ${timeSlotsList[position].endtime})"
 
-        val holidaysId = holidaysList[position].id
+        val timeSlotsId = timeSlotsList[position].id
 
         holder.btnDelete.setOnClickListener {
 
-            val request = RequestDeleteDoctorHolidays(holidaysId)
-            deleteHolidays(request)
+            val request = RequestDeleteDoctorTimeSlots(timeSlotsId)
+            deleteTimeSlots(request)
 
         }
 
     }
 
-    class HolidaysListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val holidaysDate = view.tv_holidays_date
-        val btnDelete = view.btn_delete_holiday
+    class TimeSlotsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val timeslotsName = view.tv_timeslots
+        val btnDelete = view.btn_delete_timeslots
     }
 
-
-    private fun deleteHolidays(request: RequestDeleteDoctorHolidays) {
+    private fun deleteTimeSlots(request: RequestDeleteDoctorTimeSlots) {
         if (Helper.isConnectedToInternet(context)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(context)
             }
-            val call: Call<ResponseDeleteDoctorHolidays> = APIInterface.create().deleteDoctorHolidays(request)
+            val call: Call<ResponseDeleteDoctorTimeSlots> = APIInterface.create().deleteDoctorTimeSlots(request)
             Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
-            call.enqueue(object : Callback<ResponseDeleteDoctorHolidays> {
+            call.enqueue(object : Callback<ResponseDeleteDoctorTimeSlots> {
                 override fun onResponse(
-                    call: Call<ResponseDeleteDoctorHolidays>,
-                    response: Response<ResponseDeleteDoctorHolidays>
+                    call: Call<ResponseDeleteDoctorTimeSlots>,
+                    response: Response<ResponseDeleteDoctorTimeSlots>
                 ) {
                     Helper.hideLoading()
                     if (response.isSuccessful) {
@@ -99,13 +100,14 @@ class HolidaysListAdapter(
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseDeleteDoctorHolidays>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseDeleteDoctorTimeSlots>, t: Throwable) {
                     Helper.toastShort(context, "${t.message}")
                     Helper.hideLoading()
                 }
             })
         }
 
-
     }
+
+
 }

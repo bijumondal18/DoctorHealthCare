@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -90,13 +91,18 @@ class SetHolidaysActivity : AppCompatActivity() {
                         Helper.showLog(TAG, "Response : ${response.body()}")
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
-                            if (mData != null) {
+                            if (mData != null && !mData.isEmpty()) {
 
                                 holidaysList = mData as ArrayList<Data>
                                 holidaysListAdapter = HolidaysListAdapter(holidaysList, this@SetHolidaysActivity)
                                 mRecyclerView.adapter = holidaysListAdapter
                                 holidaysListAdapter.notifyDataSetChanged()
+                                tv_no_holidays_found.visibility = View.GONE
+                                mRecyclerView.visibility = View.VISIBLE
 
+                            } else {
+                                mRecyclerView.visibility = View.GONE
+                                tv_no_holidays_found.visibility = View.VISIBLE
                             }
 
                             if (response.body()!!.message != null) {

@@ -141,6 +141,20 @@ class Helper {
             return bloodGroup!!
         }
 
+        fun weekDays(type: Int): String {
+            var weekDays: String? = null
+            when (type) {
+                0 -> weekDays = "Sunday"
+                1 -> weekDays = "Monday"
+                2 -> weekDays = "Tuesday"
+                3 -> weekDays = "Wednesday"
+                4 -> weekDays = "Thursday"
+                5 -> weekDays = "Friday"
+                6 -> weekDays = "Saturday"
+            }
+            return weekDays!!
+        }
+
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun showLoading(context: Context) {

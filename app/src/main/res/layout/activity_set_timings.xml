@@ -36,6 +36,151 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="Choose Days of Week"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <Spinner
+                android:id="@+id/spinner_weekday"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:spinnerMode="dialog" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:text="Start time"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_16" />
+
+                    <TextView
+                        android:id="@+id/edt_start_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:background="@drawable/edit_text_background_style"
+                        android:gravity="center"
+                        android:hint="06:00 AM"
+                        android:inputType="date"
+                        android:paddingLeft="@dimen/padding_12"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_16"
+                        tools:ignore="RtlCompat" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:text="End time"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_16" />
+
+                    <TextView
+                        android:id="@+id/edt_end_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:background="@drawable/edit_text_background_style"
+                        android:gravity="center"
+                        android:hint="06:00 PM"
+                        android:inputType="date"
+                        android:paddingLeft="@dimen/padding_12"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_16"
+                        tools:ignore="RtlCompat" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_timeslots"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/margin_16"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_16"
+                android:background="@color/colorTransparent" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="My TimeSlots"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_timeslots_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:id="@+id/tv_no_timeslots_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="No TimeSlots found !"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16"
+                android:visibility="gone" />
+
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

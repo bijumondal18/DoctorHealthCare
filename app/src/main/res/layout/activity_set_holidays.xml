@@ -85,9 +85,9 @@
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="My Holidays"
-                android:textStyle="bold"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/font_16" />
+                android:textSize="@dimen/font_16"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_holidays_list"
@@ -96,6 +96,18 @@
                 android:layout_margin="@dimen/margin_16"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:id="@+id/tv_no_holidays_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="No Holidays found !"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
 
 
         </LinearLayout>

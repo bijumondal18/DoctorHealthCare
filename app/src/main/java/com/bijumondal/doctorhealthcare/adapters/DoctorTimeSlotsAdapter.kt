@@ -27,7 +27,7 @@ class DoctorTimeSlotsAdapter(
 
     override fun onBindViewHolder(holder: DoctorTimeSlotsAdapterViewHolder, position: Int) {
 
-        holder.timeSlotsName.text = timeSlotsList[position].weekday
+        holder.timeSlotsName.text = "${timeSlotsList[position].weekday}\n${timeSlotsList[position].starttime} - ${timeSlotsList[position].endtime}"
 
         val timeSlotsId = timeSlotsList[position].id
 
