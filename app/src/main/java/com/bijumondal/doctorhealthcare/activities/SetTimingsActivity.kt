@@ -217,7 +217,7 @@ class SetTimingsActivity : AppCompatActivity() {
                                 val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString())
                                 fetchTimeSlotsList(requestTimeslotsList)
 
-                                Helper.toastShort(this@SetTimingsActivity, mData.message)
+                                //Helper.toastShort(this@SetTimingsActivity, mData.message)
                             }
 
                             if (response.body()!!.data.message != null) {

@@ -5,16 +5,16 @@
     android:layout_width="130dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_12"
-    app:cardElevation="@dimen/elevation_0dp"
-    app:cardCornerRadius="@dimen/radius_8">
+    app:cardCornerRadius="@dimen/radius_8"
+    app:cardElevation="@dimen/elevation_0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_parent_dept"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/card_background_style"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/card_background_style"
         android:foreground="?attr/selectableItemBackground">
 
 
@@ -29,8 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="@dimen/radius_8"
-            app:srcCompat="@drawable/doctor_thumbnail" />
+            app:riv_corner_radius="@dimen/radius_8" />
 
         <TextView
             android:id="@+id/tv_dept_title"

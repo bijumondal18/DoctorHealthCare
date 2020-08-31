@@ -1,12 +1,20 @@
-package com.bijumondal.doctorhealthcare.activities
+package com.bijumondal.doctorhealthcare.fragments
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
+
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.activities.CreateDoctorProfileActivity
+import com.bijumondal.doctorhealthcare.activities.MainActivity
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorRegistration
@@ -15,17 +23,21 @@ import com.bijumondal.doctorhealthcare.models.patientRegistration.ResponsePatien
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.fragment_signup.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RegisterActivity : AppCompatActivity() {
+
+class SignupFragment : Fragment() {
 
     companion object {
-        private const val TAG = "RegisterActivity"
+        fun newInstance(): SignupFragment = SignupFragment()
+        private const val TAG: String = "SignupFragment"
     }
 
+    private lateinit var btnSignIn: TextView
+    private lateinit var parentFrameLayout: FrameLayout
     private lateinit var mPreference: HealthCarePreference
 
     private var firstName: String = ""
@@ -36,22 +48,34 @@ class RegisterActivity : AppCompatActivity() {
     private var cnfPassword: String = ""
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        mPreference = HealthCarePreference(this@RegisterActivity)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_signup, container, false)
+        mPreference = HealthCarePreference(context!!)
+        btnSignIn = view.findViewById(R.id.tv_goto_sign_in)
+        parentFrameLayout = activity!!.findViewById(R.id.main_frame_layout)
+
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnSignIn.setOnClickListener {
+            setFragment(SigninFragment.newInstance())
+        }
 
         validateRegistrationField()
-
-        tv_goto_sign_in.setOnClickListener {
-            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-        }
 
         btn_sign_up.setOnClickListener {
 
             doSignUpValidation()
 
         }
+
 
     }
 
@@ -65,11 +89,11 @@ class RegisterActivity : AppCompatActivity() {
                     doPatientRegistration(request)
 
                 } else {
-                    Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                    Helper.toastShort(context!!, "Password doesn't match!")
                 }
 
             } else {
-                Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+                Helper.toastShort(context!!, "Field's should not be empty!")
 
             }
 
@@ -82,141 +106,13 @@ class RegisterActivity : AppCompatActivity() {
                     doDoctorRegistration(request)
 
                 } else {
-                    Helper.toastShort(this@RegisterActivity, "Password doesn't match!")
+                    Helper.toastShort(context!!, "Password doesn't match!")
                 }
 
             } else {
-                Helper.toastShort(this@RegisterActivity, "Field's should not be empty!")
+                Helper.toastShort(context!!, "Field's should not be empty!")
 
             }
-        }
-
-    }
-
-    private fun doDoctorRegistration(request: RequestDoctorRegistration) {
-        if (Helper.isConnectedToInternet(this@RegisterActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Helper.showLoading(this)
-            }
-            val call: Call<ResponseDoctorRegistration> = APIInterface.create().doctorRegistration(request)
-            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
-            call.enqueue(object : Callback<ResponseDoctorRegistration> {
-                override fun onResponse(
-                    call: Call<ResponseDoctorRegistration>,
-                    response: Response<ResponseDoctorRegistration>
-                ) {
-                    Helper.hideLoading()
-                    if (response.isSuccessful) {
-                        Helper.showLog(TAG, "Response : ${response.body()}")
-                        if (response.body()!!.success) {
-                            val mData = response.body()!!.data
-                            if (mData != null) {
-
-                                if (mData.doctor_id != null) {
-                                    val doctorId = mData.doctor_id
-                                    mPreference.setUserId(doctorId)
-                                }
-                                startActivity(Intent(this@RegisterActivity, CreateDoctorProfileActivity::class.java))
-                                finish()
-
-                                mPreference.setFirstName(firstName)
-                                mPreference.setLastName(lastName)
-                                mPreference.setEmail(email)
-                                mPreference.setNumber(mobile)
-
-                            }
-
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
-                            }
-
-                        } else {
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
-                            }
-                        }
-
-                    } else {
-                        Helper.toastNetworkError(this@RegisterActivity)
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseDoctorRegistration>, t: Throwable) {
-                    Helper.toastShort(this@RegisterActivity, "${t.message}")
-                    Helper.hideLoading()
-                }
-            })
-        }
-
-    }
-
-    private fun doPatientRegistration(request: RequestPatientRegistration) {
-        if (Helper.isConnectedToInternet(this@RegisterActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Helper.showLoading(this)
-            }
-            val call: Call<ResponsePatientRegistration> = APIInterface.create().patientRegistration(request)
-            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
-            call.enqueue(object : Callback<ResponsePatientRegistration> {
-                override fun onResponse(
-                    call: Call<ResponsePatientRegistration>,
-                    response: Response<ResponsePatientRegistration>
-                ) {
-                    Helper.hideLoading()
-                    if (response.isSuccessful) {
-                        Helper.showLog(TAG, "Response : ${response.body()}")
-                        if (response.body()!!.success) {
-                            val mData = response.body()!!.data
-                            if (mData != null) {
-
-                                if (mData.patient_id != null) {
-                                    val patientId = mData.patient_id
-                                    mPreference.setUserId(patientId)
-
-                                }
-                                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
-                                finish()
-
-                                mPreference.setFirstName(firstName)
-                                mPreference.setLastName(lastName)
-                                mPreference.setEmail(email)
-                                mPreference.setNumber(mobile)
-
-                                mPreference.setIsLoggedIn(true)
-                            }
-
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
-                            }
-
-                        } else {
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@RegisterActivity, response.body()!!.errors)
-                            }
-                        }
-
-                    } else {
-                        Helper.toastNetworkError(this@RegisterActivity)
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponsePatientRegistration>, t: Throwable) {
-                    Helper.toastShort(this@RegisterActivity, "${t.message}")
-                    Helper.hideLoading()
-                }
-            })
         }
 
     }
@@ -303,4 +199,141 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
+
+    private fun doDoctorRegistration(request: RequestDoctorRegistration) {
+        if (Helper.isConnectedToInternet(context!!)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(context!!)
+            }
+            val call: Call<ResponseDoctorRegistration> = APIInterface.create().doctorRegistration(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponseDoctorRegistration> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorRegistration>,
+                    response: Response<ResponseDoctorRegistration>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.doctor_id != null) {
+                                    val doctorId = mData.doctor_id
+                                    mPreference.setUserId(doctorId)
+                                }
+                                mPreference.setFirstName(firstName)
+                                mPreference.setLastName(lastName)
+                                mPreference.setEmail(email)
+                                mPreference.setNumber(mobile)
+
+                                startActivity(Intent(context!!, CreateDoctorProfileActivity::class.java))
+                                activity!!.finish()
+
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(context!!, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(context!!, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(context!!, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(context!!, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(context!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorRegistration>, t: Throwable) {
+                    Helper.toastShort(context!!, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+    }
+
+    private fun doPatientRegistration(request: RequestPatientRegistration) {
+        if (Helper.isConnectedToInternet(context!!)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(context!!)
+            }
+            val call: Call<ResponsePatientRegistration> = APIInterface.create().patientRegistration(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponsePatientRegistration> {
+                override fun onResponse(
+                    call: Call<ResponsePatientRegistration>,
+                    response: Response<ResponsePatientRegistration>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.patient_id != null) {
+                                    val patientId = mData.patient_id
+                                    mPreference.setUserId(patientId)
+                                }
+
+                                mPreference.setFirstName(firstName)
+                                mPreference.setLastName(lastName)
+                                mPreference.setEmail(email)
+                                mPreference.setNumber(mobile)
+
+                                mPreference.setIsLoggedIn(true)
+                                startActivity(Intent(context!!, MainActivity::class.java))
+                                activity!!.finish()
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(context!!, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(context!!, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(context!!, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(context!!, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(context!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponsePatientRegistration>, t: Throwable) {
+                    Helper.toastShort(context!!, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+    }
+
+    private fun setFragment(fragment: Fragment) {
+        val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.left_in, R.anim.right_out)
+        fragmentTransaction.replace(parentFrameLayout.id, fragment)
+        fragmentTransaction.commit()
+    }
+
 }

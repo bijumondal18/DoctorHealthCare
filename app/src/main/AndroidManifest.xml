@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.BookingSuccessfulActivity"></activity>
+        <activity android:name=".activities.RegistrationActivity"
+            android:theme="@style/FullScreenTheme"/>
+        <activity android:name=".activities.BookingSuccessfulActivity" />
         <activity android:name=".activities.SetTimingsActivity" />
         <activity android:name=".activities.SetHolidaysActivity" />
         <activity android:name=".activities.BookingActivity" />

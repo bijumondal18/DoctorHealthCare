@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     android:scrollbars="none"
-    android:background="@color/colorWhite"
-    tools:context=".activities.RegisterActivity">
+    tools:context=".fragments.SignupFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,10 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_32"
-            android:textStyle="bold"
             android:text="Create Account"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_22" />
+            android:textSize="@dimen/font_22"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,10 +40,10 @@
                 android:id="@+id/tv_goto_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text=" Sign In!"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/font_18" />
+                android:textSize="@dimen/font_18"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -153,8 +152,8 @@
             android:layout_marginRight="@dimen/margin_16"
             android:background="@drawable/edit_text_background_style"
             android:hint="Phone number"
-            android:maxLength="12"
             android:inputType="number"
+            android:maxLength="12"
             android:paddingLeft="@dimen/padding_12"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16" />

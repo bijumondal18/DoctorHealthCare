@@ -156,8 +156,8 @@ class SetHolidaysActivity : AppCompatActivity() {
 
                                 val requestHolidaysList = RequestDoctorHolidaysList(mPreference.getUserId().toString())
                                 fetchHolidaysList(requestHolidaysList)
+                                //Helper.toastShort(this@SetHolidaysActivity, mData.message)
 
-                                Helper.toastShort(this@SetHolidaysActivity, mData.message)
                             }
 
                             if (response.body()!!.data.message != null) {

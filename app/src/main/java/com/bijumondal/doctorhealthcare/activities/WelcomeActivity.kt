@@ -38,10 +38,9 @@ class WelcomeActivity : AppCompatActivity() {
                         userTypePatient = true
                         userTypeDoctor = false
                         mPreferences.setUserType(1)  //1 for patient
-                        rb_patient.setBackgroundColor(Color.parseColor("#3c4df7"))
                         rb_patient.setTextColor(Color.parseColor("#FFFFFF"))
                         rb_doctor.setTextColor(Color.parseColor("#000000"))
-                        rb_doctor.setBackgroundColor(Color.parseColor("#FFFFFF"))
+
                     }
 
                     findViewById<RadioButton>(R.id.rb_doctor) -> {
@@ -50,10 +49,9 @@ class WelcomeActivity : AppCompatActivity() {
                         userTypePatient = false
                         userTypeDoctor = true
                         mPreferences.setUserType(2)   //2 for doctor
-                        rb_doctor.setBackgroundColor(Color.parseColor("#3c4df7"))
                         rb_doctor.setTextColor(Color.parseColor("#FFFFFF"))
                         rb_patient.setTextColor(Color.parseColor("#000000"))
-                        rb_patient.setBackgroundColor(Color.parseColor("#FFFFFF"))
+
                     }
                 }
             }
@@ -63,10 +61,10 @@ class WelcomeActivity : AppCompatActivity() {
             if (mPreferences.getUserType() != null) {
 
                 if (mPreferences.getUserType() == 1) {
-                    startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
+                    startActivity(Intent(this@WelcomeActivity, RegistrationActivity::class.java))
                     finish()
                 } else if (mPreferences.getUserType() == 2) {
-                    startActivity(Intent(this@WelcomeActivity, LoginActivity::class.java))
+                    startActivity(Intent(this@WelcomeActivity, RegistrationActivity::class.java))
                     finish()
                 } else {
                     Helper.toastShort(this@WelcomeActivity, "Please choose a user type!")
