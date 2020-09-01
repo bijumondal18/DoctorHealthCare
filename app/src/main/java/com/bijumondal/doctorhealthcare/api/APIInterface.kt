@@ -7,7 +7,11 @@ import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDocto
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
+import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.RequestAppointmentsListForDoctor
+import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.ResponseAppointmentsListForDoctor
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
+import com.bijumondal.doctorhealthcare.models.bookAppointment.RequestBookAppointment
+import com.bijumondal.doctorhealthcare.models.bookAppointment.ResponseBookAppointment
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
@@ -87,7 +91,11 @@ interface APIInterface {
 
     /*@POST(Constants.PATIENT_PHOTO_URL)
     fun getPatientProfilePhoto(@Body request: RequestPatientPhoto): Call<ResponsePatientProfileDetails>
-*/
+    */
+
+    @POST(Constants.BOOK_APPOINTMENT_URL)
+    fun bookAppointment(@Body request: RequestBookAppointment): Call<ResponseBookAppointment>
+
 
     /*
     * DOCTOR SECTION
@@ -125,6 +133,9 @@ interface APIInterface {
 
     @POST(Constants.DELETE_DOCTOR_TIMESLOTS_URL)
     fun deleteDoctorTimeSlots(@Body request: RequestDeleteDoctorTimeSlots): Call<ResponseDeleteDoctorTimeSlots>
+
+    @POST(Constants.DOCTOR_APPOINTMENTS_LIST_URL)
+    fun getDoctorAppointmentsList(@Body request: RequestAppointmentsListForDoctor): Call<ResponseAppointmentsListForDoctor>
 
 
     /*

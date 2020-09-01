@@ -313,7 +313,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
     private fun fetchAllDoctorsList(request: RequestAllDoctorsList) {
         if (Helper.isConnectedToInternet(this@MainActivity)) {
             val call: Call<ResponseAllDoctorsList> = APIInterface.create().getAllDoctorsList(request)
