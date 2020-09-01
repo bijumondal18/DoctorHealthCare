@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +22,12 @@ import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.activity_booking.*
 import kotlinx.android.synthetic.main.activity_doctor_list.*
+import kotlinx.android.synthetic.main.activity_set_holidays.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BookingActivity : AppCompatActivity() {
 
@@ -39,6 +43,7 @@ class BookingActivity : AppCompatActivity() {
 
     var doctorId = ""
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
@@ -50,6 +55,11 @@ class BookingActivity : AppCompatActivity() {
             doctorId = intent.getStringExtra("doctorId").toString()
         }
 
+        val currentDate = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = currentDate.format(formatter)
+        edt_booking_date.hint = formatted.toString()
+
         val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
         mRecyclerView.layoutManager = layoutManager
         val request = RequestDoctorTimeSlotsList(doctorId)
@@ -58,7 +68,7 @@ class BookingActivity : AppCompatActivity() {
 
 
         btn_confirm_and_pay.setOnClickListener {
-            startActivity(Intent(this@BookingActivity,BookingSuccessfulActivity::class.java))
+            startActivity(Intent(this@BookingActivity, BookingSuccessfulActivity::class.java))
         }
 
     }
@@ -152,9 +162,10 @@ class BookingActivity : AppCompatActivity() {
             tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
         }
 
-        if (mPreference.getFirstName() != null && mPreference.getLastName() != null) {
-            edt_appointment_for_name.setText("${mPreference.getFirstName()} ${mPreference.getLastName()}")
+        if (mPreference.getName() != null) {
+            edt_appointment_for_name.setText("${mPreference.getName()}")
         }
+
 
         if (mPreference.getNumber() != null) {
             edt_appointment_for_number.setText("${mPreference.getNumber()}")

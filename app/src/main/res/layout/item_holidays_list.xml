@@ -10,8 +10,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginRight="@dimen/margin_12"
         android:layout_toLeftOf="@id/btn_delete_holiday"
-        android:paddingTop="@dimen/padding_12"
-        android:paddingBottom="@dimen/padding_12"
+        android:paddingTop="@dimen/padding_16"
+        android:paddingBottom="@dimen/padding_16"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/font_18" />
 

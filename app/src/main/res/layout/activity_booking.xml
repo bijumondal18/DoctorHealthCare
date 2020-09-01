@@ -79,11 +79,11 @@
                     android:drawableTint="@color/secondaryTextColor"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textStyle="bold"
                     android:text="Cardiology"
                     android:textAllCaps="true"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_15"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/tv_doc_address_booking"
                     app:layout_constraintEnd_toEndOf="@+id/tv_doc_name_booking"
                     app:layout_constraintStart_toStartOf="@+id/tv_doc_name_booking" />
@@ -159,6 +159,41 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_16"
+                    android:text="Choose Date :"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/edt_booking_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_12"
+                    android:background="@drawable/edit_text_background_style"
+                    android:gravity="center"
+                    android:inputType="date"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16"
+                    tools:ignore="RtlCompat" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,10 +208,10 @@
                     android:layout_marginLeft="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
-                    android:textStyle="bold"
-                    android:text="Timings : "
+                    android:text="Choose Timings :"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/font_16"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_timeslots"
@@ -207,16 +242,15 @@
                 android:background="@color/colorWhite"
                 android:orientation="vertical">
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:textStyle="bold"
                     android:text="Appointment for : "
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/font_16"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"

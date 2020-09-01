@@ -15,6 +15,7 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_PROFILE_PIC_URL = "PROFILE_PIC_URL"
         private const val KEY_FIRST_NAME = "FIRST_NAME"
         private const val KEY_LAST_NAME = "LAST_NAME"
+        private const val KEY_NAME = "NAME"
         private const val KEY_AUTH = "sessionId"
         private const val KEY_EMAIL = "EMAIL"
         private const val KEY_CODE = "CODE"
@@ -99,15 +100,6 @@ class HealthCarePreference(val context: Context) {
         return sharedPref.getBoolean(KEY_LOGGED_IN, false)
     }
 
-    fun setIsRegistered(status: Boolean) {
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putBoolean(KEY_REGISTERED, status)
-        editor.apply()
-    }
-
-    fun isRegistered(): Boolean {
-        return sharedPref.getBoolean(KEY_REGISTERED, false)
-    }
 
     fun setProfilePicUrl(text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -138,6 +130,16 @@ class HealthCarePreference(val context: Context) {
 
     fun getLastName(): String? {
         return sharedPref.getString(KEY_LAST_NAME, null)
+    }
+
+    fun setName(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_NAME, text)
+        editor.apply()
+    }
+
+    fun getName(): String? {
+        return sharedPref.getString(KEY_NAME, null)
     }
 
     fun setEmail(text: String) {

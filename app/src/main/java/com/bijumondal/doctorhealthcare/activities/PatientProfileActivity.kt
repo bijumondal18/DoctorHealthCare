@@ -128,6 +128,7 @@ class PatientProfileActivity : AppCompatActivity() {
                                 }
                                 if (mData.name != null) {
                                     tv_profile_name.text = mData.name
+                                    mPreference.setName(mData.name)
                                 }
                                 if (mData.phone != null) {
                                     tv_profile_mobile_number.text = mData.phone
