@@ -7,6 +7,8 @@ import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDocto
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
+import com.bijumondal.doctorhealthcare.models.appointmentListForPatient.RequestAppointmentListForPatient
+import com.bijumondal.doctorhealthcare.models.appointmentListForPatient.ResponseAppointmentListForPatient
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.RequestAppointmentsListForDoctor
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.ResponseAppointmentsListForDoctor
 import com.bijumondal.doctorhealthcare.models.banners.ResponseBannersList
@@ -98,6 +100,9 @@ interface APIInterface {
 
     @POST(Constants.BOOK_APPOINTMENT_URL)
     fun bookAppointment(@Body request: RequestBookAppointment): Call<ResponseBookAppointment>
+
+    @POST(Constants.PATIENT_APPOINTMENTS_LIST_URL)
+    fun getPatientAppointmentsList(@Body request: RequestAppointmentListForPatient): Call<ResponseAppointmentListForPatient>
 
 
     /*

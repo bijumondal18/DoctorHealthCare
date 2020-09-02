@@ -49,7 +49,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:src="@color/colorGray"
+                    android:src="@drawable/ic_avatar"
                     android:visibility="visible"
                     tools:ignore="VectorDrawableCompat" />
 

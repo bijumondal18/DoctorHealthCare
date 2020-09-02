@@ -119,13 +119,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
             app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking"
-            tools:text="500 rs" />
+            android:text="~ 500 rs consultation fees" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#300cada2"
+            android:background="@color/colorPrimaryTransparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +143,6 @@
                 android:textSize="@dimen/font_14"
                 android:textStyle="bold" />
         </RelativeLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

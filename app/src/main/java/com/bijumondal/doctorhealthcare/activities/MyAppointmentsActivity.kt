@@ -12,6 +12,8 @@ import com.bijumondal.doctorhealthcare.adapters.DoctorAppointmentsListAdapter
 import com.bijumondal.doctorhealthcare.adapters.PatientAppointmentsListAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
+import com.bijumondal.doctorhealthcare.models.appointmentListForPatient.RequestAppointmentListForPatient
+import com.bijumondal.doctorhealthcare.models.appointmentListForPatient.ResponseAppointmentListForPatient
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.Data
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.RequestAppointmentsListForDoctor
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.ResponseAppointmentsListForDoctor
@@ -36,6 +38,7 @@ class MyAppointmentsActivity : AppCompatActivity() {
     private lateinit var patientAdapter: PatientAppointmentsListAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private var appointmentsListForDoctor: ArrayList<Data> = ArrayList()
+    private var appointmentsListForPatient: ArrayList<com.bijumondal.doctorhealthcare.models.appointmentListForPatient.Data> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,10 +51,10 @@ class MyAppointmentsActivity : AppCompatActivity() {
 
         if (mPreference.getUserType() == 1) {
 
-            //todo appointments list for patient
             layoutManager = LinearLayoutManager(this@MyAppointmentsActivity, LinearLayoutManager.VERTICAL, false)
             appointmentsListRecyclerView.layoutManager = layoutManager
-
+            val request1 = RequestAppointmentListForPatient(mPreference.getUserId().toString())
+            fetchAppointmentsListForPatient(request1)
 
         } else if (mPreference.getUserType() == 2) {
 
@@ -62,6 +65,66 @@ class MyAppointmentsActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun fetchAppointmentsListForPatient(request1: RequestAppointmentListForPatient) {
+        if (Helper.isConnectedToInternet(this@MyAppointmentsActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this@MyAppointmentsActivity)
+            }
+            val call: Call<ResponseAppointmentListForPatient> = APIInterface.create().getPatientAppointmentsList(request1)
+            call.enqueue(object : Callback<ResponseAppointmentListForPatient> {
+                override fun onResponse(
+                    call: Call<ResponseAppointmentListForPatient>,
+                    response: Response<ResponseAppointmentListForPatient>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null && !mData.isEmpty()) {
+                                appointmentsListForPatient = mData as ArrayList<com.bijumondal.doctorhealthcare.models.appointmentListForPatient.Data>
+                                patientAdapter = PatientAppointmentsListAdapter(appointmentsListForPatient, this@MyAppointmentsActivity)
+                                appointmentsListRecyclerView.adapter = patientAdapter
+                                patientAdapter.notifyDataSetChanged()
+                                appointmentsListRecyclerView.visibility = View.VISIBLE
+                                tv_no_appointments_found.visibility = View.GONE
+
+                            } else {
+                                appointmentsListRecyclerView.visibility = View.GONE
+                                tv_no_appointments_found.visibility = View.VISIBLE
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@MyAppointmentsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MyAppointmentsActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@MyAppointmentsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@MyAppointmentsActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@MyAppointmentsActivity)
+                        Helper.hideLoading()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseAppointmentListForPatient>, t: Throwable) {
+                    Helper.toastShort(this@MyAppointmentsActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+
+            })
+        }
     }
 
     private fun fetchAppointmentsListForDoctor(request: RequestAppointmentsListForDoctor) {
@@ -88,7 +151,7 @@ class MyAppointmentsActivity : AppCompatActivity() {
                                 appointmentsListRecyclerView.visibility = View.VISIBLE
                                 tv_no_appointments_found.visibility = View.GONE
 
-                            }else{
+                            } else {
                                 appointmentsListRecyclerView.visibility = View.GONE
                                 tv_no_appointments_found.visibility = View.VISIBLE
                             }

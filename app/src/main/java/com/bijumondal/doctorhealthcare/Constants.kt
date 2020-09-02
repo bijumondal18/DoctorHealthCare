@@ -22,6 +22,7 @@ object Constants {
     const val PATIENT_PHOTO_URL = "patientphoto"
     const val PATIENT_PROFILE_DETAILS_URL = "getpatientprofile"
     const val BOOK_APPOINTMENT_URL = "appointmentbook"
+    const val PATIENT_APPOINTMENTS_LIST_URL = "patientappointmentlist"
 
 
     /*

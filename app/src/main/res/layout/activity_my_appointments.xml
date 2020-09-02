@@ -47,7 +47,6 @@
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false" />
 
-
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
