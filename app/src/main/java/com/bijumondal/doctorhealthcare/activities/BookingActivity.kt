@@ -1,9 +1,13 @@
 package com.bijumondal.doctorhealthcare.activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,13 +17,14 @@ import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.adapters.DoctorDeptAdapter
 import com.bijumondal.doctorhealthcare.adapters.DoctorTimeSlotsAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
+import com.bijumondal.doctorhealthcare.models.bookAppointment.RequestBookAppointment
+import com.bijumondal.doctorhealthcare.models.bookAppointment.ResponseBookAppointment
 import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
-import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
-import com.bijumondal.doctorhealthcare.utils.Helper
-import com.bijumondal.doctorhealthcare.utils.ImageLoader
+import com.bijumondal.doctorhealthcare.utils.*
+import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
 import kotlinx.android.synthetic.main.activity_booking.*
 import kotlinx.android.synthetic.main.activity_doctor_list.*
 import kotlinx.android.synthetic.main.activity_set_holidays.*
@@ -28,6 +33,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BookingActivity : AppCompatActivity() {
 
@@ -41,7 +48,17 @@ class BookingActivity : AppCompatActivity() {
     private lateinit var timeSlotsListAdapter: DoctorTimeSlotsAdapter
     private var timeSlotsList: ArrayList<Data> = ArrayList()
 
+    var dateOfBooking: String = ""
     var doctorId = ""
+    var patientId = ""
+    var name: String = ""
+    var phone: String = ""
+    var gender: String = ""
+    var bloodGroup: String = ""
+    var timeslot: String = ""
+    var appointmentForName: String = ""
+
+    var isSelected: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,15 +77,120 @@ class BookingActivity : AppCompatActivity() {
         val formatted = currentDate.format(formatter)
         edt_booking_date.hint = formatted.toString()
 
+        edt_booking_date.setOnClickListener {
+            showDatePicker()
+        }
+
         val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
         mRecyclerView.layoutManager = layoutManager
         val request = RequestDoctorTimeSlotsList(doctorId)
         fetchTimeSlots(request)
 
+        if (mPreference.getBloodGroup() != null) {
+            bloodGroup = mPreference.getBloodGroup().toString()
+        }
 
+        if (intent.hasExtra("doctorId") != null) {
+            doctorId = intent.getStringExtra("doctorId").toString()
+        }
+
+        if (mPreference.getGender() != null) {
+            gender = mPreference.getGender().toString()
+        }
+
+        if (mPreference.getUserId() != null) {
+            patientId = mPreference.getUserId().toString()
+        }
+
+
+        edt_appointment_for_name.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                appointmentForName = edt_appointment_for_name.text.trim().toString()
+            }
+
+        })
 
         btn_confirm_and_pay.setOnClickListener {
-            startActivity(Intent(this@BookingActivity, BookingSuccessfulActivity::class.java))
+            if (dateOfBooking != null) {
+                if (gender != null && bloodGroup != null) {
+                    if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
+
+                        val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot)
+                        bookAppointment(request)
+
+                    } else {
+                        Helper.toastLong(this@BookingActivity, "Please choose a time slot !")
+
+                    }
+
+                } else {
+                    Helper.toastLong(this@BookingActivity, "Please update your profile first !")
+                }
+            } else {
+                Helper.toastLong(this@BookingActivity, "Fields shouldn't be empty !")
+
+            }
+        }
+
+    }
+
+    private fun bookAppointment(request: RequestBookAppointment) {
+        if (Helper.isConnectedToInternet(this@BookingActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponseBookAppointment> = APIInterface.create().bookAppointment(request)
+            call.enqueue(object : Callback<ResponseBookAppointment> {
+                override fun onResponse(
+                    call: Call<ResponseBookAppointment>,
+                    response: Response<ResponseBookAppointment>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                startActivity(Intent(this@BookingActivity, BookingSuccessfulActivity::class.java))
+                                finish()
+
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@BookingActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@BookingActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBookAppointment>, t: Throwable) {
+                    Helper.toastShort(this@BookingActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
         }
 
     }
@@ -94,6 +216,19 @@ class BookingActivity : AppCompatActivity() {
                                 timeSlotsListAdapter = DoctorTimeSlotsAdapter(timeSlotsList, this@BookingActivity)
                                 mRecyclerView.adapter = timeSlotsListAdapter
                                 timeSlotsListAdapter.notifyDataSetChanged()
+
+                                mRecyclerView.addOnItemTouchListener(RecyclerTouchListener(this@BookingActivity, mRecyclerView, object : ClickListener {
+                                    override fun onClick(view: View?, position: Int) {
+                                        timeslot = "${timeSlotsList[position].starttime} - ${timeSlotsList[position].endtime}"
+                                        //Helper.toastShort(this@BookingActivity, timeslot)
+
+                                    }
+
+                                    override fun onLongClick(view: View?, position: Int) {
+                                        //Helper.toastShort(this@BookingActivity, timeSlotsList[position].weekday)
+                                    }
+
+                                }))
 
                             } else {
                                 tv_no_time_slots.visibility = View.VISIBLE
@@ -171,6 +306,24 @@ class BookingActivity : AppCompatActivity() {
             edt_appointment_for_number.setText("${mPreference.getNumber()}")
         }
 
+    }
+
+    private fun showDatePicker() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
+
+            // Display Selected date in textbox
+            Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
+            dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year"
+            edt_booking_date.text = dateOfBooking
+
+        }, day, month, year)
+        dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data
+        dpd.show()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
+import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import okhttp3.MediaType
@@ -17,37 +19,29 @@ import retrofit2.Response
 import java.io.File
 
 class APIHandler {
+
     companion object {
         private const val TAG = "APIHandler"
-
-       /* @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        fun uploadImage(context: Context, authId: String, imgView: ImageView, file: File) {
-            Log.d(TAG, "auth Id : $authId")
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        fun uploadImage(context: Context, imgView: ImageView, file: File) {
             val mFile = RequestBody.create(MediaType.parse("image/*"), file)
             val fileToUpload = MultipartBody.Part.createFormData("image", file.name, mFile)
             Helper.showLoading(context)
-
-            val call: Call<ResponseProfileImageUpload> = APIInterface.create().uploadProfileImageFile(authId, 1, fileToUpload, mFile)
+            val call: Call<ResponsePatientPhoto> = APIInterface.create().getPatientProfilePhoto(fileToUpload, mFile)
             Log.d(TAG, "request : $mFile")
-
-            call.enqueue(object : Callback<ResponseProfileImageUpload> {
+            call.enqueue(object : Callback<ResponsePatientPhoto> {
                 override fun onResponse(
-                    call: Call<ResponseProfileImageUpload>,
-                    response: Response<ResponseProfileImageUpload>
+                    call: Call<ResponsePatientPhoto>,
+                    response: Response<ResponsePatientPhoto>
                 ) {
                     Helper.hideLoading()
                     if (response.isSuccessful) {
                         Helper.showLog(TAG, "Response : ${response.body()!!}")
                         if (response.body()!!.success) {
-
                             val mData = response.body()!!.data
                             if (mData != null) {
-                                if (mData.userProfilePic != null) {
-                                    ImageLoader.loadCircleImageFromUrl(
-                                        imgView,
-                                        mData.userProfilePic,
-                                        R.color.colorTransparent
-                                    )
+                                if (mData.photo != null) {
+                                    ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
                                 }
 
                                 Helper.hideLoading()
@@ -79,7 +73,7 @@ class APIHandler {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseProfileImageUpload>, t: Throwable) {
+                override fun onFailure(call: Call<ResponsePatientPhoto>, t: Throwable) {
                     Helper.hideLoading()
                     if (t.message != null) {
                         Helper.showLog(TAG, t.message!!)
@@ -90,8 +84,7 @@ class APIHandler {
 
             })
         }
-*/
 
-        */
+
     }
 }

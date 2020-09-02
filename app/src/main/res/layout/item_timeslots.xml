@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginRight="@dimen/margin_12"
-    android:background="@drawable/card_background_style">
+    android:background="@drawable/recyclerview_item_selector">
 
     <TextView
         android:id="@+id/tv_time_slots"

@@ -1,5 +1,5 @@
 package com.bijumondal.doctorhealthcare.models.patientPhoto
 
-data class RequestPatientPhoto(
-    val patient_id: String
+data class Data(
+    val photo: String
 )

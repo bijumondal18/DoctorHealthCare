@@ -73,13 +73,13 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/card_background_style">
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_profile_image"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_margin="@dimen/margin_12"
                         app:riv_corner_radius="@dimen/radius_8"
-                        android:src="@color/colorGray" />
+                        android:src="@drawable/ic_avatar" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

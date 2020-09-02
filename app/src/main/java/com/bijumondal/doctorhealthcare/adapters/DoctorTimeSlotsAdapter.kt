@@ -12,9 +12,14 @@ import kotlinx.android.synthetic.main.item_timeslots.view.*
 class DoctorTimeSlotsAdapter(
     private val timeSlotsList: ArrayList<Data>,
     val context: Context
+    // listener : OnTimeSlotItemClick
+
 ) :
     RecyclerView.Adapter<DoctorTimeSlotsAdapter.DoctorTimeSlotsAdapterViewHolder>() {
+    // private val mCallback: OnTimeSlotItemClick? = listener
 
+    var selectedItem: Int = -1
+    var isSelected: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorTimeSlotsAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_timeslots, parent, false)
@@ -31,13 +36,19 @@ class DoctorTimeSlotsAdapter(
 
         val timeSlotsId = timeSlotsList[position].id
 
-        /*holder.llParent.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("hospitalName", hospitalList[position].name)
-            intent.putExtra("hospitalId", hospitalId)
-            (context as AppCompatActivity).setResult(Activity.RESULT_OK, intent)
-            context.finish()
-        }*/
+        if (selectedItem == position) holder.itemView.isSelected = true
+        else holder.itemView.isSelected = false
+
+
+        holder.itemView.setOnClickListener {
+
+            if (selectedItem >= 0)
+                notifyItemChanged(selectedItem)
+
+            selectedItem = holder.adapterPosition
+            notifyItemChanged(selectedItem)
+
+        }
 
     }
 

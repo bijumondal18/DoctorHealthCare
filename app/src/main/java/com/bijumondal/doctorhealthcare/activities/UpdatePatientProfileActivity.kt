@@ -1,6 +1,7 @@
 package com.bijumondal.doctorhealthcare.activities
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
@@ -10,6 +11,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
@@ -19,6 +21,7 @@ import com.bijumondal.doctorhealthcare.api.APIHandler
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
+import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.utils.CaptureImage
@@ -28,6 +31,9 @@ import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_update_patient_profile.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,7 +87,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
     private fun initViews() {
         mPreference = HealthCarePreference(this@UpdatePatientProfileActivity)
-        imgProfilePic = findViewById(R.id.iv_user_image)
+        imgProfilePic = findViewById(R.id.iv_user_profile_image)
         imgEditProfilePic = findViewById(R.id.iv_edit_profile_picture)
 
         if (mPreference.getUserId() != null) {
@@ -132,7 +138,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         phone = edt_phone_number.text.trim().toString()
         address = edt_address.text.trim().toString()
 
-        if (dob.isEmpty()){
+        if (dob.isEmpty()) {
             dob = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
             tv_date.text = dob
         }
@@ -331,11 +337,11 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             if (data != null) {
                 val contentURI = data.data
                 try {
-                    val bitmap =
-                        MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
-                    //  val path = saveImage(bitmap)
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                    //val path = saveImage(bitmap)
                     val file = File(saveImage(bitmap))
-                    // APIHandler.uploadImage(this@UpdatePatientProfileActivity, mPreference.getAuth()!!, imgProfilePic, file)
+                    imgProfilePic.setImageURI(contentURI)
+                   // APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
 
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -344,19 +350,17 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
             }
 
+        } else if (requestCode == Constants.CAMERA) {
+            if (data != null) {
+                val thumbnail = data!!.extras!!.get("data") as Bitmap
+                // saveImage(thumbnail)
+                val file = File(saveImage(thumbnail))
+                //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+
+                imgProfilePic.setImageBitmap(thumbnail)
+                Helper.toastShort(this@UpdatePatientProfileActivity, "Image Saved")
+            }
         }
-
-        /* else if (requestCode == Constants.CAMERA) {
-             if (data != null) {
-                 val thumbnail = data!!.extras!!.get("data") as Bitmap
-                 // saveImage(thumbnail)
-                 val file = File(saveImage(thumbnail))
-                 //APIHandler.uploadImage(this@UpdatePatientProfileActivity, mPreference.getAuth()!!, imgProfilePic, file)
-
-                 iv_user_image.setImageBitmap(thumbnail)
-                 Helper.toastShort(this@UpdatePatientProfileActivity, "Image Saved")
-             }
-         }*/
 
     }
 

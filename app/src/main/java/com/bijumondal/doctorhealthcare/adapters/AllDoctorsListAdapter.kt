@@ -36,7 +36,7 @@ class AllDoctorsListAdapter(
         holder.hospitalNameAndAddress.text = "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}"
 
         if (allDoctorsList[position].photo != null) {
-            ImageLoader.loadImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.color.colorTransparent)
+            ImageLoader.loadImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.drawable.ic_avatar)
         }
 
         val doctorId = allDoctorsList[position].id  //doctorId

@@ -45,7 +45,7 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
-                <com.makeramen.roundedimageview.RoundedImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_doc_image_booking"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -53,7 +53,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:src="@color/colorTransparent"
+                    android:src="@drawable/ic_avatar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:riv_corner_radius="@dimen/radius_8" />
@@ -128,13 +128,13 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:text="Consultation fees: 500rs."
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_18"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_hospital_phone_booking"
-                    tools:text="500 rs" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hospital_phone_booking" />
 
                 <TextView
                     android:id="@+id/tv_hospital_name_and_address_booking"
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="hospital name - address"
+                    android:text="Hospital -  hospitalName \u2022 hospitalAddress"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="TextView"
+                    android:text="Hospital number : +015485485485"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking" />

@@ -35,12 +35,15 @@ import com.bijumondal.doctorhealthcare.models.hospitalList.ResponseHospitalList
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
 import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
+import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
 import com.bijumondal.doctorhealthcare.models.patientRegistration.ResponsePatientRegistration
 import com.google.gson.Gson
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -48,6 +51,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Part
 import java.util.concurrent.TimeUnit
 
 interface APIInterface {
@@ -89,9 +93,8 @@ interface APIInterface {
     @POST(Constants.PATIENT_PROFILE_DETAILS_URL)
     fun getPatientProfileDetails(@Body request: RequestPatientProfileDetails): Call<ResponsePatientProfileDetails>
 
-    /*@POST(Constants.PATIENT_PHOTO_URL)
-    fun getPatientProfilePhoto(@Body request: RequestPatientPhoto): Call<ResponsePatientProfileDetails>
-    */
+    @POST(Constants.PATIENT_PHOTO_URL)
+    fun getPatientProfilePhoto(@Part file: MultipartBody.Part, @Part("name") name: RequestBody): Call<ResponsePatientPhoto>
 
     @POST(Constants.BOOK_APPOINTMENT_URL)
     fun bookAppointment(@Body request: RequestBookAppointment): Call<ResponseBookAppointment>

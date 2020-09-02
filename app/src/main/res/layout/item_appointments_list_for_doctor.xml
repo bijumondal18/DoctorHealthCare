@@ -10,14 +10,14 @@
     android:background="@drawable/card_background_style"
     android:orientation="vertical">
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_patient_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/margin_12"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:src="@color/colorTransparent"
+        android:src="@drawable/ic_avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius="@dimen/radius_8" />
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="12dp"
-        android:text="Biju Mondal"
+        android:text="Patient : Biju Mondal"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/font_16"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +50,48 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorGray"
         app:layout_constraintTop_toBottomOf="@+id/iv_patient_image"
         tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="#200cada2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_patient_booking_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:text="Date\n08-12-2020"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_patient_booking_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Time\n12:30 - 01:30 "
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_patient_booking_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_patient_booking_date" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -177,34 +216,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_patient_booking_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:text="Date : 08-12-2020"
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/tv_patient_booking_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:text="Time : 12:30 - 01:30 "
-        android:textSize="@dimen/font_14"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_patient_booking_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_patient_booking_date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
