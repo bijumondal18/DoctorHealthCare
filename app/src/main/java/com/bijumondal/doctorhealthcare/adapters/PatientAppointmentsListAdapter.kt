@@ -26,7 +26,7 @@ class PatientAppointmentsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientAppointmentsListAdapterViewHolder, position: Int) {
-        holder.patientName.text =  appointmentsList[position].name
+        holder.patientName.text = appointmentsList[position].name
         holder.patientBloodGroup.text = appointmentsList[position].bloodgroup
         holder.patientBookingDate.text = "Date\n${appointmentsList[position].add_date}"
         holder.patientPhoneNumber.text = appointmentsList[position].phone

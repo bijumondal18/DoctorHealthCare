@@ -1,6 +1,7 @@
 package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,14 @@ class DoctorTimeSlotsAdapter(
 
         val timeSlotsId = timeSlotsList[position].id
 
-        if (selectedItem == position) holder.itemView.isSelected = true
-        else holder.itemView.isSelected = false
+        if (selectedItem == position) {
+            holder.itemView.isSelected = true
+           // holder.timeSlotsName.setTextColor(Color.parseColor("#FFFFFF"))
+        } else {
+            holder.itemView.isSelected = false
+           // holder.timeSlotsName.setTextColor(Color.parseColor("#000000"))
+
+        }
 
 
         holder.itemView.setOnClickListener {

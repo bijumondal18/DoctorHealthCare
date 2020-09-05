@@ -119,24 +119,28 @@ class BookingActivity : AppCompatActivity() {
         })
 
         btn_confirm_and_pay.setOnClickListener {
-            if (dateOfBooking != null) {
+            if (dateOfBooking != null && !TextUtils.isEmpty(dateOfBooking)) {
                 if (gender != null && bloodGroup != null) {
                     if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
+                        if (!TextUtils.isEmpty(appointmentForName)) {
 
-                        val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot)
-                        bookAppointment(request)
+                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot)
+                            bookAppointment(request)
+
+                        } else {
+                            Helper.toastLong(this@BookingActivity, "Please enter patient name !")
+                        }
 
                     } else {
                         Helper.toastLong(this@BookingActivity, "Please choose a time slot !")
-
                     }
 
                 } else {
                     Helper.toastLong(this@BookingActivity, "Please update your profile first !")
                 }
-            } else {
-                Helper.toastLong(this@BookingActivity, "Fields shouldn't be empty !")
 
+            } else {
+                Helper.toastLong(this@BookingActivity, "Please choose a date !")
             }
         }
 
@@ -297,14 +301,13 @@ class BookingActivity : AppCompatActivity() {
             tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
         }
 
-        if (mPreference.getName() != null) {
+        /*if (mPreference.getName() != null) {
             edt_appointment_for_name.setText("${mPreference.getName()}")
         }
 
-
         if (mPreference.getNumber() != null) {
             edt_appointment_for_number.setText("${mPreference.getNumber()}")
-        }
+        }*/
 
     }
 

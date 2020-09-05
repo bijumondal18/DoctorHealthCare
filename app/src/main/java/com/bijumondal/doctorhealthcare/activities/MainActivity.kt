@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var bannerList: ArrayList<String> = ArrayList()
     private lateinit var bannerSliderAdapeter: BannerSliderAdapter
     private var currentPage = 0
-    private var NUM_PAGES = 3
+    private var NUM_PAGES = 0
     private var timer: Timer = Timer()
     private var handler: Handler = Handler()
 
@@ -386,6 +386,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                     bannerSliderAdapeter.notifyDataSetChanged()
                                     bannerSliderViewPager.clipToPadding = false
                                     bannerSliderViewPager.pageMargin = 30
+                                    NUM_PAGES = mData.size
 
                                     setupAutoSlider()
                                 }
