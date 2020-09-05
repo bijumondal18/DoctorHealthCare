@@ -186,6 +186,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
+                                //mPreference.setProfilePicUrl()
                                 mPreference.setFirstName(firstname)
                                 mPreference.setLastName(lastname)
                                 mPreference.setEmail(email)
@@ -341,7 +342,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                     //val path = saveImage(bitmap)
                     val file = File(saveImage(bitmap))
                     imgProfilePic.setImageURI(contentURI)
-                   // APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+                    //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
 
                 } catch (e: IOException) {
                     e.printStackTrace()

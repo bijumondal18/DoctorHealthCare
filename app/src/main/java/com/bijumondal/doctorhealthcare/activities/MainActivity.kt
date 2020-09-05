@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var headerView: View
 
     private var profileName: String = ""
-    private var profileImage: String = ""
+    private lateinit var profileImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -170,7 +171,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             if (mData != null) {
 
                                 if (mData.photo != null) {
-                                    ImageLoader.loadCircleImageFromUrl(headerView.iv_profile_image_nav_header, mData.photo, R.color.colorTransparent)
+                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.color.colorTransparent)
                                 }
                                 if (mData.name != null) {
                                     profileName = mData.name
@@ -227,7 +228,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             if (mData != null) {
 
                                 if (mData.photo != null) {
-                                    ImageLoader.loadCircleImageFromUrl(headerView.iv_profile_image_nav_header, mData.photo, R.color.colorTransparent)
+                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.color.colorTransparent)
                                 }
 
                                 if (mData.name != null) {
@@ -432,6 +433,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
         topSpecialitiesRecyclerView = findViewById(R.id.rv_dr_dept)
         headerView = nav_view.inflateHeaderView(R.layout.nav_header_main)
+        profileImage = headerView.findViewById(R.id.iv_profile_image_nav_header)
     }
 
     private fun setDrawerLayout() {

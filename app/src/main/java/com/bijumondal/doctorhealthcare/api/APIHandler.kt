@@ -19,7 +19,6 @@ import retrofit2.Response
 import java.io.File
 
 class APIHandler {
-
     companion object {
         private const val TAG = "APIHandler"
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -42,6 +41,7 @@ class APIHandler {
                             if (mData != null) {
                                 if (mData.photo != null) {
                                     ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
+
                                 }
 
                                 Helper.hideLoading()
