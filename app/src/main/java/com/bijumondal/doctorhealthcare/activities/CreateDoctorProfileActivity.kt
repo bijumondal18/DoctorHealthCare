@@ -112,6 +112,7 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
                             if (mData != null) {
 
                                 mPreference.setVisitAmount(visitAmount)
+                                mPreference.setDoctorDept(docDept)
                                 mPreference.setHospitalName(hospitalName)
                                 mPreference.setHospitalId(hospitalId!!)
 

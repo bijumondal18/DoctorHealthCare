@@ -1,11 +1,16 @@
 package com.bijumondal.doctorhealthcare.activities
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.media.MediaScannerConnection
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.ImageView
+import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateDoctorProfile
@@ -22,6 +27,10 @@ import kotlinx.android.synthetic.main.activity_update_patient_profile.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,6 +64,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         initViews()
 
         setupToolbar()
+
+
 
     }
 
@@ -216,6 +227,44 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
 
     }
 
+    fun saveImage(myBitmap: Bitmap): String {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val wallpaperDirectory = File(
+            (Environment.getExternalStorageDirectory()).toString() + Constants.LOCAL_IMAGE_DIRECTORY
+        )
+        // have the object build the directory structure, if needed.
+        Helper.showLog("fee", wallpaperDirectory.toString())
+        if (!wallpaperDirectory.exists()) {
+
+            wallpaperDirectory.mkdirs()
+        }
+
+        try {
+            Helper.showLog("heel", wallpaperDirectory.toString())
+            val f = File(
+                wallpaperDirectory, ((Calendar.getInstance()
+                    .timeInMillis).toString() + ".jpg")
+            )
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(
+                this,
+                arrayOf(f.path),
+                arrayOf("image/jpeg"), null
+            )
+            fo.close()
+            Helper.showLog(TAG, "File Saved::--->" + f.absolutePath)
+
+            return f.absolutePath
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return ""
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE) {
@@ -232,6 +281,35 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                 mPreference.setHospitalId(hospitalId)
             }
         }
+        if (requestCode == Constants.GALLERY) {
+            if (data != null) {
+                val contentURI = data.data
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
+                    //val path = saveImage(bitmap)
+                    val file = File(saveImage(bitmap))
+                    imgProfilePic.setImageURI(contentURI)
+                    //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Helper.toastShort(this@UpdateDoctorProfileActivity, "Failed!")
+                }
+
+            }
+
+        } else if (requestCode == Constants.CAMERA) {
+            if (data != null) {
+                val thumbnail = data!!.extras!!.get("data") as Bitmap
+                // saveImage(thumbnail)
+                val file = File(saveImage(thumbnail))
+                //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+
+                imgProfilePic.setImageBitmap(thumbnail)
+                Helper.toastShort(this@UpdateDoctorProfileActivity, "Image Saved")
+            }
+        }
+
     }
 
     private fun setupToolbar() {
