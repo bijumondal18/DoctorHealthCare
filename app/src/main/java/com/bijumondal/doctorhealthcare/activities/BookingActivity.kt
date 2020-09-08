@@ -3,34 +3,32 @@ package com.bijumondal.doctorhealthcare.activities
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
-import com.bijumondal.doctorhealthcare.adapters.DoctorDeptAdapter
 import com.bijumondal.doctorhealthcare.adapters.DoctorTimeSlotsAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.bookAppointment.RequestBookAppointment
 import com.bijumondal.doctorhealthcare.models.bookAppointment.ResponseBookAppointment
-import com.bijumondal.doctorhealthcare.models.doctorDepartment.ResponseDoctorDepartment
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
-import com.bijumondal.doctorhealthcare.utils.*
+import com.bijumondal.doctorhealthcare.utils.ClickListener
+import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
+import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
 import kotlinx.android.synthetic.main.activity_booking.*
-import kotlinx.android.synthetic.main.activity_doctor_list.*
-import kotlinx.android.synthetic.main.activity_set_holidays.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -60,6 +58,7 @@ class BookingActivity : AppCompatActivity() {
 
     var isSelected: Boolean = false
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +74,9 @@ class BookingActivity : AppCompatActivity() {
         val currentDate = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val formatted = currentDate.format(formatter)
-        edt_booking_date.hint = formatted.toString()
+        val c = Calendar.getInstance()
+        val date = c.time
+        edt_booking_date.hint = "$formatted (${SimpleDateFormat("EEEE").format(date.time)})"
 
         edt_booking_date.setOnClickListener {
             showDatePicker()
@@ -301,28 +302,21 @@ class BookingActivity : AppCompatActivity() {
             tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
         }
 
-        /*if (mPreference.getName() != null) {
-            edt_appointment_for_name.setText("${mPreference.getName()}")
-        }
-
-        if (mPreference.getNumber() != null) {
-            edt_appointment_for_number.setText("${mPreference.getNumber()}")
-        }*/
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePicker() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+        val date = c.get(Calendar.DAY_OF_WEEK)
 
         val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
-
-            // Display Selected date in textbox
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
             dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year"
-            edt_booking_date.text = dateOfBooking
+            edt_booking_date.text = "${dateOfBooking}"
 
         }, day, month, year)
         dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data

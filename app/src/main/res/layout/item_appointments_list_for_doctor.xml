@@ -6,9 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/margin_8"
     android:layout_marginTop="@dimen/margin_8"
+    android:layout_marginRight="@dimen/margin_8"
     app:cardCornerRadius="@dimen/radius_8"
-    app:cardElevation="@dimen/elevation_0dp"
-    android:layout_marginRight="@dimen/margin_8">
+    app:cardElevation="@dimen/elevation_0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,41 +27,48 @@
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="@dimen/radius_8" />
 
-        <TextView
-            android:id="@+id/tv_patient_name"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="12dp"
-            android:text="Patient : Biju Mondal"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_16"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_patient_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_patient_image"
-            app:layout_constraintTop_toTopOf="@+id/iv_patient_image" />
+            app:layout_constraintTop_toTopOf="@+id/iv_patient_image">
 
-        <TextView
-            android:id="@+id/tv_patient_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="70015854785"
-            app:layout_constraintEnd_toEndOf="@+id/tv_patient_name"
-            app:layout_constraintStart_toStartOf="@+id/tv_patient_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_patient_name" />
+            <TextView
+                android:id="@+id/tv_patient_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient : Biju Mondal"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/tv_patient_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mob: 70015854785" />
+
+        </LinearLayout>
+
 
         <View
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:background="@color/colorGray"
             app:layout_constraintTop_toBottomOf="@+id/iv_patient_image"
             tools:layout_editor_absoluteX="0dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#200cada2"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,9 +80,7 @@
                 android:id="@+id/tv_patient_booking_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="16dp"
+                android:padding="@dimen/padding_12"
                 android:text="Date\n08-12-2020"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_16"
@@ -88,7 +93,7 @@
                 android:id="@+id/tv_patient_booking_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:padding="@dimen/padding_12"
                 android:text="Time\n12:30 - 01:30 "
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_16"

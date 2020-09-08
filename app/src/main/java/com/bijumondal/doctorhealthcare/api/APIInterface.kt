@@ -38,6 +38,8 @@ import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
 import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
+import com.bijumondal.doctorhealthcare.models.patientPrescriptions.RequestPatientPrescriptionsList
+import com.bijumondal.doctorhealthcare.models.patientPrescriptions.ResponsePatientPrescriptionsList
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
@@ -103,6 +105,9 @@ interface APIInterface {
 
     @POST(Constants.PATIENT_APPOINTMENTS_LIST_URL)
     fun getPatientAppointmentsList(@Body request: RequestAppointmentListForPatient): Call<ResponseAppointmentListForPatient>
+
+    @POST(Constants.PATIENT_PRESCRIPTIONS_LIST_URL)
+    fun getPatientPrescriptionsList(@Body request: RequestPatientPrescriptionsList): Call<ResponsePatientPrescriptionsList>
 
 
     /*

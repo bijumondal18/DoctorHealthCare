@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.Data
+import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_appointments_list_for_doctor.view.*
 
 class PatientAppointmentsListAdapter(
@@ -34,9 +35,9 @@ class PatientAppointmentsListAdapter(
         holder.patientGender.text = appointmentsList[position].sex
         holder.patientBookingTimeSlots.text = "Time\n${appointmentsList[position].time_slot}"
 
-        /*if (appointmentsList[position].photo != null) {
+        if (appointmentsList[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.color.colorTransparent)
-        }*/
+        }
 
 
     }

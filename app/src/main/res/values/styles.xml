@@ -103,9 +103,8 @@
 
     <!--TabLayout Customization Start-->
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
     </style>
     <!--TabLayout Customization End-->
 
@@ -116,7 +115,7 @@
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <!--
-                <item name="android:background">@drawable/bottom_modal_sheet_style</item>
+           <item name="android:background">@drawable/bottom_modal_sheet_style</item>
         -->
     </style>
     <!--BottomSheet Customization End-->

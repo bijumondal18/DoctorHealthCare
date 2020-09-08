@@ -3,6 +3,7 @@ package com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor
 data class Data(
     val add_date: String,
     val age: String,
+    val photo: String,
     val bloodgroup: String,
     val name: String,
     val phone: String,

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.CompletedAppointmentsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_completed_appointments_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false" />
+
+    <TextView
+        android:id="@+id/tv_no_completed_appointments_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="You don't have any appointments !"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/font_16"
+        android:visibility="gone" />
+
+</RelativeLayout>

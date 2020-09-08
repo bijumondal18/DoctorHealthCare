@@ -27,7 +27,7 @@ class DoctorAppointmentsListAdapter(
     }
 
     override fun onBindViewHolder(holder: DoctorAppointmentsListAdapterViewHolder, position: Int) {
-        holder.patientName.text =  appointmentsList[position].name
+        holder.patientName.text = appointmentsList[position].name
         holder.patientBloodGroup.text = appointmentsList[position].bloodgroup
         holder.patientBookingDate.text = "Date\n${appointmentsList[position].add_date}"
         holder.patientPhoneNumber.text = appointmentsList[position].phone
@@ -35,9 +35,9 @@ class DoctorAppointmentsListAdapter(
         holder.patientGender.text = appointmentsList[position].sex
         holder.patientBookingTimeSlots.text = "Time\n${appointmentsList[position].time_slot}"
 
-        /*if (appointmentsList[position].photo != null) {
+        if (appointmentsList[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.color.colorTransparent)
-        }*/
+        }
 
 
     }
