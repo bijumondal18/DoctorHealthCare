@@ -7,7 +7,7 @@
     android:layout_marginLeft="@dimen/margin_8"
     android:layout_marginTop="@dimen/margin_8"
     app:cardCornerRadius="@dimen/radius_8"
-    app:cardElevation="@dimen/elevation_1dp"
+    app:cardElevation="@dimen/elevation_0dp"
     android:layout_marginRight="@dimen/margin_8">
 
     <androidx.constraintlayout.widget.ConstraintLayout

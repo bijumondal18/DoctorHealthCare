@@ -158,7 +158,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreatePatientProfile(address, "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
+            val request = RequestCreatePatientProfile(address, mPreference.getProfileImage().toString(), "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
             updatePatientProfile(request)
 
         } else {
@@ -342,7 +342,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                     //val path = saveImage(bitmap)
                     val file = File(saveImage(bitmap))
                     imgProfilePic.setImageURI(contentURI)
-                    //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+                    uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
 
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -356,13 +356,78 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                 val thumbnail = data!!.extras!!.get("data") as Bitmap
                 // saveImage(thumbnail)
                 val file = File(saveImage(thumbnail))
-                //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+                uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
 
                 imgProfilePic.setImageBitmap(thumbnail)
                 Helper.toastShort(this@UpdatePatientProfileActivity, "Image Saved")
             }
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun uploadImage(context: Context, imgView: ImageView, file: File) {
+        val mFile = RequestBody.create(MediaType.parse("image/*"), file)
+        val fileToUpload = MultipartBody.Part.createFormData("image", file.name, mFile)
+        Helper.showLoading(context)
+        val call: Call<ResponsePatientPhoto> = APIInterface.create().getPatientProfilePhoto(fileToUpload, mFile)
+        Log.d("TAG", "request : $mFile")
+        call.enqueue(object : Callback<ResponsePatientPhoto> {
+            override fun onResponse(
+                call: Call<ResponsePatientPhoto>,
+                response: Response<ResponsePatientPhoto>
+            ) {
+                Helper.hideLoading()
+                if (response.isSuccessful) {
+                    Helper.showLog(TAG, "Response : ${response.body()!!}")
+                    if (response.body()!!.success) {
+                        val mData = response.body()!!.data
+                        if (mData != null) {
+                            if (mData.photo != null) {
+                                ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
+                                val profilePhoto = mData.photo
+                                mPreference.setProfileImage(profilePhoto)
+                            }
+
+                            Helper.hideLoading()
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(context, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null && response.body()!!.errors[0] != null) {
+                                Helper.toastShort(context, response.body()!!.errors[0])
+                            } else {
+                                Helper.toastShort(context, "Data not saved, response : Failed!")
+                            }
+                        }
+                    } else {
+                        if (response.body()!!.message != null) {
+                            Helper.toastShort(context, response.body()!!.message)
+
+                        } else if (response.body()!!.errors != null && response.body()!!.errors[0] != null) {
+                            Helper.toastShort(context, response.body()!!.errors[0])
+                        } else {
+                            Helper.toastShort(context, "Response : Failed")
+                        }
+
+                    }
+
+                } else {
+                    Helper.toastNetworkError(context)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponsePatientPhoto>, t: Throwable) {
+                Helper.hideLoading()
+                if (t.message != null) {
+                    Helper.showLog(TAG, t.message!!)
+                    Helper.toastShort(context, t.message!!)
+                }
+
+            }
+
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -23,6 +23,21 @@ class MyPrescriptionsActivity : AppCompatActivity() {
         setupToolbar()
 
 
+        if (mPreference.getUserType() == 1) {
+
+            /*layoutManager = LinearLayoutManager(this@MyAppointmentsActivity, LinearLayoutManager.VERTICAL, false)
+            appointmentsListRecyclerView.layoutManager = layoutManager
+            val request1 = RequestAppointmentListForPatient(mPreference.getUserId().toString())
+            fetchAppointmentsListForPatient(request1)*/
+
+        } else if (mPreference.getUserType() == 2) {
+
+            /*layoutManager = LinearLayoutManager(this@MyAppointmentsActivity, LinearLayoutManager.VERTICAL, false)
+            appointmentsListRecyclerView.layoutManager = layoutManager
+            val request = RequestAppointmentsListForDoctor(mPreference.getUserId().toString())
+            fetchAppointmentsListForDoctor(request)*/
+        }
+
 
 
     }

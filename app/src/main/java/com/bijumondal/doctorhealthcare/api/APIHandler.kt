@@ -19,6 +19,8 @@ import retrofit2.Response
 import java.io.File
 
 class APIHandler {
+
+    private lateinit var mPreference: HealthCarePreference
     companion object {
         private const val TAG = "APIHandler"
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -41,6 +43,8 @@ class APIHandler {
                             if (mData != null) {
                                 if (mData.photo != null) {
                                     ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
+                                    val profilePhoto = mData.photo
+                                    // todo set phot to preference
 
                                 }
 

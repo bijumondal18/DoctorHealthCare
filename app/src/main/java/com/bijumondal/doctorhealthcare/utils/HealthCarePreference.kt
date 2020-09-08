@@ -13,6 +13,7 @@ class HealthCarePreference(val context: Context) {
         private const val KEY_REGISTERED = "REGISTERED"
         private const val KEY_EMAIL_AND_NUMBER_AVAILABLE = "EMAIL_AND_NUMBER_AVAILABLE"
         private const val KEY_PROFILE_PIC_URL = "PROFILE_PIC_URL"
+        private const val KEY_PROFILE_IMAGE = "PROFILE_IMAGE"
         private const val KEY_FIRST_NAME = "FIRST_NAME"
         private const val KEY_LAST_NAME = "LAST_NAME"
         private const val KEY_NAME = "NAME"
@@ -109,6 +110,16 @@ class HealthCarePreference(val context: Context) {
 
     fun getProfilePicUrl(): String? {
         return sharedPref.getString(KEY_PROFILE_PIC_URL, null)
+    }
+
+    fun setProfileImage(text: String) {
+        val editor: SharedPreferences.Editor = sharedPref.edit()
+        editor.putString(KEY_PROFILE_IMAGE, text)
+        editor.apply()
+    }
+
+    fun getProfileImage(): String? {
+        return sharedPref.getString(KEY_PROFILE_IMAGE, null)
     }
 
 

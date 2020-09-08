@@ -32,7 +32,7 @@ class AllDoctorsListAdapter(
         holder.doctorName.text = allDoctorsList[position].name
         holder.doctorDept.text = allDoctorsList[position].department
         holder.doctorAddress.text = allDoctorsList[position].address
-        holder.doctorVisitAmount.text = "~ ₹ ${allDoctorsList[position].visit_amount} Consultation fees"
+        holder.doctorVisitAmount.text = "~ ৳ ${allDoctorsList[position].visit_amount} Consultation fees"
         holder.hospitalNameAndAddress.text = "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}"
 
         if (allDoctorsList[position].photo != null) {
@@ -51,7 +51,7 @@ class AllDoctorsListAdapter(
                     .putExtra("doctorAddress", allDoctorsList[position].address)
                     .putExtra("doctorDept", allDoctorsList[position].department)
                     .putExtra("hospitalPhone", allDoctorsList[position].hospitalphoneno)
-                    .putExtra("doctorVisitAmount", "₹ ${allDoctorsList[position].visit_amount}")
+                    .putExtra("doctorVisitAmount", "৳ ${allDoctorsList[position].visit_amount}")
                     .putExtra("hospitalNameAndAddress", "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}")
             )
         }
@@ -66,7 +66,7 @@ class AllDoctorsListAdapter(
                     .putExtra("doctorAddress", allDoctorsList[position].address)
                     .putExtra("doctorDept", allDoctorsList[position].department)
                     .putExtra("hospitalPhone", allDoctorsList[position].hospitalphoneno)
-                    .putExtra("doctorVisitAmount", "₹ ${allDoctorsList[position].visit_amount}")
+                    .putExtra("doctorVisitAmount", "৳ ${allDoctorsList[position].visit_amount}")
                     .putExtra("hospitalNameAndAddress", "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}")
             )
         }

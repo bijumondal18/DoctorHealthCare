@@ -4,9 +4,10 @@
     <color name="colorPrimaryDark">#0cada2</color>
     <color name="colorAccent">#0cada2</color>
 
-    <color name="colorTransparent">#f1f3f4</color>
+    <color name="colorTransparent">#F4F6F7</color>
     <color name="colorGray">#E6E6E6</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorShadow">#B0CCE1</color>
 
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#90000000</color>

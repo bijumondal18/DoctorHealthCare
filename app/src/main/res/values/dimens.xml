@@ -26,6 +26,8 @@
     <dimen name="elevation_1dp">1dp</dimen>
     <dimen name="elevation_2dp">2dp</dimen>
     <dimen name="elevation_3dp">3dp</dimen>
+    <dimen name="elevation_4dp">4dp</dimen>
+    <dimen name="elevation_5dp">5dp</dimen>
 
     <dimen name="font_10">10sp</dimen>
     <dimen name="font_12">12sp</dimen>
