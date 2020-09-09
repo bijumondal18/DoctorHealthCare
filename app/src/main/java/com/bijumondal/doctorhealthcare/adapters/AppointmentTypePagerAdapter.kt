@@ -29,10 +29,10 @@ class AppointmentTypePagerAdapter(manager: FragmentManager) : FragmentPagerAdapt
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0 -> "Upcoming"
-            1 -> "Completed"
+            0 -> "  Upcoming  "
+            1 -> "  Completed  "
             else -> {
-                return "Upcoming"
+                return "  Upcoming  "
             }
         }
     }

@@ -132,6 +132,7 @@ class CompletedAppointmentsFragment : Fragment() {
         }
     }
 
+
     private fun fetchAppointmentsListForDoctor(request: RequestAppointmentsListForDoctor) {
         if (Helper.isConnectedToInternet(context!!)) {
             val call: Call<ResponseAppointmentsListForDoctor> = APIInterface.create().getDoctorAppointmentsList(request)

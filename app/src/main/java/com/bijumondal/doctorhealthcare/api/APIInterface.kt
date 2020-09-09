@@ -3,6 +3,8 @@ package com.bijumondal.doctorhealthcare.api
 import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.RequestAddDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.ResponseAddDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.RequestAddPrescriptions
+import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.ResponseAddPrescriptions
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
@@ -27,6 +29,8 @@ import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.RequestDoctorHo
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.ResponseDoctorHolidaysList
 import com.bijumondal.doctorhealthcare.models.doctorLogin.RequestDoctorLogin
 import com.bijumondal.doctorhealthcare.models.doctorLogin.ResponseDoctorLogin
+import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.RequestDoctorPrescriptionsList
+import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.ResponseDoctorPrescriptionsList
 import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.doctorRegistration.RequestDoctorRegistration
@@ -149,6 +153,13 @@ interface APIInterface {
 
     @POST(Constants.DOCTOR_APPOINTMENTS_LIST_URL)
     fun getDoctorAppointmentsList(@Body request: RequestAppointmentsListForDoctor): Call<ResponseAppointmentsListForDoctor>
+
+    @POST(Constants.ADD_PRESCRIPTIONS_URL)
+    fun addPrescription(@Body request: RequestAddPrescriptions): Call<ResponseAddPrescriptions>
+
+    @POST(Constants.DOCTOR_PRESCRIPTIONS_LIST_URL)
+    fun getDoctorPrescriptionsLis(@Body request: RequestDoctorPrescriptionsList): Call<ResponseDoctorPrescriptionsList>
+
 
 
     /*

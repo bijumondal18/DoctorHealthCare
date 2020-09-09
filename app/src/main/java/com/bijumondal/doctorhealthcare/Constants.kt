@@ -43,6 +43,8 @@ object Constants {
     const val ADD_DOCTOR_TIMESLOTS_URL = "addtimeslot"
     const val DELETE_DOCTOR_TIMESLOTS_URL = "deletetimeslot"
     const val DOCTOR_APPOINTMENTS_LIST_URL = "getdoctorappointmentbook"
+    const val DOCTOR_PRESCRIPTIONS_LIST_URL = "getdoctorprescription"
+    const val ADD_PRESCRIPTIONS_URL = "addprescription"
 
 
     /*

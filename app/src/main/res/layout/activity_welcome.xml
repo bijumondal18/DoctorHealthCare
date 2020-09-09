@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/welcome_screen_background"
     tools:context=".activities.WelcomeActivity">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_64"
-        android:src="@drawable/app_icon" />
+        android:src="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/user_type_text"
@@ -70,10 +70,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/margin_24"
-        android:textStyle="bold"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/font_20" />
+        android:textSize="@dimen/font_20"
+        android:textStyle="bold" />
 
 </RelativeLayout>

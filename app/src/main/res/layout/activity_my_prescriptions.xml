@@ -41,18 +41,26 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_prescription_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
         <TextView
+            android:id="@+id/tv_no_prescriptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="You don't have any prescriptions !"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_16" />
+            android:textSize="@dimen/font_16"
+            android:visibility="gone" />
 
 
     </RelativeLayout>
