@@ -302,7 +302,6 @@ class BookingActivity : AppCompatActivity() {
             tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
         }
 
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -327,6 +326,5 @@ class BookingActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 
 }
