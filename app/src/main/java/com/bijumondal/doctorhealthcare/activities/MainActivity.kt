@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             if (mData != null) {
 
                                 if (mData.photo != null) {
-                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.color.colorTransparent)
+                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.drawable.ic_avatar)
                                 }
                                 if (mData.name != null) {
                                     profileName = mData.name
@@ -228,7 +228,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             if (mData != null) {
 
                                 if (mData.photo != null) {
-                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.color.colorTransparent)
+                                    ImageLoader.loadCircleImageFromUrl(profileImage, mData.photo, R.drawable.ic_avatar)
                                 }
 
                                 if (mData.name != null) {

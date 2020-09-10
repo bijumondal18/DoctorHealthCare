@@ -76,7 +76,11 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
         userId = mPreference.getUserId().toString()
         firstname = mPreference.getFirstName().toString()
         lastname = mPreference.getLastName().toString()
-        email = mPreference.getEmail().toString()
+        if (mPreference.getEmail() != null) {
+            email = mPreference.getEmail().toString()
+        } else {
+            email = ""
+        }
         phone = mPreference.getNumber().toString()
         hospitalId = mPreference.getHospitalId().toString()
 

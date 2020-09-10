@@ -27,7 +27,7 @@ class PatientPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientPrescriptionsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = prescriptionsListForPatient[position].name
+        holder.patientName.text = prescriptionsListForPatient[position].doctor
         holder.patientSymptom.text = prescriptionsListForPatient[position].symptom
         holder.medicine.text = prescriptionsListForPatient[position].medicine
         holder.note.text = prescriptionsListForPatient[position].note
