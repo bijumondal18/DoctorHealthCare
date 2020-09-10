@@ -30,6 +30,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     private var symptom: String = ""
     private var advice: String = ""
     private var note: String = ""
+    private var patientId: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,10 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         mPreference = HealthCarePreference(this@AddPrescriptionsActivity)
 
         setupToolbar()
+
+        if (intent.hasExtra("patientId") != null) {
+            patientId = intent.getStringExtra("patientId").toString()
+        }
 
         validateFields()
 
@@ -56,7 +61,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             !TextUtils.isEmpty(note)
         ) {
 
-            val request = RequestAddPrescriptions(advice, mPreference.getUserId().toString(), medicineName, note, "", symptom)
+            val request = RequestAddPrescriptions(advice, mPreference.getUserId().toString(), medicineName, note, patientId, symptom)
             addPrescriptions(request)
 
         } else {
@@ -84,7 +89,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
-                                Helper.toastShort(this@AddPrescriptionsActivity, mData.message)
+                                //Helper.toastShort(this@AddPrescriptionsActivity, mData.message)
 
                             }
 

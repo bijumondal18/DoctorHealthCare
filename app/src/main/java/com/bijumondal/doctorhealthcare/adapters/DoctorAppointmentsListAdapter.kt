@@ -45,6 +45,7 @@ class DoctorAppointmentsListAdapter(
             ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.color.colorTransparent)
         }
 
+        val patient_id = appointmentsList[position].patient_id
         if (mPreference.getUserType() == 1) {
             holder.btnAddPrescriptions.visibility = View.GONE
         } else if (mPreference.getUserType() == 2) {
@@ -54,7 +55,7 @@ class DoctorAppointmentsListAdapter(
         holder.btnAddPrescriptions.setOnClickListener {
             context.startActivity(
                 Intent(context!!, AddPrescriptionsActivity::class.java)
-
+                    .putExtra("patientId", patient_id)
             )
         }
 
