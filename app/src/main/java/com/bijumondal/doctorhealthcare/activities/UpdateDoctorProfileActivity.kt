@@ -1,29 +1,35 @@
 package com.bijumondal.doctorhealthcare.activities
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
-import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
-import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
+import com.bijumondal.doctorhealthcare.models.doctorPhoto.RequestDoctorPhoto
+import com.bijumondal.doctorhealthcare.models.doctorPhoto.ResponseDoctorPhoto
+import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
 import com.bijumondal.doctorhealthcare.utils.CaptureImage
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
+import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import com.google.gson.Gson
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_update_doctor_profile.*
-import kotlinx.android.synthetic.main.activity_update_patient_profile.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +37,6 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.text.SimpleDateFormat
 import java.util.*
 
 class UpdateDoctorProfileActivity : AppCompatActivity() {
@@ -62,10 +67,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_update_doctor_profile)
 
         initViews()
-
         setupToolbar()
-
-
 
     }
 
@@ -156,7 +158,6 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     }
 
     private fun updateDoctorProfile(request: RequestCreateDoctorProfile) {
-
         if (Helper.isConnectedToInternet(this@UpdateDoctorProfileActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this)
@@ -265,6 +266,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         return ""
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE) {
@@ -281,15 +283,16 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                 mPreference.setHospitalId(hospitalId)
             }
         }
+
         if (requestCode == Constants.GALLERY) {
             if (data != null) {
                 val contentURI = data.data
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
-                    //val path = saveImage(bitmap)
                     val file = File(saveImage(bitmap))
                     imgProfilePic.setImageURI(contentURI)
-                    //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
+
+                    //uploadImage(this@UpdateDoctorProfileActivity, imgProfilePic, file)
 
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -310,6 +313,125 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun uploadDoctorPhoto(request: RequestDoctorPhoto) {
+        if (Helper.isConnectedToInternet(this@UpdateDoctorProfileActivity)) {
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponseDoctorPhoto> = APIInterface.create().getDoctorProfilePhoto(request)
+            call.enqueue(object : Callback<ResponseDoctorPhoto> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorPhoto>,
+                    response: Response<ResponseDoctorPhoto>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, "Uploaded")
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@UpdateDoctorProfileActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorPhoto>, t: Throwable) {
+                    Helper.toastShort(this@UpdateDoctorProfileActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun uploadImage(context: Context, imgView: ImageView, file: File) {
+        val mFile = RequestBody.create(MediaType.parse("image/*"), file)
+        val fileToUpload = MultipartBody.Part.createFormData("image", file.name, mFile)
+        Helper.showLoading(this)
+        val call: Call<ResponsePatientPhoto> = APIInterface.create().getPatientProfilePhoto(fileToUpload, mFile)
+        call.enqueue(object : Callback<ResponsePatientPhoto> {
+            override fun onResponse(
+                call: Call<ResponsePatientPhoto>,
+                response: Response<ResponsePatientPhoto>
+            ) {
+                Helper.hideLoading()
+                if (response.isSuccessful) {
+                    Helper.showLog(TAG, "Response : ${response.body()!!}")
+                    if (response.body()!!.success) {
+                        val mData = response.body()!!.data
+                        if (mData != null) {
+                            if (mData.photo != null) {
+                                ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
+                                val profilePhoto = mData.photo
+                                // todo set photo to preference
+
+                            }
+
+                            Helper.hideLoading()
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(context, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null && response.body()!!.errors[0] != null) {
+                                Helper.toastShort(context, response.body()!!.errors[0])
+                            } else {
+                                Helper.toastShort(context, "Data not saved, response : Failed!")
+                            }
+                        }
+                    } else {
+                        if (response.body()!!.message != null) {
+                            Helper.toastShort(context, response.body()!!.message)
+
+                        } else if (response.body()!!.errors != null && response.body()!!.errors[0] != null) {
+                            Helper.toastShort(context, response.body()!!.errors[0])
+                        } else {
+                            Helper.toastShort(context, "Response : Failed")
+                        }
+
+                    }
+
+                } else {
+                    Helper.toastNetworkError(context)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponsePatientPhoto>, t: Throwable) {
+                Helper.hideLoading()
+                if (t.message != null) {
+                    Helper.showLog(TAG, t.message!!)
+                    Helper.toastShort(context, t.message!!)
+                }
+
+            }
+
+        })
     }
 
     private fun setupToolbar() {

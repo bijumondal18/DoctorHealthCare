@@ -47,7 +47,6 @@ class TopSpecialistAdapter(
             )
         }
 
-
     }
 
     class TopSpecialistAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {

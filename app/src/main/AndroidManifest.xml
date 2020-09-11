@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bijumondal.doctorhealthcare">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".activities.AddPrescriptionsActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:targetApi="q">
+        <activity android:name=".activities.AddPrescriptionsActivity" />
         <activity
             android:name=".activities.RegistrationActivity"
             android:theme="@style/FullScreenTheme" />
@@ -34,14 +44,9 @@
         <activity android:name=".activities.MyAppointmentsActivity" />
         <activity android:name=".activities.PatientProfileActivity" />
         <activity
-            android:name=".activities.RegisterActivity"
-            android:theme="@style/FullScreenTheme" />
-        <activity
             android:name=".activities.WelcomeActivity"
             android:theme="@style/FullScreenTheme" />
-        <activity
-            android:name=".activities.LoginActivity"
-            android:theme="@style/FullScreenTheme" />
+
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

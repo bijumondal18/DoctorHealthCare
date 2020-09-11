@@ -11,19 +11,15 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.R
-import com.bijumondal.doctorhealthcare.api.APIHandler
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
-import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
-import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.utils.CaptureImage
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
@@ -186,7 +182,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
-                                //mPreference.setProfilePicUrl()
+
                                 mPreference.setFirstName(firstname)
                                 mPreference.setLastName(lastname)
                                 mPreference.setEmail(email)
@@ -204,6 +200,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 intent.putExtra("gender", Helper.getGender(gender!!))
                                 intent.putExtra("bloodGroup", bloodGroup)
                                 intent.putExtra("dob", dob)
+                                intent.putExtra("",mPreference.getProfileImage())
                                 setResult(RESULT_OK, intent)
                                 finish()
 
@@ -292,16 +289,15 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     }
 
 
-    fun saveImage(myBitmap: Bitmap): String {
+    private fun saveImage(myBitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
         val wallpaperDirectory = File(
-            (Environment.getExternalStorageDirectory()).toString() + Constants.LOCAL_IMAGE_DIRECTORY
+            (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)).toString() + Constants.LOCAL_IMAGE_DIRECTORY
         )
         // have the object build the directory structure, if needed.
         Helper.showLog("fee", wallpaperDirectory.toString())
         if (!wallpaperDirectory.exists()) {
-
             wallpaperDirectory.mkdirs()
         }
 
@@ -317,7 +313,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             MediaScannerConnection.scanFile(
                 this,
                 arrayOf(f.path),
-                arrayOf("image/jpeg"), null
+                arrayOf("photo/jpeg"), null
             )
             fo.close()
             Helper.showLog(TAG, "File Saved::--->" + f.absolutePath)
@@ -366,12 +362,12 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun uploadImage(context: Context, imgView: ImageView, file: File) {
-        val mFile = RequestBody.create(MediaType.parse("image/*"), file)
-        val fileToUpload = MultipartBody.Part.createFormData("image", file.name, mFile)
-        Helper.showLoading(context)
+    fun uploadImage(context: Context, imgView: CircleImageView, file: File) {
+        val mFile = RequestBody.create(MediaType.parse("photo/*"), file)
+        val fileToUpload: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, mFile)
+        //val name: RequestBody = RequestBody.create(MediaType.parse("text/plain"), "upload_test")
+        Helper.showLoading(this@UpdatePatientProfileActivity)
         val call: Call<ResponsePatientPhoto> = APIInterface.create().getPatientProfilePhoto(fileToUpload, mFile)
-        Log.d("TAG", "request : $mFile")
         call.enqueue(object : Callback<ResponsePatientPhoto> {
             override fun onResponse(
                 call: Call<ResponsePatientPhoto>,
@@ -387,6 +383,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
                                 val profilePhoto = mData.photo
                                 mPreference.setProfileImage(profilePhoto)
+
                             }
 
                             Helper.hideLoading()
