@@ -73,8 +73,8 @@ class DoctorProfileActivity : AppCompatActivity() {
             builder.setTitle("Logout")
             builder.setMessage("Are you sure want to logout?")
             builder.setPositiveButton("Yes") { dialog, which ->
-                mPreference.setIsLoggedIn(false)
                 mPreference.clearSharedPreference()
+                mPreference.setIsLoggedIn(false)
                 startActivity(
                     Intent(this, WelcomeActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -113,6 +113,7 @@ class DoctorProfileActivity : AppCompatActivity() {
                                 if (mData.photo != null) {
                                     ImageLoader.loadCircleImageFromUrl(iv_doc_profile_image, mData.photo, R.drawable.ic_avatar)
                                 }
+
                                 if (mData.name != null) {
                                     tv_doc_profile_name.text = mData.name
                                 }

@@ -58,6 +58,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     var lastname = ""
     var email = ""
     var phone = ""
+    var photo = ""
     var address = ""
 
     var userId = ""
@@ -120,7 +121,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         }
 
         imgEditProfilePic.setOnClickListener {
-
             CaptureImage.showPictureDialog(this@UpdatePatientProfileActivity)
         }
 
@@ -154,7 +154,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreatePatientProfile(address, mPreference.getProfileImage().toString(), "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
+            val request = RequestCreatePatientProfile(address, photo, "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
             updatePatientProfile(request)
 
         } else {
@@ -181,7 +181,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
                             if (mData != null) {
-
 
                                 mPreference.setFirstName(firstname)
                                 mPreference.setLastName(lastname)
@@ -352,9 +351,9 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                 val thumbnail = data!!.extras!!.get("data") as Bitmap
                 // saveImage(thumbnail)
                 val file = File(saveImage(thumbnail))
+                imgProfilePic.setImageBitmap(thumbnail)
                 uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
 
-                imgProfilePic.setImageBitmap(thumbnail)
                 Helper.toastShort(this@UpdatePatientProfileActivity, "Image Saved")
             }
         }
@@ -380,9 +379,8 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                         val mData = response.body()!!.data
                         if (mData != null) {
                             if (mData.photo != null) {
-                                ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
-                                val profilePhoto = mData.photo
-                                mPreference.setProfileImage(profilePhoto)
+                                photo = mData.photo
+                                mPreference.setProfileImage(photo)
 
                             }
 

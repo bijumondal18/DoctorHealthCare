@@ -88,7 +88,7 @@ class CreateDoctorProfileActivity : AppCompatActivity() {
             && !TextUtils.isEmpty(visitAmount)
             && !TextUtils.isEmpty(hospitalName)
         ) {
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId, visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email,"", phone, "${firstname} ${lastname}", "", hospitalId, visitAmount)
             createDoctorProfile(request)
 
         } else {

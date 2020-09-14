@@ -5,6 +5,7 @@ data class RequestCreateDoctorProfile(
     val department: String,
     val doctor_id: String,
     val email: String,
+    val photo: String,
     val mobile: String,
     val name: String,
     val profile: String,

@@ -160,8 +160,9 @@ interface APIInterface {
     @POST(Constants.DOCTOR_PRESCRIPTIONS_LIST_URL)
     fun getDoctorPrescriptionsLis(@Body request: RequestDoctorPrescriptionsList): Call<ResponseDoctorPrescriptionsList>
 
+    @Multipart
     @POST(Constants.DOCTOR_PHOTO_URL)
-    fun getDoctorProfilePhoto(requestDoctorPhoto: RequestDoctorPhoto): Call<ResponseDoctorPhoto>
+    fun getDoctorProfilePhoto(@Part file: MultipartBody.Part, @Part("name") name: RequestBody): Call<ResponseDoctorPhoto>
 
 
     /*

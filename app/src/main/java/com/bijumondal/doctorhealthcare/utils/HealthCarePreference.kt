@@ -60,15 +60,6 @@ class HealthCarePreference(val context: Context) {
         return sharedPref.getString(KEY_AUTH_KEY, null)
     }
 
-    fun setIsEmailAndNumberAvailable(status: Boolean) {
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putBoolean(KEY_EMAIL_AND_NUMBER_AVAILABLE, status)
-        editor.apply()
-    }
-
-    fun isEmailAndNumberAvailable(): Boolean {
-        return sharedPref.getBoolean(KEY_EMAIL_AND_NUMBER_AVAILABLE, false)
-    }
 
     fun setUserId(id: Int) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -121,7 +112,6 @@ class HealthCarePreference(val context: Context) {
     fun getProfileImage(): String? {
         return sharedPref.getString(KEY_PROFILE_IMAGE, null)
     }
-
 
     fun setFirstName(text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -281,7 +271,6 @@ class HealthCarePreference(val context: Context) {
 
     fun clearSharedPreference() {
         val editor: SharedPreferences.Editor = sharedPref.edit()
-        //sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         editor.clear()
         editor.apply()
     }

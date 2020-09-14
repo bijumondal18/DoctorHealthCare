@@ -495,8 +495,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 builder.setTitle("Logout")
                 builder.setMessage("Are you sure want to logout?")
                 builder.setPositiveButton("Yes") { dialog, which ->
-                    mPreference.setIsLoggedIn(false)
                     mPreference.clearSharedPreference()
+                    mPreference.setIsLoggedIn(false)
                     startActivity(Intent(this, WelcomeActivity::class.java))
                     finish()
                 }

@@ -76,7 +76,6 @@ class SignupFragment : Fragment() {
 
         }
 
-
     }
 
     private fun doSignUpValidation() {
@@ -198,7 +197,6 @@ class SignupFragment : Fragment() {
 
         })
 
-
     }
 
     private fun doDoctorRegistration(request: RequestDoctorRegistration) {
@@ -231,7 +229,6 @@ class SignupFragment : Fragment() {
 
                                 startActivity(Intent(context!!, CreateDoctorProfileActivity::class.java))
                                 activity!!.finish()
-
 
                             }
 

@@ -59,6 +59,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
     var address = ""
     var docDept = ""
     var visitAmount = ""
+    var photo = ""
     var hospitalName = ""
     var hospitalId = ""
 
@@ -149,7 +150,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, phone, "${firstname} ${lastname}", "", hospitalId.toString(), visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, photo, phone, "${firstname} ${lastname}", "", hospitalId, visitAmount)
             updateDoctorProfile(request)
 
         } else {
@@ -193,6 +194,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 intent.putExtra("docDept", docDept)
                                 intent.putExtra("docVisitAmount", visitAmount)
                                 intent.putExtra("docHospitalName", hospitalName)
+                                intent.putExtra("",mPreference.getProfileImage())
                                 setResult(RESULT_OK, intent)
                                 finish()
 
@@ -228,16 +230,15 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
 
     }
 
-    fun saveImage(myBitmap: Bitmap): String {
+    private fun saveImage(myBitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
         val wallpaperDirectory = File(
-            (Environment.getExternalStorageDirectory()).toString() + Constants.LOCAL_IMAGE_DIRECTORY
+            (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)).toString() + Constants.LOCAL_IMAGE_DIRECTORY
         )
         // have the object build the directory structure, if needed.
         Helper.showLog("fee", wallpaperDirectory.toString())
         if (!wallpaperDirectory.exists()) {
-
             wallpaperDirectory.mkdirs()
         }
 
@@ -253,7 +254,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             MediaScannerConnection.scanFile(
                 this,
                 arrayOf(f.path),
-                arrayOf("image/jpeg"), null
+                arrayOf("photo/jpeg"), null
             )
             fo.close()
             Helper.showLog(TAG, "File Saved::--->" + f.absolutePath)
@@ -291,8 +292,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, contentURI)
                     val file = File(saveImage(bitmap))
                     imgProfilePic.setImageURI(contentURI)
-
-                    //uploadImage(this@UpdateDoctorProfileActivity, imgProfilePic, file)
+                    uploadImage(this@UpdateDoctorProfileActivity, imgProfilePic, file)
 
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -306,79 +306,24 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                 val thumbnail = data!!.extras!!.get("data") as Bitmap
                 // saveImage(thumbnail)
                 val file = File(saveImage(thumbnail))
-                //APIHandler.uploadImage(this@UpdatePatientProfileActivity, imgProfilePic, file)
-
                 imgProfilePic.setImageBitmap(thumbnail)
+                uploadImage(this@UpdateDoctorProfileActivity, imgProfilePic, file)
                 Helper.toastShort(this@UpdateDoctorProfileActivity, "Image Saved")
             }
         }
 
     }
 
-    private fun uploadDoctorPhoto(request: RequestDoctorPhoto) {
-        if (Helper.isConnectedToInternet(this@UpdateDoctorProfileActivity)) {
-            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Helper.showLoading(this)
-            }
-            val call: Call<ResponseDoctorPhoto> = APIInterface.create().getDoctorProfilePhoto(request)
-            call.enqueue(object : Callback<ResponseDoctorPhoto> {
-                override fun onResponse(
-                    call: Call<ResponseDoctorPhoto>,
-                    response: Response<ResponseDoctorPhoto>
-                ) {
-                    Helper.hideLoading()
-                    if (response.isSuccessful) {
-                        Helper.showLog(TAG, "Response : ${response.body()}")
-                        if (response.body()!!.success) {
-                            val mData = response.body()!!.data
-                            if (mData != null) {
-
-                                Helper.toastShort(this@UpdateDoctorProfileActivity, "Uploaded")
-
-                            }
-
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
-                            }
-
-                        } else {
-                            if (response.body()!!.data.message != null) {
-                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
-                            }
-                        }
-
-                    } else {
-                        Helper.toastNetworkError(this@UpdateDoctorProfileActivity)
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseDoctorPhoto>, t: Throwable) {
-                    Helper.toastShort(this@UpdateDoctorProfileActivity, "${t.message}")
-                    Helper.hideLoading()
-                }
-            })
-        }
-
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun uploadImage(context: Context, imgView: ImageView, file: File) {
-        val mFile = RequestBody.create(MediaType.parse("image/*"), file)
-        val fileToUpload = MultipartBody.Part.createFormData("image", file.name, mFile)
-        Helper.showLoading(this)
-        val call: Call<ResponsePatientPhoto> = APIInterface.create().getPatientProfilePhoto(fileToUpload, mFile)
-        call.enqueue(object : Callback<ResponsePatientPhoto> {
+    fun uploadImage(context: Context, imgView: CircleImageView, file: File) {
+        val mFile = RequestBody.create(MediaType.parse("photo/*"), file)
+        val fileToUpload: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, mFile)
+        Helper.showLoading(this@UpdateDoctorProfileActivity)
+        val call: Call<ResponseDoctorPhoto> = APIInterface.create().getDoctorProfilePhoto(fileToUpload, mFile)
+        call.enqueue(object : Callback<ResponseDoctorPhoto> {
             override fun onResponse(
-                call: Call<ResponsePatientPhoto>,
-                response: Response<ResponsePatientPhoto>
+                call: Call<ResponseDoctorPhoto>,
+                response: Response<ResponseDoctorPhoto>
             ) {
                 Helper.hideLoading()
                 if (response.isSuccessful) {
@@ -387,9 +332,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                         val mData = response.body()!!.data
                         if (mData != null) {
                             if (mData.photo != null) {
-                                ImageLoader.loadCircleImageFromUrl(imgView, mData.photo, R.drawable.ic_avatar)
-                                val profilePhoto = mData.photo
-                                // todo set photo to preference
+                                photo = mData.photo
+                                mPreference.setProfileImage(photo)
 
                             }
 
@@ -422,7 +366,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponsePatientPhoto>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseDoctorPhoto>, t: Throwable) {
                 Helper.hideLoading()
                 if (t.message != null) {
                     Helper.showLog(TAG, t.message!!)

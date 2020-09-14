@@ -59,16 +59,8 @@ class WelcomeActivity : AppCompatActivity() {
 
         btn_next.setOnClickListener {
             if (mPreferences.getUserType() != null) {
-
-                if (mPreferences.getUserType() == 1) {
-                    startActivity(Intent(this@WelcomeActivity, RegistrationActivity::class.java))
-                    finish()
-                } else if (mPreferences.getUserType() == 2) {
-                    startActivity(Intent(this@WelcomeActivity, RegistrationActivity::class.java))
-                    finish()
-                } else {
-                    Helper.toastShort(this@WelcomeActivity, "Please choose a user type!")
-                }
+                startActivity(Intent(this@WelcomeActivity, RegistrationActivity::class.java))
+                finish()
 
             } else {
                 Helper.toastShort(this@WelcomeActivity, "Please choose a user type!")

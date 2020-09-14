@@ -1,5 +1,6 @@
 package com.bijumondal.doctorhealthcare.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -69,8 +70,8 @@ class PatientProfileActivity : AppCompatActivity() {
             builder.setTitle("Logout")
             builder.setMessage("Are you sure want to logout?")
             builder.setPositiveButton("Yes") { dialog, which ->
-                mPreference.setIsLoggedIn(false)
                 mPreference.clearSharedPreference()
+                mPreference.setIsLoggedIn(false)
                 startActivity(
                     Intent(this, WelcomeActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -87,6 +88,7 @@ class PatientProfileActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -160,7 +162,6 @@ class PatientProfileActivity : AppCompatActivity() {
                                     tv_blood_group.text = mData.bloodgroup
                                     mPreference.setBloodGroup(mData.bloodgroup)
                                 }
-
 
                             }
 
