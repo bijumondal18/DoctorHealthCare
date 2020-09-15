@@ -101,6 +101,10 @@ class PatientProfileActivity : AppCompatActivity() {
                 tv_blood_group.text = data!!.getStringExtra("bloodGroup")
                 tv_gender.text = data!!.getStringExtra("gender")
                 tv_dob.text = data!!.getStringExtra("dob")
+
+                val request = RequestPatientProfileDetails(mPreference.getUserId().toString())
+                fetchProfileDetails(request)
+
             }
         }
 

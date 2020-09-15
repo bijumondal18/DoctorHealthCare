@@ -20,6 +20,8 @@ import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.RequestPatientProfileDetails
+import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePatientProfileDetails
 import com.bijumondal.doctorhealthcare.utils.CaptureImage
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
@@ -91,20 +93,15 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             userId = mPreference.getUserId().toString()
         }
 
+        val requestPatientProfileDetails = RequestPatientProfileDetails(userId)
+        fetchProfileDetails(requestPatientProfileDetails)
+
         if (mPreference.getFirstName() != null) {
             edt_first_name.setText(mPreference.getFirstName())
         }
 
         if (mPreference.getLastName() != null) {
             edt_last_name.setText(mPreference.getLastName())
-        }
-
-        if (mPreference.getEmail() != null) {
-            edt_email.setText(mPreference.getEmail())
-        }
-
-        if (mPreference.getAddress() != null) {
-            edt_address.setText(mPreference.getAddress())
         }
 
         if (mPreference.getNumber() != null) {
@@ -163,6 +160,75 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
     }
 
+
+    private fun fetchProfileDetails(request: RequestPatientProfileDetails) {
+        if (Helper.isConnectedToInternet(this@UpdatePatientProfileActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponsePatientProfileDetails> = APIInterface.create().getPatientProfileDetails(request)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponsePatientProfileDetails> {
+                override fun onResponse(
+                    call: Call<ResponsePatientProfileDetails>,
+                    response: Response<ResponsePatientProfileDetails>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.photo != null) {
+                                    ImageLoader.loadCircleImageFromUrl(imgProfilePic, mData.photo, R.drawable.ic_avatar)
+                                }
+                                if (mData.email != null) {
+                                    edt_email.setText(mData.email)
+                                }
+
+                                if (mData.address != null) {
+                                    edt_address.setText(mData.address)
+                                }
+                                if (mData.birthdate != null) {
+                                    tv_date.text = mData.birthdate
+                                    mPreference.setDOB(mData.birthdate)
+                                }
+
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdatePatientProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdatePatientProfileActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdatePatientProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdatePatientProfileActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@UpdatePatientProfileActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponsePatientProfileDetails>, t: Throwable) {
+                    Helper.toastShort(this@UpdatePatientProfileActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+    }
+
+
     private fun updatePatientProfile(request: RequestCreatePatientProfile) {
         if (Helper.isConnectedToInternet(this@UpdatePatientProfileActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -199,7 +265,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 intent.putExtra("gender", Helper.getGender(gender!!))
                                 intent.putExtra("bloodGroup", bloodGroup)
                                 intent.putExtra("dob", dob)
-                                intent.putExtra("",mPreference.getProfileImage())
+                                intent.putExtra("", mPreference.getProfileImage())
                                 setResult(RESULT_OK, intent)
                                 finish()
 
@@ -265,12 +331,17 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     private fun showDatePicker() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
+        var month = c.get(Calendar.MONTH)
+        var day = c.get(Calendar.DAY_OF_MONTH)
+
+        if (month < 10) {
+            month = 0 + month
+        }
+        if (day < 10) {
+            day = 0 + day
+        }
 
         val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dayOfMonth, monthOfYear, year ->
-
-            // Display Selected date in textbox
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
             dob = "$dayOfMonth-${monthOfYear + 1}-$year"
             tv_date.text = dob
@@ -286,7 +357,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         actionBar!!.title = "Update Profile"
         actionBar.setDisplayHomeAsUpEnabled(true)
     }
-
 
     private fun saveImage(myBitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()

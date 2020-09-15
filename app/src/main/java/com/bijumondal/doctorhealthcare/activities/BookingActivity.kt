@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,14 +21,14 @@ import com.bijumondal.doctorhealthcare.models.bookAppointment.ResponseBookAppoin
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
-import com.bijumondal.doctorhealthcare.utils.ClickListener
-import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
-import com.bijumondal.doctorhealthcare.utils.Helper
+import com.bijumondal.doctorhealthcare.utils.*
 import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.activity_booking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -280,7 +281,7 @@ class BookingActivity : AppCompatActivity() {
             tv_doc_name_booking.text = intent.getStringExtra("doctorName")
         }
         if (intent.hasExtra("doctorPhoto") != null) {
-            // ImageLoader.loadImageFromUrl(iv_doc_image_booking,intent.getStringExtra("doctorPhoto")!!,R.color.colorTransparent)
+             ImageLoader.loadImageFromUrl(iv_doc_image_booking,intent.getStringExtra("doctorPhoto")!!,R.color.colorTransparent)
         }
         if (intent.hasExtra("doctorPhone") != null) {
 
@@ -310,11 +311,10 @@ class BookingActivity : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val date = c.get(Calendar.DAY_OF_WEEK)
 
         val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
-            dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year"
+            dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year "
             edt_booking_date.text = "${dateOfBooking}"
 
         }, day, month, year)

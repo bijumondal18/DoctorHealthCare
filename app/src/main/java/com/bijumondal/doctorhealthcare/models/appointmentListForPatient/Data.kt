@@ -6,6 +6,7 @@ data class Data(
     val photo: String,
     val bloodgroup: String,
     val name: String,
+    val doctor: String,
     val phone: String,
     val sex: String,
     val status: String,

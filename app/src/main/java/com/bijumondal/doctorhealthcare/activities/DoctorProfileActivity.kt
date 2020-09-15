@@ -191,6 +191,10 @@ class DoctorProfileActivity : AppCompatActivity() {
                 tv_doc_dept.text = data.getStringExtra("docDept")
                 tv_doc_profile_visit_amount.text = data!!.getStringExtra("docVisitAmount") + "  (Visit amount)"
                 tv_doc_profile_hospital_name.text = "${data!!.getStringExtra("docHospitalName")}"
+
+                val request = RequestDoctorProfileDetails(mPreference.getUserId().toString())
+                fetchProfileDetails(request)
+
             }
         }
 

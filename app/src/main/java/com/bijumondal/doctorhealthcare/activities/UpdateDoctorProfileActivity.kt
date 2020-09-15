@@ -19,6 +19,8 @@ import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateD
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.doctorPhoto.RequestDoctorPhoto
 import com.bijumondal.doctorhealthcare.models.doctorPhoto.ResponseDoctorPhoto
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.RequestDoctorProfileDetails
+import com.bijumondal.doctorhealthcare.models.doctorProfileDetails.ResponseDoctorProfileDetails
 import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
 import com.bijumondal.doctorhealthcare.utils.CaptureImage
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
@@ -70,6 +72,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         initViews()
         setupToolbar()
 
+
     }
 
     private fun initViews() {
@@ -81,6 +84,9 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             userId = mPreference.getUserId().toString()
         }
 
+        val requestDoctorProfileDetails = RequestDoctorProfileDetails(userId)
+        loadDoctorProfileDetails(requestDoctorProfileDetails)
+
         if (mPreference.getFirstName() != null) {
             edt_first_name_doc.setText(mPreference.getFirstName())
         }
@@ -89,28 +95,8 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             edt_last_name_doc.setText(mPreference.getLastName())
         }
 
-        if (mPreference.getEmail() != null) {
-            edt_email_doc.setText(mPreference.getEmail())
-        }
-
-        if (mPreference.getAddress() != null) {
-            edt_address_doc.setText(mPreference.getAddress())
-        }
-
         if (mPreference.getNumber() != null) {
             edt_phone_number_doc.setText(mPreference.getNumber())
-        }
-
-        if (mPreference.getDoctorDept() != null) {
-            edt_department_doc.text = mPreference.getDoctorDept()
-        }
-
-        if (mPreference.getHospitalName() != null) {
-            edt_hospital_doc.text = mPreference.getHospitalName()
-        }
-
-        if (mPreference.getVisitAmount() != null) {
-            edt_visit_amount_doc.setText(mPreference.getVisitAmount())
         }
 
         imgEditProfilePic.setOnClickListener {
@@ -158,6 +144,76 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadDoctorProfileDetails(request: RequestDoctorProfileDetails) {
+        if (Helper.isConnectedToInternet(this@UpdateDoctorProfileActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this)
+            }
+            val call: Call<ResponseDoctorProfileDetails> = APIInterface.create().getDoctorProfileDetails(request)
+
+            call.enqueue(object : Callback<ResponseDoctorProfileDetails> {
+                override fun onResponse(
+                    call: Call<ResponseDoctorProfileDetails>,
+                    response: Response<ResponseDoctorProfileDetails>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                if (mData.photo != null) {
+                                    ImageLoader.loadCircleImageFromUrl(imgProfilePic, mData.photo, R.drawable.ic_avatar)
+                                }
+                                if (mData.email != null) {
+                                    edt_email_doc.setText(mData.email)
+                                }
+                                if (mData.department != null) {
+                                    edt_department_doc.text = mData.department
+                                }
+                                if (mData.hospitalname != null) {
+                                    edt_hospital_doc.text = mData.hospitalname
+                                }
+                                if (mData.visit_amount != null) {
+                                    edt_visit_amount_doc.setText(mData.visit_amount)
+                                }
+                                if (mData.address != null) {
+                                    edt_address_doc.setText(mData.address)
+                                }
+
+
+                            }
+
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.data.message != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.data.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@UpdateDoctorProfileActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@UpdateDoctorProfileActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDoctorProfileDetails>, t: Throwable) {
+                    Helper.toastShort(this@UpdateDoctorProfileActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+    }
+
     private fun updateDoctorProfile(request: RequestCreateDoctorProfile) {
         if (Helper.isConnectedToInternet(this@UpdateDoctorProfileActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -194,7 +250,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
                                 intent.putExtra("docDept", docDept)
                                 intent.putExtra("docVisitAmount", visitAmount)
                                 intent.putExtra("docHospitalName", hospitalName)
-                                intent.putExtra("",mPreference.getProfileImage())
+                                intent.putExtra("", mPreference.getProfileImage())
                                 setResult(RESULT_OK, intent)
                                 finish()
 
