@@ -28,8 +28,8 @@ class PatientPrescriptionsListAdapter(
         holder.patientName.text = "Prescribed by ${prescriptionsListForPatient[position].doctor}"
         holder.patientSymptom.text = "Symptom - ${prescriptionsListForPatient[position].symptom}"
         holder.medicine.text = prescriptionsListForPatient[position].medicine
-        holder.note.text = "Note : ${prescriptionsListForPatient[position].note}"
-        holder.advice.text = "Doctor's Advice : ${prescriptionsListForPatient[position].advice}"
+        holder.note.text = prescriptionsListForPatient[position].note
+        holder.advice.text = prescriptionsListForPatient[position].advice
 
         if (prescriptionsListForPatient[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForPatient[position].photo, R.drawable.ic_avatar)

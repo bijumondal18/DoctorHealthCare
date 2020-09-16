@@ -27,9 +27,12 @@ import kotlinx.android.synthetic.main.activity_booking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -311,18 +314,17 @@ class BookingActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
-            Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
-            dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year "
-            val date = SimpleDateFormat("dd-MM-yyyy").parse(dateOfBooking)
-            val formatter = SimpleDateFormat("EEEE")
-            val weekDayName = formatter.format(date)
-            edt_booking_date.text = "${dateOfBooking} ($weekDayName)"
+        val dpd = DatePickerDialog(this, { view, mYear, mMonth, mDay ->
+            Helper.showLog(TAG, "$mDay-$mMonth-$mYear")
+            val dateInString = "$mDay-${mMonth + 1}-$mYear"
+            edt_booking_date.text = "${dateInString}"
 
         }, day, month, year)
         dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data
         dpd.show()
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
