@@ -41,12 +41,12 @@
                 android:id="@+id/tv_doctor_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Patient : Biju Mondal"
+                android:text="Appointment with Dr. Biswajit Biswas"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_15" />
 
             <TextView
-                android:id="@+id/tv_hospital_name_and_address_dor_doctor"
+                android:id="@+id/tv_hospital_name_and_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -77,10 +77,10 @@
 
             <TextView
                 android:id="@+id/tv_doctor_booking_date"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_12"
-                android:text="Appointment Date - 08-12-2020 at 07:30 - 09:30"
+                android:text="Appointment Date -  08-12-2020 at 12:30 - 02:30"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_14"
                 android:textStyle="bold"
@@ -90,22 +90,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <Button
-            android:id="@+id/btn_add_prescription"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Add Prescription"
-            android:textAllCaps="false"
-            android:textSize="@dimen/font_14"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

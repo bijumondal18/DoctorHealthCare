@@ -246,7 +246,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/banner_slider_view_pager"
                 android:layout_width="match_parent"

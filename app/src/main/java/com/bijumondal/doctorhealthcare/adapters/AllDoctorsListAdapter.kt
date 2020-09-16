@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.activities.BookingActivity
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.Data
+import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_all_doctors_list.view.*
 
@@ -34,6 +35,10 @@ class AllDoctorsListAdapter(
         holder.doctorAddress.text = allDoctorsList[position].address
         holder.doctorVisitAmount.text = "~ ৳ ${allDoctorsList[position].visit_amount} Consultation fees"
         holder.hospitalNameAndAddress.text = "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}"
+
+        holder.btnVideoConsultant.setOnClickListener {
+            Helper.toastLong(context, "Video calling features coming soon.")
+        }
 
         if (allDoctorsList[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.drawable.ic_avatar)
@@ -82,5 +87,6 @@ class AllDoctorsListAdapter(
         val doctorAddress = view.tv_doc_address_booking
         val doctorVisitAmount = view.tv_visit_amount_booking
         val hospitalNameAndAddress = view.tv_hospital_name_and_address_booking
+        val btnVideoConsultant = view.btn_book_video_consult
     }
 }

@@ -42,8 +42,8 @@ class DoctorPrescriptionsListAdapter(
     }
 
     class DoctorPrescriptionsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val patientImage = view.iv_patient_image
-        val patientName = view.tv_patient_name
+        val patientImage = view.iv_doctor_image
+        val patientName = view.tv_doctor_name
         val patientSymptom = view.tv_patient_symptom
         val medicine = view.tv_medicine
         val advice = view.tv_advice

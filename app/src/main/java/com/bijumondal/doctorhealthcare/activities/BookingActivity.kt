@@ -271,6 +271,7 @@ class BookingActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setupToolbar() {
         setSupportActionBar(toolbar_booking_activity)
         val actionBar = supportActionBar
@@ -281,7 +282,9 @@ class BookingActivity : AppCompatActivity() {
             tv_doc_name_booking.text = intent.getStringExtra("doctorName")
         }
         if (intent.hasExtra("doctorPhoto") != null) {
-             ImageLoader.loadImageFromUrl(iv_doc_image_booking,intent.getStringExtra("doctorPhoto")!!,R.color.colorTransparent)
+            ImageLoader.loadImageFromUrl(iv_doc_image_booking, intent.getStringExtra("doctorPhoto")!!, R.drawable.ic_avatar)
+        }else{
+            iv_doc_image_booking.setImageResource(R.drawable.ic_avatar)
         }
         if (intent.hasExtra("doctorPhone") != null) {
 

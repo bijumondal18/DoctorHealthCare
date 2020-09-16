@@ -10,7 +10,7 @@
     android:background="@drawable/card_background_style">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_patient_image"
+        android:id="@+id/iv_doctor_image"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -26,13 +26,13 @@
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_patient_image"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_doctor_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_patient_image"
-        app:layout_constraintTop_toTopOf="@+id/iv_patient_image">
+        app:layout_constraintStart_toEndOf="@+id/iv_doctor_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_doctor_image">
 
         <TextView
-            android:id="@+id/tv_patient_name"
+            android:id="@+id/tv_doctor_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="patient name"
@@ -57,7 +57,7 @@
         android:background="@color/colorGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_patient_image" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_doctor_image" />
 
     <TextView
         android:id="@+id/tv_medicine"

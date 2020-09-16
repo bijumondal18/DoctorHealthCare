@@ -33,24 +33,16 @@ class DoctorAppointmentsListAdapter(
     }
 
     override fun onBindViewHolder(holder: DoctorAppointmentsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = appointmentsList[position].name
-        holder.patientBloodGroup.text = appointmentsList[position].bloodgroup
-        holder.patientBookingDate.text = "Date\n${appointmentsList[position].add_date}"
-        holder.patientPhoneNumber.text = appointmentsList[position].phone
-        holder.patientBookingStatus.text = appointmentsList[position].status
-        holder.patientGender.text = appointmentsList[position].sex
-        holder.patientBookingTimeSlots.text = "Time\n${appointmentsList[position].time_slot}"
-
         if (appointmentsList[position].photo != null) {
-            ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.color.colorTransparent)
+            ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.drawable.ic_avatar)
         }
+        holder.patientName.text = "Appointment with ${appointmentsList[position].name}"
+        holder.hospitalAddress.text = appointmentsList[position].phone //todo hospital address and name
+
+        holder.patientBookingDate.text = "Appointment Date - ${appointmentsList[position].add_date} at ${appointmentsList[position].time_slot}"
+        //holder.patientBookingStatus.text = appointmentsList[position].status
 
         val patient_id = appointmentsList[position].patient_id
-        if (mPreference.getUserType() == 1) {
-            holder.btnAddPrescriptions.visibility = View.GONE
-        } else if (mPreference.getUserType() == 2) {
-            holder.btnAddPrescriptions.visibility = View.VISIBLE
-        }
 
         holder.btnAddPrescriptions.setOnClickListener {
             context.startActivity(
@@ -59,19 +51,14 @@ class DoctorAppointmentsListAdapter(
             )
         }
 
-        //todo putExtra to send appointed user id to next screen
-
     }
 
     class DoctorAppointmentsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val patientImage = view.iv_patient_image
-        val patientName = view.tv_patient_name
-        val patientBloodGroup = view.tv_patient_blood_group
-        val patientBookingDate = view.tv_patient_booking_date
-        val patientPhoneNumber = view.tv_patient_phone
-        val patientBookingStatus = view.tv_patient_booking_status
-        val patientGender = view.tv_patient_gender
-        val patientBookingTimeSlots = view.tv_patient_booking_time
+        val patientImage = view.iv_doctor_image
+        val patientName = view.tv_doctor_name
+        val patientBookingDate = view.tv_doctor_booking_date
+        val hospitalAddress = view.tv_hospital_name_and_address_dor_doctor
+        //val patientBookingStatus = view.tv_patient_booking_status
         val btnAddPrescriptions = view.btn_add_prescription
 
     }

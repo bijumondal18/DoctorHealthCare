@@ -28,7 +28,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorGray"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -45,18 +45,37 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_doc_image_booking"
+                <RelativeLayout
+                    android:id="@+id/rl_dr_pic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_avatar"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:riv_corner_radius="@dimen/radius_8" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_doc_image_booking"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_avatar"
+                        app:riv_corner_radius="@dimen/radius_8" />
+
+                    <ImageView
+                        android:id="@+id/iv_video_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/iv_doc_image_booking"
+                        android:layout_alignBottom="@+id/iv_doc_image_booking"
+                        android:background="@drawable/thumb_orange_small"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_videocall"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -65,10 +84,10 @@
                     android:layout_marginEnd="8dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_doc_image_booking"
+                    app:layout_constraintBottom_toBottomOf="@+id/rl_dr_pic"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_doc_image_booking"
-                    app:layout_constraintTop_toTopOf="@+id/iv_doc_image_booking">
+                    app:layout_constraintStart_toEndOf="@+id/rl_dr_pic"
+                    app:layout_constraintTop_toTopOf="@+id/rl_dr_pic">
 
                     <TextView
                         android:id="@+id/tv_doc_name_booking"
@@ -119,7 +138,7 @@
                     android:background="@color/colorGray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_doc_image_booking" />
+                    app:layout_constraintTop_toBottomOf="@+id/rl_dr_pic" />
 
 
                 <TextView
@@ -315,7 +334,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/material_button_height"
                     android:layout_margin="@dimen/margin_16"
-                    android:text="Confirm &amp; Pay"
+                    android:text="Confirm Appointment"
                     android:textAllCaps="false"
                     android:textSize="@dimen/font_14" />
 

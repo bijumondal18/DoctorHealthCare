@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
-import com.bijumondal.doctorhealthcare.models.appointmentsListForDoctor.Data
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
+import kotlinx.android.synthetic.main.item_appointment_list_for_patient.view.*
 import kotlinx.android.synthetic.main.item_appointments_list_for_doctor.view.*
+import kotlinx.android.synthetic.main.item_appointments_list_for_doctor.view.iv_doctor_image
+import kotlinx.android.synthetic.main.item_appointments_list_for_doctor.view.tv_doctor_booking_date
+import kotlinx.android.synthetic.main.item_appointments_list_for_doctor.view.tv_doctor_name
 
 class PatientAppointmentsListAdapter(
     private val appointmentsList: ArrayList<com.bijumondal.doctorhealthcare.models.appointmentListForPatient.Data>,
@@ -20,7 +23,7 @@ class PatientAppointmentsListAdapter(
     private lateinit var mPreference: HealthCarePreference
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientAppointmentsListAdapterViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_appointments_list_for_doctor, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_appointment_list_for_patient, parent, false)
         mPreference = HealthCarePreference(context!!)
 
         return PatientAppointmentsListAdapterViewHolder(view)
@@ -31,36 +34,25 @@ class PatientAppointmentsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientAppointmentsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = appointmentsList[position].doctor
-        holder.patientBloodGroup.text = appointmentsList[position].bloodgroup
-        holder.patientBookingDate.text = "Date\n${appointmentsList[position].add_date}"
-        holder.patientPhoneNumber.text = appointmentsList[position].phone
-        holder.patientBookingStatus.text = appointmentsList[position].status
-        holder.patientGender.text = appointmentsList[position].sex
-        holder.patientBookingTimeSlots.text = "Time\n${appointmentsList[position].time_slot}"
+        holder.patientName.text = "Appointment with ${appointmentsList[position].doctor}"
+        holder.hospitalDetails.text = appointmentsList[position].phone //todo hospital details
+        holder.patientBookingDate.text = "Appointment Date - ${appointmentsList[position].add_date} at ${appointmentsList[position].time_slot}"
+
+        //holder.patientBookingStatus.text = appointmentsList[position].status
 
         if (appointmentsList[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, appointmentsList[position].photo, R.drawable.ic_avatar)
         }
 
-        if (mPreference.getUserType() == 1) {
-            holder.btnAddPrescriptions.visibility = View.GONE
-        } else if (mPreference.getUserType() == 2) {
-            holder.btnAddPrescriptions.visibility = View.VISIBLE
-        }
-
-
     }
 
     class PatientAppointmentsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val patientImage = view.iv_patient_image
-        val patientName = view.tv_patient_name
-        val patientBloodGroup = view.tv_patient_blood_group
-        val patientBookingDate = view.tv_patient_booking_date
-        val patientPhoneNumber = view.tv_patient_phone
-        val patientBookingStatus = view.tv_patient_booking_status
-        val patientGender = view.tv_patient_gender
-        val patientBookingTimeSlots = view.tv_patient_booking_time
-        val btnAddPrescriptions = view.btn_add_prescription
+        val patientImage = view.iv_doctor_image
+        val patientName = view.tv_doctor_name
+        val patientBookingDate = view.tv_doctor_booking_date
+        val hospitalDetails = view.tv_hospital_name_and_address
+       // val patientBookingStatus = view.tv_patient_booking_status
+
     }
+
 }

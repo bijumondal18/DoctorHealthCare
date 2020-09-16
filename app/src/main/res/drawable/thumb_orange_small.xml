@@ -1,0 +1,45 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The bottom layer is blue square.-->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorTransparent" />
+            <size
+                android:width="30dp"
+                android:height="30dp" />
+        </shape>
+    </item>
+    <!-- <item android:left="1dp"
+           android:top="1dp"
+           android:right="1dp"
+           android:bottom="1dp">
+         <shape android:shape="oval">
+             <solid android:color="@color/gozoBlue" />
+         </shape>
+     </item>-->
+    <!-- The middle layer is green circle.-->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/colorOrange" />
+        </shape>
+    </item>
+
+    <!-- The top layer is red ring.-->
+    <!--
+        <item
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp">
+            <shape
+                    android:shape="oval"
+                    android:useLevel="false">
+                <solid android:color="@color/gozoOrange" />
+            </shape>
+        </item>
+    -->
+
+</layer-list>

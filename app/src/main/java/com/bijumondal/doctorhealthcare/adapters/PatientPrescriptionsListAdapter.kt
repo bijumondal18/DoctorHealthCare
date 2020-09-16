@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
-import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.Data
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_prescription_list_for_doctor.view.*
 
@@ -40,8 +39,8 @@ class PatientPrescriptionsListAdapter(
     }
 
     class PatientPrescriptionsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val patientImage = view.iv_patient_image
-        val patientName = view.tv_patient_name
+        val patientImage = view.iv_doctor_image
+        val patientName = view.tv_doctor_name
         val patientSymptom = view.tv_patient_symptom
         val medicine = view.tv_medicine
         val advice = view.tv_advice
