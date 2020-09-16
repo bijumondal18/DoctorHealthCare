@@ -64,7 +64,7 @@
     <dimen name="card_corner_radius">6dp</dimen>
 
     <dimen name="radius_4">4dp</dimen>
-    <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_8">4dp</dimen>
     <dimen name="radius_12">12dp</dimen>
     <dimen name="radius_16">16dp</dimen>
     <dimen name="radius_24">24dp</dimen>

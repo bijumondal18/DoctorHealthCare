@@ -49,16 +49,41 @@
             <EditText
                 android:id="@+id/edt_medicine_name"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
-                android:hint="Medicine name"
-                android:inputType="text"
+                android:gravity="top|left"
+                android:hint="Add all medicines here"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="10"
+                android:minLines="5"
                 android:paddingLeft="@dimen/padding_12"
+                android:paddingTop="@dimen/padding_8"
+                android:scrollbars="vertical"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_medicine"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/margin_16"
+                android:text="Add all medicines"
+                android:textAllCaps="false"
+                android:textSize="@dimen/font_14" />
+
+
+            <TextView
+                android:id="@+id/tv_medicine_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,27 +143,36 @@
             <EditText
                 android:id="@+id/edt_note"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
+                android:gravity="top|left"
                 android:hint="Note..."
-                android:inputType="text"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:maxLines="5"
+                android:minLines="5"
                 android:paddingLeft="@dimen/padding_12"
+                android:paddingTop="@dimen/padding_8"
+                android:scrollbars="vertical"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_medicine"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_save_prescription"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/material_button_height"
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/margin_16"
-                android:text="Add medicine"
+                android:lines="5"
+                android:maxLines="20"
+                android:minLines="5"
+                android:scrollbars="vertical"
+                android:text="Save Prescription"
                 android:textAllCaps="false"
                 android:textSize="@dimen/font_14" />
-
 
         </LinearLayout>
 

@@ -17,7 +17,6 @@
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground">
 
-
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_dept_icon"
             android:layout_width="80dp"

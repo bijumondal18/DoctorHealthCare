@@ -15,7 +15,6 @@ class PatientPrescriptionsListAdapter(
 ) :
     RecyclerView.Adapter<PatientPrescriptionsListAdapter.PatientPrescriptionsListAdapterViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientPrescriptionsListAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_prescription_list_for_doctor, parent, false)
         return PatientPrescriptionsListAdapterViewHolder(view)
@@ -26,11 +25,11 @@ class PatientPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientPrescriptionsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = prescriptionsListForPatient[position].doctor
-        holder.patientSymptom.text = prescriptionsListForPatient[position].symptom
+        holder.patientName.text = "Prescribed by ${prescriptionsListForPatient[position].doctor}"
+        holder.patientSymptom.text = "Symptom - ${prescriptionsListForPatient[position].symptom}"
         holder.medicine.text = prescriptionsListForPatient[position].medicine
-        holder.note.text = prescriptionsListForPatient[position].note
-        holder.advice.text = prescriptionsListForPatient[position].advice
+        holder.note.text = "Note : ${prescriptionsListForPatient[position].note}"
+        holder.advice.text = "Doctor's Advice : ${prescriptionsListForPatient[position].advice}"
 
         if (prescriptionsListForPatient[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForPatient[position].photo, R.drawable.ic_avatar)
@@ -45,6 +44,6 @@ class PatientPrescriptionsListAdapter(
         val medicine = view.tv_medicine
         val advice = view.tv_advice
         val note = view.tv_note
-
     }
+
 }

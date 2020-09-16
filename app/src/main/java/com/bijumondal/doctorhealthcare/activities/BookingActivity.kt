@@ -2,6 +2,7 @@ package com.bijumondal.doctorhealthcare.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.ParseException
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -22,13 +23,10 @@ import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.utils.*
-import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
-import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.activity_booking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -49,6 +47,7 @@ class BookingActivity : AppCompatActivity() {
 
     var dateOfBooking: String = ""
     var doctorId = ""
+    var hospitalId = ""
     var patientId = ""
     var name: String = ""
     var phone: String = ""
@@ -58,7 +57,6 @@ class BookingActivity : AppCompatActivity() {
     var appointmentForName: String = ""
 
     var isSelected: Boolean = false
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +69,7 @@ class BookingActivity : AppCompatActivity() {
         if (intent.hasExtra("doctorId") != null) {
             doctorId = intent.getStringExtra("doctorId").toString()
         }
+
 
         val currentDate = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -90,10 +89,6 @@ class BookingActivity : AppCompatActivity() {
 
         if (mPreference.getBloodGroup() != null) {
             bloodGroup = mPreference.getBloodGroup().toString()
-        }
-
-        if (intent.hasExtra("doctorId") != null) {
-            doctorId = intent.getStringExtra("doctorId").toString()
         }
 
         if (mPreference.getGender() != null) {
@@ -126,7 +121,7 @@ class BookingActivity : AppCompatActivity() {
                     if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
                         if (!TextUtils.isEmpty(appointmentForName)) {
 
-                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot)
+                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot,hospitalId)
                             bookAppointment(request)
 
                         } else {
@@ -283,11 +278,12 @@ class BookingActivity : AppCompatActivity() {
         }
         if (intent.hasExtra("doctorPhoto") != null) {
             ImageLoader.loadImageFromUrl(iv_doc_image_booking, intent.getStringExtra("doctorPhoto")!!, R.drawable.ic_avatar)
-        }else{
+        } else {
             iv_doc_image_booking.setImageResource(R.drawable.ic_avatar)
         }
-        if (intent.hasExtra("doctorPhone") != null) {
 
+        if (intent.hasExtra("hospitalId") != null) {
+            hospitalId = "${intent.getStringExtra("hospitalId")}"
         }
         if (intent.hasExtra("doctorAddress") != null) {
             tv_doc_address_booking.text = intent.getStringExtra("doctorAddress")
@@ -300,7 +296,7 @@ class BookingActivity : AppCompatActivity() {
         }
         if (intent.hasExtra("doctorVisitAmount") != null) {
             tv_visit_amount_booking.text = "Consultation fees - ${intent.getStringExtra("doctorVisitAmount")}"
-            btn_confirm_and_pay.text = "Confirm & Pay ${intent.getStringExtra("doctorVisitAmount")}"
+            btn_confirm_and_pay.text = "Confirm Appointment ${intent.getStringExtra("doctorVisitAmount")}" //todo "confirm & pay" ->
         }
         if (intent.hasExtra("hospitalNameAndAddress") != null) {
             tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
@@ -318,7 +314,10 @@ class BookingActivity : AppCompatActivity() {
         val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
             dateOfBooking = "$dayOfMonth-${monthOfYear + 1}-$year "
-            edt_booking_date.text = "${dateOfBooking}"
+            val date = SimpleDateFormat("dd-MM-yyyy").parse(dateOfBooking)
+            val formatter = SimpleDateFormat("EEEE")
+            val weekDayName = formatter.format(date)
+            edt_booking_date.text = "${dateOfBooking} ($weekDayName)"
 
         }, day, month, year)
         dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data

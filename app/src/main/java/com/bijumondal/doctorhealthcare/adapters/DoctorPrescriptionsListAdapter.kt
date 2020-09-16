@@ -27,12 +27,11 @@ class DoctorPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: DoctorPrescriptionsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = prescriptionsListForDoctor[position].name
-        holder.patientSymptom.text = prescriptionsListForDoctor[position].symptom
+        holder.patientName.text = "You prescribed for ${prescriptionsListForDoctor[position].name}"
+        holder.patientSymptom.text = "Symptom - ${prescriptionsListForDoctor[position].symptom}"
         holder.medicine.text = prescriptionsListForDoctor[position].medicine
         holder.note.text = prescriptionsListForDoctor[position].note
         holder.advice.text = prescriptionsListForDoctor[position].advice
-
 
         if (prescriptionsListForDoctor[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForDoctor[position].photo, R.drawable.ic_avatar)

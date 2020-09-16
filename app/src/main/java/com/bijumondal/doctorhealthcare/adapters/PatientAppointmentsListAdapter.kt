@@ -35,7 +35,7 @@ class PatientAppointmentsListAdapter(
 
     override fun onBindViewHolder(holder: PatientAppointmentsListAdapterViewHolder, position: Int) {
         holder.patientName.text = "Appointment with ${appointmentsList[position].doctor}"
-        holder.hospitalDetails.text = appointmentsList[position].phone //todo hospital details
+        holder.hospitalDetails.text = "${appointmentsList[position].hospital_name} \u2022 ${appointmentsList[position].hospital_address}"
         holder.patientBookingDate.text = "Appointment Date - ${appointmentsList[position].add_date} at ${appointmentsList[position].time_slot}"
 
         //holder.patientBookingStatus.text = appointmentsList[position].status
@@ -51,7 +51,7 @@ class PatientAppointmentsListAdapter(
         val patientName = view.tv_doctor_name
         val patientBookingDate = view.tv_doctor_booking_date
         val hospitalDetails = view.tv_hospital_name_and_address
-       // val patientBookingStatus = view.tv_patient_booking_status
+        // val patientBookingStatus = view.tv_patient_booking_status
 
     }
 

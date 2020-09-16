@@ -9,7 +9,7 @@ data class Data(
     val photo: String,
     val profile: String,
     val message: String,
-    val hospital_id: Int,
+    val hospital_id: String,
     val hospitalname: String,
     val visit_amount: String,
     val hospitaladdress: String,

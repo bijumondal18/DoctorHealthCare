@@ -1,5 +1,6 @@
 package com.bijumondal.doctorhealthcare.activities
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_add_prescriptions.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.StringBuilder
 
 class AddPrescriptionsActivity : AppCompatActivity() {
 
@@ -27,6 +29,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     private lateinit var mPreference: HealthCarePreference
 
     private var medicineName: String = ""
+    private var medName: String = ""
     private var symptom: String = ""
     private var advice: String = ""
     private var note: String = ""
@@ -46,7 +49,16 @@ class AddPrescriptionsActivity : AppCompatActivity() {
 
         validateFields()
 
+
         btn_add_medicine.setOnClickListener {
+            if (!TextUtils.isEmpty(medicineName)) {
+                medName = medicineName
+                tv_medicine_list.text = medName
+            }
+
+        }
+
+        btn_save_prescription.setOnClickListener {
             doAddMedicineValidation()
         }
 
@@ -61,7 +73,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             !TextUtils.isEmpty(note)
         ) {
 
-            val request = RequestAddPrescriptions(advice, mPreference.getUserId().toString(), medicineName, note, patientId, symptom)
+            val request = RequestAddPrescriptions(advice, mPreference.getUserId().toString(), medName, note, patientId, symptom)
             addPrescriptions(request)
 
         } else {
@@ -89,6 +101,8 @@ class AddPrescriptionsActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
+                                startActivity(Intent(this@AddPrescriptionsActivity, MyPrescriptionsActivity::class.java))
+                                finish()
                                 //Helper.toastShort(this@AddPrescriptionsActivity, mData.message)
 
                             }
