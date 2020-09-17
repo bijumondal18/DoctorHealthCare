@@ -89,7 +89,7 @@ class BookingActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
         mRecyclerView.layoutManager = layoutManager
-        val request = RequestDoctorTimeSlotsList(doctorId, "")
+        val request = RequestDoctorTimeSlotsList(doctorId, dayOfWeek)
         fetchTimeSlots(request)
 
         if (mPreference.getBloodGroup() != null) {
@@ -224,6 +224,9 @@ class BookingActivity : AppCompatActivity() {
                                 mRecyclerView.adapter = timeSlotsListAdapter
                                 timeSlotsListAdapter.notifyDataSetChanged()
 
+                                tv_no_time_slots.visibility = View.GONE
+                                mRecyclerView.visibility = View.VISIBLE
+
                                 mRecyclerView.addOnItemTouchListener(RecyclerTouchListener(this@BookingActivity, mRecyclerView, object : ClickListener {
                                     override fun onClick(view: View?, position: Int) {
                                         timeslot = "${timeSlotsList[position].starttime} - ${timeSlotsList[position].endtime}"
@@ -326,8 +329,11 @@ class BookingActivity : AppCompatActivity() {
             dateOfBooking = "${dateInString} ($dayOfWeek)"
             edt_booking_date.text = dateOfBooking
 
+            val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
+            mRecyclerView.layoutManager = layoutManager
             val request = RequestDoctorTimeSlotsList(doctorId, dayOfWeek)
             fetchTimeSlots(request)
+
 
         }, day, month, year)
         dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data
