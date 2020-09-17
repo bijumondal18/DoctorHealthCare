@@ -49,6 +49,7 @@ class BookingActivity : AppCompatActivity() {
     private var timeSlotsList: ArrayList<Data> = ArrayList()
 
     var dateOfBooking: String = ""
+    var dateInString: String = ""
     var doctorId = ""
     var hospitalId = ""
     var patientId = ""
@@ -127,7 +128,7 @@ class BookingActivity : AppCompatActivity() {
                     if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
                         if (!TextUtils.isEmpty(appointmentForName)) {
 
-                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId)
+                            val request = RequestBookAppointment("", dateInString, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId)
                             bookAppointment(request)
 
                         } else {
@@ -323,14 +324,12 @@ class BookingActivity : AppCompatActivity() {
 
         val dpd = DatePickerDialog(this, { view, mYear, mMonth, mDay ->
             Helper.showLog(TAG, "$mDay-$mMonth-$mYear")
-            val dateInString = "$mDay-${mMonth + 1}-$mYear"
+            dateInString = "$mDay-${mMonth + 1}-$mYear"
             val date: Date = dateFormat.parse(dateInString)
             dayOfWeek = SimpleDateFormat("EEEE", Locale.ENGLISH).format(date)
             dateOfBooking = "${dateInString} ($dayOfWeek)"
             edt_booking_date.text = dateOfBooking
 
-            val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
-            mRecyclerView.layoutManager = layoutManager
             val request = RequestDoctorTimeSlotsList(doctorId, dayOfWeek)
             fetchTimeSlots(request)
 
