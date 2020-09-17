@@ -59,6 +59,8 @@ class BookingActivity : AppCompatActivity() {
     var timeslot: String = ""
     var appointmentForName: String = ""
 
+    var dayOfWeek = ""
+
     var isSelected: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -87,7 +89,7 @@ class BookingActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this@BookingActivity, LinearLayoutManager.HORIZONTAL, false)
         mRecyclerView.layoutManager = layoutManager
-        val request = RequestDoctorTimeSlotsList(doctorId)
+        val request = RequestDoctorTimeSlotsList(doctorId, "")
         fetchTimeSlots(request)
 
         if (mPreference.getBloodGroup() != null) {
@@ -118,13 +120,14 @@ class BookingActivity : AppCompatActivity() {
 
         })
 
+
         btn_confirm_and_pay.setOnClickListener {
             if (dateOfBooking != null && !TextUtils.isEmpty(dateOfBooking)) {
                 if (gender != null && bloodGroup != null) {
                     if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
                         if (!TextUtils.isEmpty(appointmentForName)) {
 
-                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot,hospitalId)
+                            val request = RequestBookAppointment("", dateOfBooking, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId)
                             bookAppointment(request)
 
                         } else {
@@ -313,17 +316,23 @@ class BookingActivity : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
 
         val dpd = DatePickerDialog(this, { view, mYear, mMonth, mDay ->
             Helper.showLog(TAG, "$mDay-$mMonth-$mYear")
             val dateInString = "$mDay-${mMonth + 1}-$mYear"
-            edt_booking_date.text = "${dateInString}"
+            val date: Date = dateFormat.parse(dateInString)
+            dayOfWeek = SimpleDateFormat("EEEE", Locale.ENGLISH).format(date)
+            dateOfBooking = "${dateInString} ($dayOfWeek)"
+            edt_booking_date.text = dateOfBooking
+
+            val request = RequestDoctorTimeSlotsList(doctorId, dayOfWeek)
+            fetchTimeSlots(request)
 
         }, day, month, year)
         dpd.datePicker.minDate = System.currentTimeMillis() - 1000 // chose only after date from current data
         dpd.show()
     }
-
 
 
     override fun onSupportNavigateUp(): Boolean {

@@ -75,7 +75,10 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         initViews()
         setupToolbar()
 
-        setupDateOfBirth()
+        ll_date_picker.setOnClickListener {
+            showDatePicker()
+        }
+
         setupBloodGroupSpinner()
 
         btn_update_profile.setOnClickListener {
@@ -151,7 +154,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreatePatientProfile(address, photo, "", bloodGroup, dob, email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
+            val request = RequestCreatePatientProfile(address, photo, "", bloodGroup, mPreference.getDOB().toString(), email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
             updatePatientProfile(request)
 
         } else {
@@ -302,11 +305,6 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun setupDateOfBirth() {
-        ll_date_picker.setOnClickListener {
-            showDatePicker()
-        }
-    }
 
     private fun setupBloodGroupSpinner() {
         spinnerBloodGroup = findViewById<Spinner>(R.id.spinner_blood_group)
@@ -331,19 +329,13 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     private fun showDatePicker() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
-        var month = c.get(Calendar.MONTH)
-        var day = c.get(Calendar.DAY_OF_MONTH)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
 
-        if (month < 10) {
-            month = 0 + month
-        }
-        if (day < 10) {
-            day = 0 + day
-        }
-
-        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dayOfMonth, monthOfYear, year ->
+        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
             dob = "$dayOfMonth-${monthOfYear + 1}-$year"
+            mPreference.setDOB(dob)
             tv_date.text = dob
 
         }, day, month, year)

@@ -83,7 +83,7 @@ class SetTimingsActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this@SetTimingsActivity, LinearLayoutManager.VERTICAL, false)
         mRecyclerView.layoutManager = layoutManager
 
-        val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString())
+        val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString(), "")
         fetchTimeSlotsList(requestTimeslotsList)
 
 
@@ -214,7 +214,7 @@ class SetTimingsActivity : AppCompatActivity() {
                             val mData = response.body()!!.data
                             if (mData != null) {
 
-                                val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString())
+                                val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString(), "")
                                 fetchTimeSlotsList(requestTimeslotsList)
 
                                 //Helper.toastShort(this@SetTimingsActivity, mData.message)
