@@ -14,17 +14,17 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
+        <activity android:name=".activities.MedicineListActivity"></activity>
         <activity android:name=".activities.AddPrescriptionsActivity" />
         <activity
             android:name=".activities.RegistrationActivity"
@@ -46,7 +46,6 @@
         <activity
             android:name=".activities.WelcomeActivity"
             android:theme="@style/FullScreenTheme" />
-
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

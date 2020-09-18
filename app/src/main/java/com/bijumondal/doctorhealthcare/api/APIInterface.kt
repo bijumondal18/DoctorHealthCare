@@ -40,6 +40,7 @@ import com.bijumondal.doctorhealthcare.models.doctorRegistration.ResponseDoctorR
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.hospitalList.ResponseHospitalList
+import com.bijumondal.doctorhealthcare.models.medicineList.ResponseMedicineList
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
 import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
@@ -163,6 +164,9 @@ interface APIInterface {
     @Multipart
     @POST(Constants.DOCTOR_PHOTO_URL)
     fun getDoctorProfilePhoto(@Part file: MultipartBody.Part, @Part("name") name: RequestBody): Call<ResponseDoctorPhoto>
+
+    @GET(Constants.MEDICINE_LIST_URL)
+    fun getMedicineList(): Call<ResponseMedicineList>
 
 
     /*

@@ -141,6 +141,36 @@ class Helper {
             return bloodGroup!!
         }
 
+        fun frequencyList(type: Int): String {
+            var frequency: String? = null
+            when (type) {
+                1 -> frequency = "Morning only"
+                2 -> frequency = "Morning + Day"
+                3 -> frequency = "Morning + Day + Night"
+                4 -> frequency = "Morning + Night"
+                5 -> frequency = "Day only"
+                6 -> frequency = "Day + Night"
+                7 -> frequency = "Night only"
+            }
+            return frequency!!
+        }
+
+
+        fun durationList(type: Int): String {
+            var duration: String? = null
+            when (type) {
+                1 -> duration = "1 Day"
+                2 -> duration = "2 Days"
+                3 -> duration = "3 Days"
+                4 -> duration = "5 Days"
+                5 -> duration = "7 Days"
+                6 -> duration = "10 Days"
+                7 -> duration = "15 Days"
+                8 -> duration = "30 Days"
+            }
+            return duration!!
+        }
+
         fun weekDays(type: Int): String {
             var weekDays: String? = null
             when (type) {

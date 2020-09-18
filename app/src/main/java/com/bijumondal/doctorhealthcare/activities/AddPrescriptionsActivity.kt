@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.RequestAddPrescriptions
@@ -24,9 +28,38 @@ class AddPrescriptionsActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG: String = "AddPrescriptionsActivity"
+        private const val REQUEST_CODE = 342
+
     }
 
     private lateinit var mPreference: HealthCarePreference
+
+    private lateinit var spinnerFrequency: Spinner
+    var frequencyList = arrayOf(
+        "Morning only",
+        "Morning + Day",
+        "Morning + Day + Night",
+        "Morning + Night",
+        "Day only",
+        "Day + Night",
+        "Night only"
+    )
+    var selectedfrequency: Int? = null
+    var frequency = ""
+
+    private lateinit var spinnerDuration: Spinner
+    var durationList = arrayOf(
+        "1 Day",
+        "2 Days",
+        "3 Days",
+        "5 Days",
+        "7 Days",
+        "10 Days",
+        "15 Days",
+        "30 Days"
+    )
+    var selectedDuration: Int? = null
+    var duration = ""
 
     private var medicineName: String = ""
     private var medName: String = ""
@@ -47,13 +80,21 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             patientId = intent.getStringExtra("patientId").toString()
         }
 
+        tv_choose_medicine_name.setOnClickListener {
+            startActivityForResult(Intent(this@AddPrescriptionsActivity, MedicineListActivity::class.java), REQUEST_CODE)
+        }
+
+        setupFrequencySpinner()
+
+        setupDurationSpinner()
+
+
         validateFields()
 
 
         btn_add_medicine.setOnClickListener {
             if (!TextUtils.isEmpty(medicineName)) {
                 medName = medicineName
-                tv_medicine_list.text = medName
             }
 
         }
@@ -62,6 +103,47 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             doAddMedicineValidation()
         }
 
+
+    }
+
+    private fun setupDurationSpinner() {
+        spinnerDuration = findViewById<Spinner>(R.id.spinner_duration)
+        val durationListAdapter = ArrayAdapter(this@AddPrescriptionsActivity, R.layout.support_simple_spinner_dropdown_item, durationList)
+        durationListAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        spinnerDuration.adapter = durationListAdapter
+
+        spinnerDuration.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedDuration = spinnerDuration.selectedItemPosition + 1.toString().toInt()
+                Helper.durationList(selectedDuration!!)
+                duration = Helper.durationList(selectedDuration!!) // bloodGroup will pass on request parameters
+            }
+
+        }
+    }
+
+    private fun setupFrequencySpinner() {
+        spinnerFrequency = findViewById<Spinner>(R.id.spinner_frequency)
+        val frequencyListAdapter = ArrayAdapter(this@AddPrescriptionsActivity, R.layout.support_simple_spinner_dropdown_item, frequencyList)
+        frequencyListAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        spinnerFrequency.adapter = frequencyListAdapter
+
+        spinnerFrequency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedfrequency = spinnerFrequency.selectedItemPosition + 1.toString().toInt()
+                Helper.frequencyList(selectedfrequency!!)
+                frequency = Helper.frequencyList(selectedfrequency!!) // bloodGroup will pass on request parameters
+            }
+
+        }
 
     }
 
@@ -81,6 +163,19 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         }
 
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                medicineName = data!!.getStringExtra("medicineGenericName")!!
+                tv_choose_medicine_name.text = medicineName
+            }
+        }
+
+    }
+
 
     private fun addPrescriptions(request: RequestAddPrescriptions) {
         if (Helper.isConnectedToInternet(this@AddPrescriptionsActivity)) {
@@ -138,19 +233,6 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     }
 
     private fun validateFields() {
-
-        edt_medicine_name.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                medicineName = edt_medicine_name.text.trim().toString()
-            }
-
-        })
 
         edt_symptom.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
