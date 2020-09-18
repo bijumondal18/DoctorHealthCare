@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AppointmentDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:elevation="@dimen/elevation_0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_appointment_details_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarWhiteBackArrow"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+            app:titleTextAppearance="@style/ToolbarTitleAppearance"
+            app:titleTextColor="@color/colorWhite" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_doctor_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="@dimen/margin_12"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_avatar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/radius_8" />
+
+                <TextView
+                    android:id="@+id/tv_doctor_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="doctor name"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_doctor_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_doctor_image"
+                    app:layout_constraintTop_toTopOf="@+id/iv_doctor_image" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_12"
+                android:background="@color/colorGray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="Date &amp; Time : "
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/tv_appointment_date_and_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_12"
+                android:text="26-09-2020, 12:30pm"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_12"
+                android:background="@color/colorGray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="Hospital details :"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/tv_appointment_hospital_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_12"
+                android:text="LEED HMS"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:id="@+id/tv_appointment_hospital_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="Dhaka"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/tv_appointment_hospital_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:layout_marginTop="@dimen/margin_4"
+                android:text="+0185478547547"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_14" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_12"
+                android:background="@color/colorGray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="Procedure : "
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/tv_appointment_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_12"
+                android:text="Consultation"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_12"
+                android:background="@color/colorGray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_12"
+                android:text="Appointment for : "
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:id="@+id/tv_appointment_for_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_prescription"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_button_height"
+                android:layout_margin="@dimen/margin_12"
+                android:text="Add Prescription"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_14"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

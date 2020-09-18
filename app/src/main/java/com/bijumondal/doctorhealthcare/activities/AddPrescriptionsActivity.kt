@@ -46,7 +46,6 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     )
     var selectedfrequency: Int? = null
     var frequency = ""
-
     private lateinit var spinnerDuration: Spinner
     var durationList = arrayOf(
         "1 Day",
@@ -60,6 +59,14 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     )
     var selectedDuration: Int? = null
     var duration = ""
+
+    private lateinit var spinnerInstruction: Spinner
+    var instructionList = arrayOf(
+        "Before food",
+        "After food"
+    )
+    var selectedInstruction: Int? = null
+    var instruction = ""
 
     private var medicineName: String = ""
     private var medName: String = ""
@@ -88,6 +95,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
 
         setupDurationSpinner()
 
+        setupInstructionSpinner()
 
         validateFields()
 
@@ -104,6 +112,26 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun setupInstructionSpinner() {
+        spinnerInstruction = findViewById<Spinner>(R.id.spinner_instruction)
+        val instructionListAdapter = ArrayAdapter(this@AddPrescriptionsActivity, R.layout.support_simple_spinner_dropdown_item, instructionList)
+        instructionListAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        spinnerInstruction.adapter = instructionListAdapter
+
+        spinnerInstruction.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedInstruction = spinnerInstruction.selectedItemPosition + 1.toString().toInt()
+                Helper.instructionsList(selectedInstruction!!)
+                instruction = Helper.instructionsList(selectedInstruction!!) // bloodGroup will pass on request parameters
+            }
+
+        }
     }
 
     private fun setupDurationSpinner() {

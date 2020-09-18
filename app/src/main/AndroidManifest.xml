@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
-        <activity android:name=".activities.MedicineListActivity"></activity>
+        <activity android:name=".activities.AppointmentDetailsActivity"></activity>
+        <activity android:name=".activities.MedicineListActivity" />
         <activity android:name=".activities.AddPrescriptionsActivity" />
         <activity
             android:name=".activities.RegistrationActivity"

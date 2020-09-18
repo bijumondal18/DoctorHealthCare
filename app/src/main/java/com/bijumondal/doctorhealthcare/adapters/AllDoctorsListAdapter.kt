@@ -2,6 +2,7 @@ package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
 import com.bijumondal.doctorhealthcare.activities.BookingActivity
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.Data
+import com.bijumondal.doctorhealthcare.utils.CacheImageManager
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_all_doctors_list.view.*
+import java.lang.Exception
 
 class AllDoctorsListAdapter(
     private val allDoctorsList: ArrayList<Data>,

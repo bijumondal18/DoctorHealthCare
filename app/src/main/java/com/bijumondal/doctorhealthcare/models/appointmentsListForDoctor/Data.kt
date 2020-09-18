@@ -10,5 +10,8 @@ data class Data(
     val phone: String,
     val sex: String,
     val status: String,
+    val hospital_name: String,
+    val hospital_address: String,
+    val hospital_phone: String,
     val time_slot: String
 )

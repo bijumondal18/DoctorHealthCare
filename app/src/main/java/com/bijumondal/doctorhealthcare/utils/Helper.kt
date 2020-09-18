@@ -171,6 +171,16 @@ class Helper {
             return duration!!
         }
 
+        fun instructionsList(type: Int): String {
+            var instruction: String? = null
+            when (type) {
+                1 -> instruction = "Before food"
+                2 -> instruction = "After food"
+
+            }
+            return instruction!!
+        }
+
         fun weekDays(type: Int): String {
             var weekDays: String? = null
             when (type) {

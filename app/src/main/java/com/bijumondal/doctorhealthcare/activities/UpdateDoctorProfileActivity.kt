@@ -288,7 +288,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
 
     private fun saveImage(myBitmap: Bitmap): String {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
         val wallpaperDirectory = File(
             (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)).toString() + Constants.LOCAL_IMAGE_DIRECTORY
         )

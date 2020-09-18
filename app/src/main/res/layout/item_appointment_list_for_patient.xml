@@ -2,8 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_parent_appointment_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/colorGray"
     app:cardElevation="@dimen/elevation_0dp">
 
@@ -50,8 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textSize="@dimen/font_12"
-                android:text="Hospital - LEED HMS \u2022 Dhaka" />
+                android:text="Hospital - LEED HMS \u2022 Dhaka"
+                android:textSize="@dimen/font_12" />
 
         </LinearLayout>
 
@@ -80,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_12"
-                android:text="Appointment Date -  08-12-2020 at 12:30 - 02:30"
+                android:text="08-12-2020 at 12:30 - 02:30"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_14"
                 android:textStyle="bold"

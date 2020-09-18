@@ -76,7 +76,6 @@ class BookingActivity : AppCompatActivity() {
             doctorId = intent.getStringExtra("doctorId").toString()
         }
 
-
         val currentDate = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val formatted = currentDate.format(formatter)
@@ -104,7 +103,6 @@ class BookingActivity : AppCompatActivity() {
         if (mPreference.getUserId() != null) {
             patientId = mPreference.getUserId().toString()
         }
-
 
         edt_appointment_for_name.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -167,6 +165,10 @@ class BookingActivity : AppCompatActivity() {
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
                             if (mData != null) {
+
+                                if (mData.name != null) {
+                                    val appointmentForName = mData.name
+                                }
 
                                 startActivity(Intent(this@BookingActivity, BookingSuccessfulActivity::class.java))
                                 finish()
