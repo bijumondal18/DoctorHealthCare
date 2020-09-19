@@ -19,7 +19,7 @@
             android:paddingTop="@dimen/padding_16"
             android:paddingBottom="@dimen/padding_16"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/font_18" />
+            android:textSize="@dimen/font_16" />
 
         <ImageView
             android:id="@+id/btn_delete_holiday"

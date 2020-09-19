@@ -26,7 +26,6 @@ class TimeSlotsListAdapter(
 ) :
     RecyclerView.Adapter<TimeSlotsListAdapter.TimeSlotsListAdapterViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeSlotsListAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_time_slots_list, parent, false)
         return TimeSlotsListAdapterViewHolder(view)
@@ -40,74 +39,11 @@ class TimeSlotsListAdapter(
 
         holder.timeslotsName.text = "${timeSlotsList[position].weekday} (${timeSlotsList[position].starttime} - ${timeSlotsList[position].endtime})"
 
-        val timeSlotsId = timeSlotsList[position].id
-
-        holder.btnDelete.setOnClickListener {
-
-            val request = RequestDeleteDoctorTimeSlots(timeSlotsId)
-            deleteTimeSlots(request)
-
-        }
-
     }
 
     class TimeSlotsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val timeslotsName = view.tv_timeslots
         val btnDelete = view.btn_delete_timeslots
     }
-
-    private fun deleteTimeSlots(request: RequestDeleteDoctorTimeSlots) {
-        if (Helper.isConnectedToInternet(context)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Helper.showLoading(context)
-            }
-            val call: Call<ResponseDeleteDoctorTimeSlots> = APIInterface.create().deleteDoctorTimeSlots(request)
-            Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
-            call.enqueue(object : Callback<ResponseDeleteDoctorTimeSlots> {
-                override fun onResponse(
-                    call: Call<ResponseDeleteDoctorTimeSlots>,
-                    response: Response<ResponseDeleteDoctorTimeSlots>
-                ) {
-                    Helper.hideLoading()
-                    if (response.isSuccessful) {
-                        Helper.showLog("TAG", "Response : ${response.body()}")
-                        if (response.body()!!.success) {
-                            val mData = response.body()!!.data
-                            if (mData != null) {
-
-                                Helper.toastShort(context, mData.message)
-
-                            }
-
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(context, response.body()!!.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(context, response.body()!!.errors)
-                            }
-
-                        } else {
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(context, response.body()!!.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(context, response.body()!!.errors)
-                            }
-                        }
-
-                    } else {
-                        Helper.toastNetworkError(context)
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseDeleteDoctorTimeSlots>, t: Throwable) {
-                    Helper.toastShort(context, "${t.message}")
-                    Helper.hideLoading()
-                }
-            })
-        }
-
-    }
-
 
 }

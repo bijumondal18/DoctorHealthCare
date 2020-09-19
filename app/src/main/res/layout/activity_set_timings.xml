@@ -129,16 +129,18 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_timeslots"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/material_button_height"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/margin_16"
-                android:text="Submit"
+                android:drawableLeft="@drawable/ic_add"
+                android:drawableTint="@color/colorWhite"
+                android:text="Add TimeSlots"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_16" />
@@ -148,7 +150,6 @@
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/margin_16"
                 android:background="@color/colorTransparent" />
-
 
             <TextView
                 android:layout_width="wrap_content"

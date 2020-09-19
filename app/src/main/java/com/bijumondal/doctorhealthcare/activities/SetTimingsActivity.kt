@@ -18,12 +18,16 @@ import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.ResponseAddDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.RequestDeleteDoctorTimeSlots
+import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.ResponseDeleteDoctorTimeSlots
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.RequestDoctorHolidaysList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.Data
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.RequestDoctorTimeSlotsList
 import com.bijumondal.doctorhealthcare.models.doctorTimeSlotsList.ResponseDoctorTimeSlotsList
+import com.bijumondal.doctorhealthcare.utils.ClickListener
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
+import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_set_holidays.*
 import kotlinx.android.synthetic.main.activity_set_holidays.toolbar_set_holidays_activity
@@ -60,10 +64,6 @@ class SetTimingsActivity : AppCompatActivity() {
         mRecyclerView = findViewById(R.id.rv_timeslots_list)
 
         setupToolbar()
-
-        /*val calender = Calendar.getInstance()
-        val date = calender.time
-        currentWeekDay = SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.time)  // current weekday*/
 
         setupWeekdaySpinner()
 
@@ -106,18 +106,47 @@ class SetTimingsActivity : AppCompatActivity() {
                         Helper.showLog(TAG, "Response : ${response.body()}")
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
-                            if (mData != null && !mData.isEmpty()) {
+                            if (mData != null) {
 
                                 timeSlotsList = mData as ArrayList<Data>
-                                timeslotsListAdapter = TimeSlotsListAdapter(timeSlotsList, this@SetTimingsActivity)
-                                mRecyclerView.adapter = timeslotsListAdapter
-                                timeslotsListAdapter.notifyDataSetChanged()
-                                tv_no_timeslots_found.visibility = View.GONE
-                                mRecyclerView.visibility = View.VISIBLE
 
-                            } else {
-                                mRecyclerView.visibility = View.GONE
-                                tv_no_timeslots_found.visibility = View.VISIBLE
+                                if (timeSlotsList.size > 0) {
+                                    btn_add_timeslots.text = "Add More TimeSlots"
+                                    tv_no_timeslots_found.visibility = View.GONE
+                                    mRecyclerView.visibility = View.VISIBLE
+                                } else {
+                                    btn_add_timeslots.text = "Add TimeSlots"
+                                    mRecyclerView.visibility = View.GONE
+                                    tv_no_timeslots_found.visibility = View.VISIBLE
+                                }
+
+                                if (!mData.isEmpty()) {
+                                    timeslotsListAdapter = TimeSlotsListAdapter(timeSlotsList, this@SetTimingsActivity)
+                                    mRecyclerView.adapter = timeslotsListAdapter
+                                    timeslotsListAdapter.notifyDataSetChanged()
+                                    tv_no_timeslots_found.visibility = View.GONE
+                                    mRecyclerView.visibility = View.VISIBLE
+
+
+                                    mRecyclerView.addOnItemTouchListener(RecyclerTouchListener(this@SetTimingsActivity, mRecyclerView, object : ClickListener {
+                                        override fun onClick(view: View?, position: Int) {
+                                            val timeSlotsId = timeSlotsList[position].id
+                                            val request = RequestDeleteDoctorTimeSlots(timeSlotsId)
+                                            deleteTimeSlots(request)
+
+                                        }
+
+                                        override fun onLongClick(view: View?, position: Int) {
+                                            //Helper.toastShort(this@BookingActivity, timeSlotsList[position].weekday)
+                                        }
+
+                                    }))
+
+                                } else {
+                                    mRecyclerView.visibility = View.GONE
+                                    tv_no_timeslots_found.visibility = View.VISIBLE
+                                }
+
                             }
 
                             if (response.body()!!.message != null) {
@@ -142,6 +171,60 @@ class SetTimingsActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ResponseDoctorTimeSlotsList>, t: Throwable) {
+                    Helper.toastShort(this@SetTimingsActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+    }
+
+    private fun deleteTimeSlots(request: RequestDeleteDoctorTimeSlots) {
+        if (Helper.isConnectedToInternet(this@SetTimingsActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this@SetTimingsActivity)
+            }
+            val call: Call<ResponseDeleteDoctorTimeSlots> = APIInterface.create().deleteDoctorTimeSlots(request)
+            Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponseDeleteDoctorTimeSlots> {
+                override fun onResponse(
+                    call: Call<ResponseDeleteDoctorTimeSlots>,
+                    response: Response<ResponseDeleteDoctorTimeSlots>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog("TAG", "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                val requestTimeslotsList = RequestDoctorTimeSlotsList(mPreference.getUserId().toString(), "")
+                                fetchTimeSlotsList(requestTimeslotsList)
+
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@SetTimingsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@SetTimingsActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@SetTimingsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@SetTimingsActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@SetTimingsActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDeleteDoctorTimeSlots>, t: Throwable) {
                     Helper.toastShort(this@SetTimingsActivity, "${t.message}")
                     Helper.hideLoading()
                 }
