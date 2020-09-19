@@ -21,7 +21,7 @@
         android:paddingBottom="@dimen/padding_12"
         android:text="doctor department"
         android:textColor="@color/primaryTextColor"
-        android:textSize="@dimen/font_18" />
+        android:textSize="@dimen/font_15" />
 
     <View
         android:layout_width="match_parent"

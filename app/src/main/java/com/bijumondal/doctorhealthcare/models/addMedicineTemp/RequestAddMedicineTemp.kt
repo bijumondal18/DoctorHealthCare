@@ -7,5 +7,6 @@ data class RequestAddMedicineTemp(
     val frequency: String,
     val instructions: String,
     val medicine: String,
-    val patient_id: String
+    val patient_id: String,
+    val type: String
 )

@@ -83,17 +83,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Medicines : "
-                    android:textColor="@color/secondaryTextColor"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
                 <TextView
                     android:id="@+id/tv_medicine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
-                    android:layout_toRightOf="@id/tv_medicine_title"
+                    android:layout_below="@id/tv_medicine_title"
                     android:text="Medicines"
-                    android:textColor="@color/primaryTextColor"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
             </RelativeLayout>
@@ -108,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Advice : "
-                    android:textColor="@color/secondaryTextColor"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:layout_marginStart="@dimen/margin_8"
                     android:layout_toRightOf="@id/tv_advice_title"
                     android:text="Advice"
-                    android:textColor="@color/primaryTextColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
             </RelativeLayout>
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Notes : "
-                    android:textColor="@color/secondaryTextColor"
+                    android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
                 <TextView
@@ -143,7 +143,7 @@
                     android:layout_marginStart="@dimen/margin_8"
                     android:layout_toRightOf="@id/tv_note_title"
                     android:text="Notes"
-                    android:textColor="@color/primaryTextColor"
+                    android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
             </RelativeLayout>

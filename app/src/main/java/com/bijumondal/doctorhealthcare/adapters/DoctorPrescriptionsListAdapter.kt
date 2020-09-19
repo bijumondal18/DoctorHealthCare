@@ -1,6 +1,7 @@
 package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,6 @@ class DoctorPrescriptionsListAdapter(
 ) :
     RecyclerView.Adapter<DoctorPrescriptionsListAdapter.DoctorPrescriptionsListAdapterViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorPrescriptionsListAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_prescription_list_for_doctor, parent, false)
         return DoctorPrescriptionsListAdapterViewHolder(view)
@@ -27,16 +27,18 @@ class DoctorPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: DoctorPrescriptionsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = "You prescribed for ${prescriptionsListForDoctor[position].name}"
-        holder.patientSymptom.text = "Symptom - ${prescriptionsListForDoctor[position].symptom}"
-        holder.medicine.text = prescriptionsListForDoctor[position].medicine
+
+        val patientName = "You prescribed to <b>${prescriptionsListForDoctor[position].name}</b> for"
+        holder.patientName.text = Html.fromHtml(patientName)
+        holder.patientSymptom.text = "${prescriptionsListForDoctor[position].symptom}"
+        val medicineName = prescriptionsListForDoctor[position].medicine
+        holder.medicine.text = Html.fromHtml(medicineName)
         holder.note.text = prescriptionsListForDoctor[position].note
         holder.advice.text = prescriptionsListForDoctor[position].advice
 
         if (prescriptionsListForDoctor[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForDoctor[position].photo, R.drawable.ic_avatar)
         }
-
 
     }
 

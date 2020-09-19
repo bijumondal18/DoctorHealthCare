@@ -14,11 +14,15 @@ import com.bijumondal.doctorhealthcare.adapters.HolidaysListAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.RequestAddDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.addDoctorHolidays.ResponseAddDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.RequestDeleteDoctorHolidays
+import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.ResponseDeleteDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.Data
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.RequestDoctorHolidaysList
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.ResponseDoctorHolidaysList
+import com.bijumondal.doctorhealthcare.utils.ClickListener
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
+import com.bijumondal.doctorhealthcare.utils.RecyclerTouchListener
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_set_holidays.*
 import retrofit2.Call
@@ -91,18 +95,48 @@ class SetHolidaysActivity : AppCompatActivity() {
                         Helper.showLog(TAG, "Response : ${response.body()}")
                         if (response.body()!!.success) {
                             val mData = response.body()!!.data
-                            if (mData != null && !mData.isEmpty()) {
+                            if (mData != null) {
 
                                 holidaysList = mData as ArrayList<Data>
-                                holidaysListAdapter = HolidaysListAdapter(holidaysList, this@SetHolidaysActivity)
-                                mRecyclerView.adapter = holidaysListAdapter
-                                holidaysListAdapter.notifyDataSetChanged()
-                                tv_no_holidays_found.visibility = View.GONE
-                                mRecyclerView.visibility = View.VISIBLE
 
-                            } else {
-                                mRecyclerView.visibility = View.GONE
-                                tv_no_holidays_found.visibility = View.VISIBLE
+                                if (holidaysList.size > 0) {
+                                    btn_add_holidays.text = "Add More Holidays"
+                                    tv_no_holidays_found.visibility = View.GONE
+                                    mRecyclerView.visibility = View.VISIBLE
+                                } else {
+                                    btn_add_holidays.text = "Add Holidays"
+                                    mRecyclerView.visibility = View.GONE
+                                    tv_no_holidays_found.visibility = View.VISIBLE
+                                }
+
+                                if (!mData.isEmpty()) {
+
+                                    holidaysListAdapter = HolidaysListAdapter(holidaysList, this@SetHolidaysActivity)
+                                    mRecyclerView.adapter = holidaysListAdapter
+                                    holidaysListAdapter.notifyDataSetChanged()
+                                    tv_no_holidays_found.visibility = View.GONE
+                                    mRecyclerView.visibility = View.VISIBLE
+
+                                    mRecyclerView.addOnItemTouchListener(RecyclerTouchListener(this@SetHolidaysActivity, mRecyclerView, object : ClickListener {
+                                        override fun onClick(view: View?, position: Int) {
+                                            val holidaysId = holidaysList[position].id
+                                            val request = RequestDeleteDoctorHolidays(holidaysId)
+                                            deleteHolidays(request)
+
+                                        }
+
+                                        override fun onLongClick(view: View?, position: Int) {
+                                            //Helper.toastShort(this@BookingActivity, timeSlotsList[position].weekday)
+                                        }
+
+                                    }))
+
+                                } else {
+                                    mRecyclerView.visibility = View.GONE
+                                    tv_no_holidays_found.visibility = View.VISIBLE
+                                }
+
+
                             }
 
                             if (response.body()!!.message != null) {
@@ -137,9 +171,9 @@ class SetHolidaysActivity : AppCompatActivity() {
 
     private fun addHolidays(request: RequestAddDoctorHolidays) {
         if (Helper.isConnectedToInternet(this@SetHolidaysActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this)
-            }
+            }*/
             val call: Call<ResponseAddDoctorHolidays> = APIInterface.create().addDoctorHolidays(request)
             Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
             call.enqueue(object : Callback<ResponseAddDoctorHolidays> {
@@ -156,7 +190,6 @@ class SetHolidaysActivity : AppCompatActivity() {
 
                                 val requestHolidaysList = RequestDoctorHolidaysList(mPreference.getUserId().toString())
                                 fetchHolidaysList(requestHolidaysList)
-                                //Helper.toastShort(this@SetHolidaysActivity, mData.message)
 
                             }
 
@@ -187,6 +220,61 @@ class SetHolidaysActivity : AppCompatActivity() {
                 }
             })
         }
+
+    }
+
+    private fun deleteHolidays(request: RequestDeleteDoctorHolidays) {
+        if (Helper.isConnectedToInternet(this@SetHolidaysActivity)) {
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this@SetHolidaysActivity)
+            }*/
+            val call: Call<ResponseDeleteDoctorHolidays> = APIInterface.create().deleteDoctorHolidays(request)
+            Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
+            call.enqueue(object : Callback<ResponseDeleteDoctorHolidays> {
+                override fun onResponse(
+                    call: Call<ResponseDeleteDoctorHolidays>,
+                    response: Response<ResponseDeleteDoctorHolidays>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog("TAG", "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                val requestHolidaysList = RequestDoctorHolidaysList(mPreference.getUserId().toString())
+                                fetchHolidaysList(requestHolidaysList)
+
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@SetHolidaysActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@SetHolidaysActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@SetHolidaysActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@SetHolidaysActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@SetHolidaysActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDeleteDoctorHolidays>, t: Throwable) {
+                    Helper.toastShort(this@SetHolidaysActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
 
     }
 

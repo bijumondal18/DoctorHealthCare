@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1.5"
+        android:layout_weight="1.3"
         android:gravity="start"
         android:padding="@dimen/padding_4"
         android:text="Medicine"
@@ -46,12 +46,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight=".9"
         android:gravity="start"
         android:padding="@dimen/padding_4"
         android:text="Instruction"
         android:textColor="@color/secondaryTextColor"
         android:textSize="@dimen/font_14" />
 
+    <ImageView
+        android:id="@+id/iv_delete_temp_medicine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".3"
+        android:src="@drawable/ic_close"
+        android:tint="@color/colorRed" />
 
 </LinearLayout>

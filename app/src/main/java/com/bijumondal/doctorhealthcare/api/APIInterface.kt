@@ -35,7 +35,6 @@ import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.RequestDoctorHo
 import com.bijumondal.doctorhealthcare.models.doctorHolidaysList.ResponseDoctorHolidaysList
 import com.bijumondal.doctorhealthcare.models.doctorLogin.RequestDoctorLogin
 import com.bijumondal.doctorhealthcare.models.doctorLogin.ResponseDoctorLogin
-import com.bijumondal.doctorhealthcare.models.doctorPhoto.RequestDoctorPhoto
 import com.bijumondal.doctorhealthcare.models.doctorPhoto.ResponseDoctorPhoto
 import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.RequestDoctorPrescriptionsList
 import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.ResponseDoctorPrescriptionsList
@@ -49,7 +48,6 @@ import com.bijumondal.doctorhealthcare.models.hospitalList.ResponseHospitalList
 import com.bijumondal.doctorhealthcare.models.medicineList.ResponseMedicineList
 import com.bijumondal.doctorhealthcare.models.patientLogin.RequestPatientLogin
 import com.bijumondal.doctorhealthcare.models.patientLogin.ResponsePatientLogin
-import com.bijumondal.doctorhealthcare.models.patientPhoto.RequestPatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientPhoto.ResponsePatientPhoto
 import com.bijumondal.doctorhealthcare.models.patientPrescriptions.RequestPatientPrescriptionsList
 import com.bijumondal.doctorhealthcare.models.patientPrescriptions.ResponsePatientPrescriptionsList

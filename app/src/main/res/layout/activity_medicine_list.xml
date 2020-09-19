@@ -36,6 +36,75 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicine name : "
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <EditText
+                android:id="@+id/edt_add_medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:hint="Medicine Name"
+                android:inputType="text"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generic name : "
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_16"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <EditText
+                android:id="@+id/edt_add_generic_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginRight="@dimen/margin_16"
+                android:background="@drawable/edit_text_background_style"
+                android:hint="Generic Name"
+                android:inputType="text"
+                android:paddingLeft="@dimen/padding_12"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_16" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_new_medicine"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/margin_16"
+                android:drawableLeft="@drawable/ic_add"
+                android:drawableTint="@color/colorWhite"
+                android:text="Add New Medicine"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/font_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16"
+                android:text="All Medicines"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/font_18"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_medicine_list"
                 android:layout_width="match_parent"

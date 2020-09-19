@@ -38,74 +38,10 @@ class HolidaysListAdapter(
 
         holder.holidaysDate.text = holidaysList[position].date
 
-        val holidaysId = holidaysList[position].id
-
-        holder.btnDelete.setOnClickListener {
-
-            val request = RequestDeleteDoctorHolidays(holidaysId)
-            deleteHolidays(request)
-
-        }
-
     }
 
     class HolidaysListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val holidaysDate = view.tv_holidays_date
-        val btnDelete = view.btn_delete_holiday
     }
 
-
-    private fun deleteHolidays(request: RequestDeleteDoctorHolidays) {
-        if (Helper.isConnectedToInternet(context)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Helper.showLoading(context)
-            }
-            val call: Call<ResponseDeleteDoctorHolidays> = APIInterface.create().deleteDoctorHolidays(request)
-            Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
-            call.enqueue(object : Callback<ResponseDeleteDoctorHolidays> {
-                override fun onResponse(
-                    call: Call<ResponseDeleteDoctorHolidays>,
-                    response: Response<ResponseDeleteDoctorHolidays>
-                ) {
-                    Helper.hideLoading()
-                    if (response.isSuccessful) {
-                        Helper.showLog("TAG", "Response : ${response.body()}")
-                        if (response.body()!!.success) {
-                            val mData = response.body()!!.data
-                            if (mData != null) {
-
-                                Helper.toastShort(context, mData.message)
-
-                            }
-
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(context, response.body()!!.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(context, response.body()!!.errors)
-                            }
-
-                        } else {
-                            if (response.body()!!.message != null) {
-                                Helper.toastShort(context, response.body()!!.message)
-
-                            } else if (response.body()!!.errors != null) {
-                                Helper.toastShort(context, response.body()!!.errors)
-                            }
-                        }
-
-                    } else {
-                        Helper.toastNetworkError(context)
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseDeleteDoctorHolidays>, t: Throwable) {
-                    Helper.toastShort(context, "${t.message}")
-                    Helper.hideLoading()
-                }
-            })
-        }
-
-
-    }
 }

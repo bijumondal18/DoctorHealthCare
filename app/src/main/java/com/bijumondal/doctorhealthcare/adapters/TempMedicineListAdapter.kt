@@ -39,6 +39,7 @@ class TempMedicineListAdapter(
         val frequency = view.tv_temp_med_frequency
         val duration = view.tv_temp_med_duration
         val instruction = view.tv_temp_med_instruction
+        val deleteTempMedicine = view.iv_delete_temp_medicine
 
     }
 

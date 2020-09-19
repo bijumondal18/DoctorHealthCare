@@ -1,6 +1,7 @@
 package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,10 @@ class PatientPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientPrescriptionsListAdapterViewHolder, position: Int) {
-        holder.patientName.text = "Prescribed by ${prescriptionsListForPatient[position].doctor}"
-        holder.patientSymptom.text = "Symptom - ${prescriptionsListForPatient[position].symptom}"
+        val patientName = "Prescribed by <b>${prescriptionsListForPatient[position].doctor}</b>"
+        holder.patientName.text = Html.fromHtml(patientName)
+
+        holder.patientSymptom.text = "${prescriptionsListForPatient[position].symptom}"
         holder.medicine.text = prescriptionsListForPatient[position].medicine
         holder.note.text = prescriptionsListForPatient[position].note
         holder.advice.text = prescriptionsListForPatient[position].advice

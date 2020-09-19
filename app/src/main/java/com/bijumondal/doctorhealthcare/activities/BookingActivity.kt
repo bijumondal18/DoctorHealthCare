@@ -2,14 +2,12 @@ package com.bijumondal.doctorhealthcare.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.net.ParseException
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,12 +25,9 @@ import kotlinx.android.synthetic.main.activity_booking.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAccessor
 import java.util.*
 import kotlin.collections.ArrayList
 

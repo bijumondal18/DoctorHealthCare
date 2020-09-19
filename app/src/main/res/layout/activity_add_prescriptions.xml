@@ -79,44 +79,67 @@
                 android:background="@drawable/edit_text_background_style"
                 android:spinnerMode="dialog" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:text="Duration"
-                android:textColor="@color/secondaryTextColor"
-                android:textSize="@dimen/font_16" />
-
-            <Spinner
-                android:id="@+id/spinner_duration"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:spinnerMode="dialog" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_16"
-                android:text="Instructions"
-                android:textColor="@color/secondaryTextColor"
-                android:textSize="@dimen/font_16" />
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <Spinner
-                android:id="@+id/spinner_instruction"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginLeft="@dimen/margin_16"
-                android:layout_marginTop="@dimen/margin_8"
-                android:layout_marginRight="@dimen/margin_16"
-                android:background="@drawable/edit_text_background_style"
-                android:spinnerMode="dialog" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:text="Duration"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_marginRight="@dimen/margin_8"
+                        android:background="@drawable/edit_text_background_style"
+                        android:spinnerMode="dialog" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_8"
+                        android:layout_marginTop="@dimen/margin_16"
+                        android:text="Instructions"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_16" />
+
+                    <Spinner
+                        android:id="@+id/spinner_instruction"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="@dimen/margin_8"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:layout_marginRight="@dimen/margin_16"
+                        android:background="@drawable/edit_text_background_style"
+                        android:spinnerMode="dialog" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_temp_medicine"
@@ -139,6 +162,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_margin="@dimen/margin_4"
                     android:layout_marginBottom="@dimen/margin_4"
                     android:orientation="horizontal"
                     android:weightSum="4">
@@ -151,7 +175,7 @@
                         android:gravity="start"
                         android:padding="@dimen/padding_4"
                         android:text="Medicine Name"
-                        android:textColor="@color/secondaryTextColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_14" />
 
                     <TextView
@@ -162,7 +186,7 @@
                         android:gravity="start"
                         android:padding="@dimen/padding_4"
                         android:text="Frequency"
-                        android:textColor="@color/secondaryTextColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_14" />
 
                     <TextView
@@ -173,7 +197,7 @@
                         android:gravity="start"
                         android:padding="@dimen/padding_4"
                         android:text="Duration"
-                        android:textColor="@color/secondaryTextColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_14" />
 
                     <TextView
@@ -184,7 +208,7 @@
                         android:gravity="start"
                         android:padding="@dimen/padding_4"
                         android:text="Instructions"
-                        android:textColor="@color/secondaryTextColor"
+                        android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_14" />
 
                 </LinearLayout>
@@ -193,11 +217,18 @@
                     android:id="@+id/rv_temp_medicine_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_4"
                     android:clipToPadding="false"
-                    android:nestedScrollingEnabled="true"
+                    android:nestedScrollingEnabled="false"
                     android:scrollbars="none" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_12"
+                android:background="@color/colorGray" />
 
 
             <TextView
@@ -262,6 +293,7 @@
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
                 android:gravity="top|left"
                 android:hint="Note"
@@ -285,7 +317,7 @@
                 android:maxLines="20"
                 android:minLines="5"
                 android:scrollbars="vertical"
-                android:text="Submit"
+                android:text="Submit Prescription"
                 android:textAllCaps="false"
                 android:textSize="@dimen/font_14" />
 

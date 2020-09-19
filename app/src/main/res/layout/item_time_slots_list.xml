@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_timeslots"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="@dimen/margin_12"
-        android:layout_toLeftOf="@id/btn_delete_timeslots"
-        android:paddingTop="@dimen/padding_16"
-        android:paddingBottom="@dimen/padding_16"
-        android:textColor="@color/primaryTextColor"
-        android:textSize="@dimen/font_16" />
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_delete_timeslots"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="Delete"
-        android:textAllCaps="false"
-        android:textColor="@color/colorRed"
-        android:textSize="@dimen/font_14" />
+        <TextView
+            android:id="@+id/tv_timeslots"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_12"
+            android:layout_weight=".9"
+            android:paddingTop="@dimen/padding_16"
+            android:paddingBottom="@dimen/padding_16"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/font_16" />
+
+        <ImageView
+            android:id="@+id/btn_delete_timeslots"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_close"
+            android:tint="@color/colorRed" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorTransparent" />
+        android:background="@color/colorGray" />
 
-</RelativeLayout>
+</LinearLayout>

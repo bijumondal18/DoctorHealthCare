@@ -64,11 +64,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_holidays"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/material_button_height"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/margin_16"
-                android:text="Submit"
+                android:drawableLeft="@drawable/ic_add"
+                android:drawableTint="@color/colorWhite"
+                android:text="Add Holidays"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_16" />
@@ -102,12 +105,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:visibility="gone"
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="No Holidays found !"
                 android:textColor="@color/secondaryTextColor"
-                android:textSize="@dimen/font_16" />
+                android:textSize="@dimen/font_16"
+                android:visibility="gone" />
 
 
         </LinearLayout>
