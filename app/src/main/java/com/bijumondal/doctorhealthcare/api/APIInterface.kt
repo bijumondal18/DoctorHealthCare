@@ -7,6 +7,10 @@ import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.RequestAddP
 import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.ResponseAddPrescriptions
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.RequestAddDoctorTimeslots
 import com.bijumondal.doctorhealthcare.models.addDoctorTimeslots.ResponseAddDoctorTimeslots
+import com.bijumondal.doctorhealthcare.models.addMedicine.RequestAddMedicine
+import com.bijumondal.doctorhealthcare.models.addMedicine.ResponseAddMedicine
+import com.bijumondal.doctorhealthcare.models.addMedicineTemp.RequestAddMedicineTemp
+import com.bijumondal.doctorhealthcare.models.addMedicineTemp.ResponseAddMedicineTemp
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.RequestAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.allDoctorsList.ResponseAllDoctorsList
 import com.bijumondal.doctorhealthcare.models.appointmentListForPatient.RequestAppointmentListForPatient
@@ -20,6 +24,8 @@ import com.bijumondal.doctorhealthcare.models.createDoctorProfile.RequestCreateD
 import com.bijumondal.doctorhealthcare.models.createDoctorProfile.ResponseCreateDoctorProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.RequestCreatePatientProfile
 import com.bijumondal.doctorhealthcare.models.createPatientProfile.ResponseCreatePatientProfile
+import com.bijumondal.doctorhealthcare.models.delTempMedicine.RequestDeleteTempMedicine
+import com.bijumondal.doctorhealthcare.models.delTempMedicine.ResponseDeleteTempMedicine
 import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.RequestDeleteDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.deleteDoctorHolidays.ResponseDeleteDoctorHolidays
 import com.bijumondal.doctorhealthcare.models.deleteDoctorTimeSlots.RequestDeleteDoctorTimeSlots
@@ -167,6 +173,15 @@ interface APIInterface {
 
     @GET(Constants.MEDICINE_LIST_URL)
     fun getMedicineList(): Call<ResponseMedicineList>
+
+    @POST(Constants.ADD_MEDICINE_TEMP_URL)
+    fun addTempMedicine(@Body request: RequestAddMedicineTemp): Call<ResponseAddMedicineTemp>
+
+    @POST(Constants.DELETE_MEDICINE_TEMP_URL)
+    fun delTempMedicine(@Body request: RequestDeleteTempMedicine): Call<ResponseDeleteTempMedicine>
+
+    @POST(Constants.ADD_MEDICINE_URL)
+    fun addMedicine(@Body request: RequestAddMedicine): Call<ResponseAddMedicine>
 
 
     /*

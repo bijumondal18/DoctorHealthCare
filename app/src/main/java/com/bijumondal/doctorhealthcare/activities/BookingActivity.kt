@@ -304,14 +304,14 @@ class BookingActivity : AppCompatActivity() {
             tv_doc_department_booking.text = intent.getStringExtra("doctorDept")
         }
         if (intent.hasExtra("hospitalPhone") != null) {
-            tv_hospital_phone_booking.text = "Hospital number - ${intent.getStringExtra("hospitalPhone")}"
+            tv_hospital_phone_booking.text = "${intent.getStringExtra("hospitalPhone")}"
         }
         if (intent.hasExtra("doctorVisitAmount") != null) {
             tv_visit_amount_booking.text = "Consultation fees - ${intent.getStringExtra("doctorVisitAmount")}"
             btn_confirm_and_pay.text = "Confirm Appointment ${intent.getStringExtra("doctorVisitAmount")}" //todo "confirm & pay" ->
         }
         if (intent.hasExtra("hospitalNameAndAddress") != null) {
-            tv_hospital_name_and_address_booking.text = "Hospital - ${intent.getStringExtra("hospitalNameAndAddress")}"
+            tv_hospital_name_and_address_booking.text = "${intent.getStringExtra("hospitalNameAndAddress")}"
         }
 
     }

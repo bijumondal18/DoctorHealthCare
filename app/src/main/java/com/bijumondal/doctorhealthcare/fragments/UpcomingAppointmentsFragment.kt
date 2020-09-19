@@ -134,16 +134,16 @@ class UpcomingAppointmentsFragment : Fragment() {
 
     private fun fetchAppointmentsListForDoctor(request: RequestAppointmentsListForDoctor) {
         if (Helper.isConnectedToInternet(context!!)) {
-            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(context!!)
-            }*/
+            }
             val call: Call<ResponseAppointmentsListForDoctor> = APIInterface.create().getDoctorAppointmentsList(request)
             call.enqueue(object : Callback<ResponseAppointmentsListForDoctor> {
                 override fun onResponse(
                     call: Call<ResponseAppointmentsListForDoctor>,
                     response: Response<ResponseAppointmentsListForDoctor>
                 ) {
-                    // Helper.hideLoading()
+                    Helper.hideLoading()
                     if (response.isSuccessful) {
                         Helper.showLog(TAG, "Response : ${response.body()}")
                         if (response.body()!!.success) {
@@ -179,13 +179,13 @@ class UpcomingAppointmentsFragment : Fragment() {
 
                     } else {
                         Helper.toastNetworkError(context!!)
-                        // Helper.hideLoading()
+                        Helper.hideLoading()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseAppointmentsListForDoctor>, t: Throwable) {
                     Helper.toastShort(context!!, "${t.message}")
-                    // Helper.hideLoading()
+                    Helper.hideLoading()
                 }
 
             })

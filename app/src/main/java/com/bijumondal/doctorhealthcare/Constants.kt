@@ -9,6 +9,7 @@ object Constants {
     const val API_CONTENT_TYPE = "application/json"
 
     const val API_BASE_URL = "http://helping-world.in/medical/"
+    //const val API_BASE_URL = "http://medicine.leedmeditech.com/"
 
     //?XDEBUG_SESSION_START=netbeans-xdebug
 
@@ -46,6 +47,9 @@ object Constants {
     const val DOCTOR_PRESCRIPTIONS_LIST_URL = "getdoctorprescription"
     const val ADD_PRESCRIPTIONS_URL = "addprescription"
     const val MEDICINE_LIST_URL = "getmedicine"
+    const val ADD_MEDICINE_TEMP_URL = "addtempmedicine"
+    const val DELETE_MEDICINE_TEMP_URL = "deletetempmedicine"
+    const val ADD_MEDICINE_URL = "addmedicine"
 
 
     /*

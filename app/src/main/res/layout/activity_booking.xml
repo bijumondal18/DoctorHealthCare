@@ -121,7 +121,7 @@
                         android:drawablePadding="@dimen/padding_4"
                         android:drawableTint="@color/secondaryTextColor"
                         android:ellipsize="end"
-                        android:maxLines="1"
+                        android:maxLines="2"
                         android:text="doctor address"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="@dimen/font_15" />
@@ -146,7 +146,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Consultation fees: 500৳"
                     android:textColor="@color/primaryTextColor"
@@ -158,11 +158,13 @@
 
                 <TextView
                     android:id="@+id/tv_hospital_name_and_address_booking"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Hospital -  hospitalName \u2022 hospitalAddress"
+                    android:layout_marginEnd="8dp"
+                    android:text="hospitalName \u2022 hospitalAddress"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -171,8 +173,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="Hospital number : +015485485485"
+                    android:layout_marginEnd="8dp"
+                    android:text="+015485485485"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
                     app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking" />

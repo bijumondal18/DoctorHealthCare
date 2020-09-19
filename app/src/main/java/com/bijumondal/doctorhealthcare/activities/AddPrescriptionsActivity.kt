@@ -11,10 +11,17 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.adapters.TempMedicineListAdapter
 import com.bijumondal.doctorhealthcare.api.APIInterface
 import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.RequestAddPrescriptions
 import com.bijumondal.doctorhealthcare.models.addDoctorPrescriptions.ResponseAddPrescriptions
+import com.bijumondal.doctorhealthcare.models.addMedicineTemp.Data
+import com.bijumondal.doctorhealthcare.models.addMedicineTemp.RequestAddMedicineTemp
+import com.bijumondal.doctorhealthcare.models.addMedicineTemp.ResponseAddMedicineTemp
 import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.Helper
 import com.google.gson.Gson
@@ -23,16 +30,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AddPrescriptionsActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG: String = "AddPrescriptionsActivity"
         private const val REQUEST_CODE = 342
-
     }
 
     private lateinit var mPreference: HealthCarePreference
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var tempMedicineListAdapter: TempMedicineListAdapter
+    private var tempMedicineList: ArrayList<Data> = ArrayList()
 
     private lateinit var spinnerFrequency: Spinner
     var frequencyList = arrayOf(
@@ -74,18 +86,17 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     private var advice: String = ""
     private var note: String = ""
     private var patientId: String = ""
+    private var doctorId: String = ""
+    private var prescriptionDate: String = ""
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_prescriptions)
-        mPreference = HealthCarePreference(this@AddPrescriptionsActivity)
 
+        initViews()
         setupToolbar()
-
-        if (intent.hasExtra("patientId") != null) {
-            patientId = intent.getStringExtra("patientId").toString()
-        }
 
         tv_choose_medicine_name.setOnClickListener {
             startActivityForResult(Intent(this@AddPrescriptionsActivity, MedicineListActivity::class.java), REQUEST_CODE)
@@ -100,9 +111,17 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         validateFields()
 
 
-        btn_add_medicine.setOnClickListener {
+        btn_add_temp_medicine.setOnClickListener {
             if (!TextUtils.isEmpty(medicineName)) {
                 medName = medicineName
+
+                val layoutManager = LinearLayoutManager(this@AddPrescriptionsActivity, LinearLayoutManager.VERTICAL, false)
+                mRecyclerView.layoutManager = layoutManager
+                val requestAddMedicineTemp = RequestAddMedicineTemp(prescriptionDate, doctorId, duration, frequency, instruction, medName, patientId)
+                addTempMedicine(requestAddMedicineTemp)
+
+            } else {
+                Helper.toastShort(this@AddPrescriptionsActivity, "Please add some Medicines!")
             }
 
         }
@@ -110,6 +129,85 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         btn_save_prescription.setOnClickListener {
             doAddMedicineValidation()
         }
+
+
+    }
+
+    private fun addTempMedicine(requestAddMedicineTemp: RequestAddMedicineTemp) {
+        if (Helper.isConnectedToInternet(this@AddPrescriptionsActivity)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Helper.showLoading(this@AddPrescriptionsActivity)
+            }
+            val call: Call<ResponseAddMedicineTemp> = APIInterface.create().addTempMedicine(requestAddMedicineTemp)
+            Helper.showLog(TAG, " request :- ${Gson().toJson(requestAddMedicineTemp)}")
+            call.enqueue(object : Callback<ResponseAddMedicineTemp> {
+                override fun onResponse(
+                    call: Call<ResponseAddMedicineTemp>,
+                    response: Response<ResponseAddMedicineTemp>
+                ) {
+                    Helper.hideLoading()
+                    if (response.isSuccessful) {
+                        Helper.showLog(TAG, "Response : ${response.body()}")
+                        if (response.body()!!.success) {
+                            val mData = response.body()!!.data
+                            if (mData != null) {
+
+                                btn_add_temp_medicine.text = "Add More"
+                                tv_choose_medicine_name.text = ""
+
+                                tempMedicineList = mData as ArrayList<Data>
+                                tempMedicineListAdapter = TempMedicineListAdapter(tempMedicineList, this@AddPrescriptionsActivity)
+                                mRecyclerView.adapter = tempMedicineListAdapter
+                                tempMedicineListAdapter.notifyDataSetChanged()
+
+                            }
+
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.errors)
+                            }
+
+                        } else {
+                            if (response.body()!!.message != null) {
+                                Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.message)
+
+                            } else if (response.body()!!.errors != null) {
+                                Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.errors)
+                            }
+                        }
+
+                    } else {
+                        Helper.toastNetworkError(this@AddPrescriptionsActivity)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseAddMedicineTemp>, t: Throwable) {
+                    Helper.toastShort(this@AddPrescriptionsActivity, "${t.message}")
+                    Helper.hideLoading()
+                }
+            })
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun initViews() {
+        mPreference = HealthCarePreference(this@AddPrescriptionsActivity)
+        mRecyclerView = findViewById(R.id.rv_temp_medicine_list)
+
+        if (intent.hasExtra("patientId") != null) {
+            patientId = intent.getStringExtra("patientId").toString()
+        }
+        if (mPreference.getUserId() != null) {
+            doctorId = mPreference.getUserId().toString()
+        }
+
+        val currentDate = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = currentDate.format(formatter)
+        prescriptionDate = formatted.toString()
 
 
     }
@@ -184,7 +282,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         ) {
 
             val request = RequestAddPrescriptions(advice, mPreference.getUserId().toString(), medName, note, patientId, symptom)
-            addPrescriptions(request)
+            doSubmitPrescriptions(request)
 
         } else {
             Helper.toastLong(this@AddPrescriptionsActivity, "empty Field's !")
@@ -205,7 +303,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
     }
 
 
-    private fun addPrescriptions(request: RequestAddPrescriptions) {
+    private fun doSubmitPrescriptions(request: RequestAddPrescriptions) {
         if (Helper.isConnectedToInternet(this@AddPrescriptionsActivity)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this@AddPrescriptionsActivity)

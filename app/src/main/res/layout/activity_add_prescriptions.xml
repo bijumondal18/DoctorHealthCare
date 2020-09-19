@@ -36,11 +36,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Medicine"
                 android:textColor="@color/secondaryTextColor"
@@ -56,7 +55,7 @@
                 android:background="@drawable/edit_text_background_style"
                 android:gravity="center|start"
                 android:hint="Choose Medicines"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -64,7 +63,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Frequency"
                 android:textColor="@color/secondaryTextColor"
@@ -83,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Duration"
                 android:textColor="@color/secondaryTextColor"
@@ -103,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Instructions"
                 android:textColor="@color/secondaryTextColor"
@@ -120,19 +119,91 @@
                 android:spinnerMode="dialog" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_medicine"
+                android:id="@+id/btn_add_temp_medicine"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/material_button_height"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/margin_16"
-                android:text="Add Medicine"
+                android:drawableLeft="@drawable/ic_add"
+                android:drawableTint="@color/colorWhite"
+                android:text="Add medicine"
                 android:textAllCaps="false"
                 android:textSize="@dimen/font_14" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="@dimen/margin_4"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.5"
+                        android:gravity="start"
+                        android:padding="@dimen/padding_4"
+                        android:text="Medicine Name"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_14" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight=".8"
+                        android:gravity="start"
+                        android:padding="@dimen/padding_4"
+                        android:text="Frequency"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_14" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight=".7"
+                        android:gravity="start"
+                        android:padding="@dimen/padding_4"
+                        android:text="Duration"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_14" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:padding="@dimen/padding_4"
+                        android:text="Instructions"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="@dimen/font_14" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_temp_medicine_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="true"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Symptoms"
                 android:textColor="@color/secondaryTextColor"
@@ -148,14 +219,14 @@
                 android:background="@drawable/edit_text_background_style"
                 android:hint="Symptom"
                 android:inputType="text"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Give advice to patient"
                 android:textColor="@color/secondaryTextColor"
@@ -171,14 +242,14 @@
                 android:background="@drawable/edit_text_background_style"
                 android:hint="Advice"
                 android:inputType="text"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
                 android:text="Add a note"
                 android:textColor="@color/secondaryTextColor"
@@ -198,7 +269,7 @@
                 android:lines="5"
                 android:maxLines="5"
                 android:minLines="5"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
                 android:paddingTop="@dimen/padding_8"
                 android:scrollbars="vertical"
                 android:textColor="@color/primaryTextColor"

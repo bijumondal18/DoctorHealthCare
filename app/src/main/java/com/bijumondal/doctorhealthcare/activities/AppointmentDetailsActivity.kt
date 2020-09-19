@@ -18,6 +18,7 @@ class AppointmentDetailsActivity : AppCompatActivity() {
 
     private lateinit var mPreference: HealthCarePreference
 
+    private var patientId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class AppointmentDetailsActivity : AppCompatActivity() {
         btn_add_prescription.setOnClickListener {
             startActivity(
                 Intent(this@AppointmentDetailsActivity, AddPrescriptionsActivity::class.java)
-                //.putExtra("patientId", patient_id)
+                    .putExtra("patientId", patientId)
             )
         }
 
@@ -72,6 +73,10 @@ class AppointmentDetailsActivity : AppCompatActivity() {
 
         if (intent.hasExtra("appointmentForName") != null) {
             tv_appointment_for_name.text = intent.getStringExtra("appointmentForName")
+        }
+
+        if (intent.hasExtra("patientId") != null) {
+            patientId = intent.getStringExtra("patientId").toString()
         }
 
 

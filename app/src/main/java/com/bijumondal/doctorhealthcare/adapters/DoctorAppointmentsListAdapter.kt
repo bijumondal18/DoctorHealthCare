@@ -58,6 +58,7 @@ class DoctorAppointmentsListAdapter(
                 Intent(context, AppointmentDetailsActivity::class.java)
                     .putExtra("doctorName", appointmentsList[position].name)
                     .putExtra("doctorImage", appointmentsList[position].photo)
+                    .putExtra("patientId", patient_id)
                     .putExtra("appointmentDate", appointmentsList[position].add_date)
                     .putExtra("appointmentTime", appointmentsList[position].time_slot)
                     .putExtra("hospitalName", appointmentsList[position].hospital_name)

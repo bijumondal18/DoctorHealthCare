@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="4">
+
+    <TextView
+        android:id="@+id/tv_temp_med_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.5"
+        android:gravity="start"
+        android:padding="@dimen/padding_4"
+        android:text="Medicine"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14" />
+
+    <TextView
+        android:id="@+id/tv_temp_med_frequency"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".8"
+        android:gravity="start"
+        android:padding="@dimen/padding_4"
+        android:text="Frequency"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14" />
+
+    <TextView
+        android:id="@+id/tv_temp_med_duration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".7"
+        android:gravity="start"
+        android:padding="@dimen/padding_4"
+        android:text="Duration"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14" />
+
+    <TextView
+        android:id="@+id/tv_temp_med_instruction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:padding="@dimen/padding_4"
+        android:text="Instruction"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/font_14" />
+
+
+</LinearLayout>

@@ -39,11 +39,10 @@ class DoctorTimeSlotsAdapter(
 
         if (selectedItem == position) {
             holder.itemView.isSelected = true
-           // holder.timeSlotsName.setTextColor(Color.parseColor("#FFFFFF"))
+           holder.timeSlotsName.setTextColor(Color.parseColor("#FFFFFF"))
         } else {
             holder.itemView.isSelected = false
-           // holder.timeSlotsName.setTextColor(Color.parseColor("#000000"))
-
+            holder.timeSlotsName.setTextColor(Color.parseColor("#000000"))
         }
 
 
