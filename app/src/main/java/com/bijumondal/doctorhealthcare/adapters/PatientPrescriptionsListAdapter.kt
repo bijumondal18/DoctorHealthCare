@@ -26,11 +26,12 @@ class PatientPrescriptionsListAdapter(
     }
 
     override fun onBindViewHolder(holder: PatientPrescriptionsListAdapterViewHolder, position: Int) {
-        val patientName = "Prescribed by <b>${prescriptionsListForPatient[position].doctor}</b>"
+        val patientName = "Prescribed by <b>${prescriptionsListForPatient[position].doctor}</b> for"
         holder.patientName.text = Html.fromHtml(patientName)
 
         holder.patientSymptom.text = "${prescriptionsListForPatient[position].symptom}"
-        holder.medicine.text = prescriptionsListForPatient[position].medicine
+        val medicineName = prescriptionsListForPatient[position].medicine
+        holder.medicine.text = Html.fromHtml(medicineName)
         holder.note.text = prescriptionsListForPatient[position].note
         holder.advice.text = prescriptionsListForPatient[position].advice
 

@@ -181,9 +181,9 @@ class SetTimingsActivity : AppCompatActivity() {
 
     private fun deleteTimeSlots(request: RequestDeleteDoctorTimeSlots) {
         if (Helper.isConnectedToInternet(this@SetTimingsActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this@SetTimingsActivity)
-            }
+            }*/
             val call: Call<ResponseDeleteDoctorTimeSlots> = APIInterface.create().deleteDoctorTimeSlots(request)
             Helper.showLog("TAG", " request :- ${Gson().toJson(request)}")
             call.enqueue(object : Callback<ResponseDeleteDoctorTimeSlots> {
@@ -280,9 +280,9 @@ class SetTimingsActivity : AppCompatActivity() {
 
     private fun addTimeSlots(request: RequestAddDoctorTimeslots) {
         if (Helper.isConnectedToInternet(this@SetTimingsActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this)
-            }
+            }*/
             val call: Call<ResponseAddDoctorTimeslots> = APIInterface.create().addDoctorTimeSlots(request)
             Helper.showLog(TAG, " request :- ${Gson().toJson(request)}")
             call.enqueue(object : Callback<ResponseAddDoctorTimeslots> {
