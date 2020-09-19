@@ -66,7 +66,7 @@
                 android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Dr. biju mondal"
+                android:text="@string/text_doctor_name"
                 android:textAllCaps="true"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
@@ -81,7 +81,7 @@
                 android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Cardiology"
+                android:text="@string/text_doctor_department"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_14"
@@ -93,12 +93,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                android:drawableLeft="@drawable/ic_place"
+                android:drawableStart="@drawable/ic_place"
                 android:drawablePadding="@dimen/padding_4"
                 android:drawableTint="@color/secondaryTextColor"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="doctor address"
+                android:text="@string/text_doctor_address"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="hospital name - address"
+            android:text="@string/text_hospital_name_and_address"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/rl_pic"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="~ 500 rs consultation fees"
+            android:text="@string/text_consultation_fees"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/font_16"
             app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +159,7 @@
                 android:layout_marginEnd="@dimen/margin_8"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorOrange"
-                android:text="Book Video Consult"
+                android:text="@string/btn_book_video_consult"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_14" />
@@ -171,7 +171,7 @@
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:layout_weight="1"
-                android:text="Book Appointment"
+                android:text="@string/btn_book_appointment"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_14" />

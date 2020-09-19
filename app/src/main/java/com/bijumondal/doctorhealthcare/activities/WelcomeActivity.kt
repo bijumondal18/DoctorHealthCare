@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.bijumondal.doctorhealthcare.R
@@ -40,7 +41,7 @@ class WelcomeActivity : AppCompatActivity() {
                         mPreferences.setUserType(1)  //1 for patient
                         rb_patient.setTextColor(Color.parseColor("#FFFFFF"))
                         rb_doctor.setTextColor(Color.parseColor("#000000"))
-
+                        btn_next.visibility = View.VISIBLE
                     }
 
                     findViewById<RadioButton>(R.id.rb_doctor) -> {
@@ -51,6 +52,7 @@ class WelcomeActivity : AppCompatActivity() {
                         mPreferences.setUserType(2)   //2 for doctor
                         rb_doctor.setTextColor(Color.parseColor("#FFFFFF"))
                         rb_patient.setTextColor(Color.parseColor("#000000"))
+                        btn_next.visibility = View.VISIBLE
 
                     }
                 }

@@ -39,7 +39,7 @@
                 android:id="@+id/tv_doctor_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="patient name"
+                android:text="@string/text_patient_name"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_15" />
 
@@ -47,7 +47,7 @@
                 android:id="@+id/tv_patient_symptom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="patient symptom"
+                android:text="@string/hint_symptom"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -82,7 +82,7 @@
                     android:id="@+id/tv_medicine_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medicines : "
+                    android:text="@string/text_medicine"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -91,8 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_medicine_title"
-                    android:text="Medicines"
                     android:layout_marginTop="@dimen/margin_4"
+                    android:hint="@string/text_medicine"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -107,7 +107,7 @@
                     android:id="@+id/tv_advice_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Advice : "
+                    android:text="@string/hint_advice"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -116,8 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_8"
-                    android:layout_toRightOf="@id/tv_advice_title"
-                    android:text="Advice"
+                    android:layout_toEndOf="@id/tv_advice_title"
+                    android:text="@string/hint_advice"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -132,7 +132,7 @@
                     android:id="@+id/tv_note_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notes : "
+                    android:text="@string/hint_note"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -142,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_8"
                     android:layout_toRightOf="@id/tv_note_title"
-                    android:text="Notes"
+                    android:text="@string/hint_note"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 

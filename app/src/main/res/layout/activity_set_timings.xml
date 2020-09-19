@@ -39,9 +39,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="Choose Days of Week"
+                android:text="@string/text_choose_days_of_week"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -70,9 +70,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginTop="@dimen/margin_16"
-                        android:text="Start time"
+                        android:text="@string/text_start_time"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -85,9 +85,10 @@
                         android:layout_marginRight="@dimen/margin_16"
                         android:background="@drawable/edit_text_background_style"
                         android:gravity="center"
-                        android:hint="06:00 AM"
+                        android:hint="@string/hint_time_only"
                         android:inputType="date"
-                        android:paddingLeft="@dimen/padding_12"
+                        android:paddingStart="@dimen/padding_12"
+                        android:paddingEnd="@dimen/padding_12"
                         android:textAlignment="textStart"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16"
@@ -104,9 +105,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/margin_16"
                         android:layout_marginTop="@dimen/margin_16"
-                        android:text="End time"
+                        android:text="@string/text_end_time"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -119,9 +120,10 @@
                         android:layout_marginRight="@dimen/margin_16"
                         android:background="@drawable/edit_text_background_style"
                         android:gravity="center"
-                        android:hint="06:00 PM"
+                        android:hint="@string/hint_time_only"
                         android:inputType="date"
-                        android:paddingLeft="@dimen/padding_12"
+                        android:paddingStart="@dimen/padding_12"
+                        android:paddingEnd="@dimen/padding_12"
                         android:textAlignment="textStart"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16"
@@ -140,7 +142,7 @@
                 android:layout_margin="@dimen/margin_16"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawableTint="@color/colorWhite"
-                android:text="Add TimeSlots"
+                android:text="@string/btn_add_timeslots"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_16" />
@@ -154,9 +156,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="My TimeSlots"
+                android:text="@string/text_my_timeslots"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16"
                 android:textStyle="bold" />
@@ -174,15 +176,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="No TimeSlots found !"
+                android:text="@string/text_no_timeslots_found"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16"
                 android:visibility="gone" />
 
-
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

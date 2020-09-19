@@ -36,10 +36,10 @@
                     android:drawableLeft="@drawable/ic_edit_profile"
                     android:drawableTint="@color/colorWhite"
                     android:gravity="start|center"
-                    android:text="Edit profile"
+                    android:text="@string/btn_edit_profile"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/font_16" />
+                    android:textSize="@dimen/button_text_size" />
 
             </RelativeLayout>
 
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_margin="@dimen/margin_12"
-                        android:layout_toRightOf="@id/iv_doc_profile_image"
+                        android:layout_toEndOf="@id/iv_doc_profile_image"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_16"
                         android:layout_marginRight="@dimen/margin_16"
-                        android:drawableLeft="@drawable/ic_hospital_image"
+                        android:drawableStart="@drawable/ic_hospital_image"
                         android:drawablePadding="@dimen/padding_16"
                         android:drawableTint="@color/secondaryTextColor"
                         android:textColor="@color/secondaryTextColor"
@@ -147,7 +147,7 @@
                         android:layout_marginLeft="@dimen/margin_16"
                         android:layout_marginTop="@dimen/margin_8"
                         android:layout_marginRight="@dimen/margin_16"
-                        android:drawableLeft="@drawable/ic_rupee"
+                        android:drawableStart="@drawable/ic_rupee"
                         android:drawablePadding="@dimen/padding_16"
                         android:drawableTint="@color/secondaryTextColor"
                         android:textColor="@color/secondaryTextColor"
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_16"
                         android:layout_marginRight="@dimen/margin_16"
-                        android:drawableLeft="@drawable/ic_call"
+                        android:drawableStart="@drawable/ic_call"
                         android:drawablePadding="@dimen/padding_16"
                         android:drawableTint="@color/secondaryTextColor"
                         android:textColor="@color/secondaryTextColor"
@@ -192,7 +192,7 @@
                         android:layout_marginLeft="@dimen/margin_16"
                         android:layout_marginTop="@dimen/margin_12"
                         android:layout_marginRight="@dimen/margin_16"
-                        android:drawableLeft="@drawable/ic_email"
+                        android:drawableStart="@drawable/ic_email"
                         android:drawablePadding="@dimen/padding_16"
                         android:drawableTint="@color/secondaryTextColor"
                         android:textColor="@color/secondaryTextColor"
@@ -206,7 +206,7 @@
                         android:layout_marginLeft="@dimen/margin_16"
                         android:layout_marginTop="@dimen/margin_12"
                         android:layout_marginRight="@dimen/margin_16"
-                        android:drawableLeft="@drawable/ic_place"
+                        android:drawableStart="@drawable/ic_place"
                         android:drawablePadding="@dimen/padding_16"
                         android:drawableTint="@color/secondaryTextColor"
                         android:ellipsize="end"
@@ -238,13 +238,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:drawableLeft="@drawable/ic_appointment_outline"
+                        android:drawableStart="@drawable/ic_appointment_outline"
                         android:drawablePadding="@dimen/padding_12"
                         android:drawableTint="@color/primaryTextColor"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/padding_16"
-                        android:text="My Appointments"
+                        android:text="@string/text_my_appointments"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -259,13 +259,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:drawableLeft="@drawable/ic_prescription"
+                        android:drawableStart="@drawable/ic_prescription"
                         android:drawablePadding="@dimen/padding_12"
                         android:drawableTint="@color/primaryTextColor"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/padding_16"
-                        android:text="My Prescriptions"
+                        android:text="@string/text_my_prescriptions"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -280,13 +280,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:drawableLeft="@drawable/ic_share"
+                        android:drawableStart="@drawable/ic_share"
                         android:drawablePadding="@dimen/padding_12"
                         android:drawableTint="@color/primaryTextColor"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/padding_16"
-                        android:text="Share App"
+                        android:text="@string/text_share_app"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -301,13 +301,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:drawableLeft="@drawable/ic_rate_us"
+                        android:drawableStart="@drawable/ic_rate_us"
                         android:drawablePadding="@dimen/padding_12"
                         android:drawableTint="@color/primaryTextColor"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/padding_16"
-                        android:text="Rate Us"
+                        android:text="@string/text_rate_us"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_16" />
 
@@ -322,13 +322,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:drawableLeft="@drawable/ic_logout"
+                        android:drawableStart="@drawable/ic_logout"
                         android:drawablePadding="@dimen/padding_12"
                         android:drawableTint="@color/colorRed"
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/padding_16"
-                        android:text="Logout"
+                        android:text="@string/text_logout"
                         android:textColor="@color/colorRed"
                         android:textSize="@dimen/font_16" />
 

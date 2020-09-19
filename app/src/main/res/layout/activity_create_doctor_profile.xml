@@ -40,9 +40,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_32"
-                android:text="Create Profile"
+                android:text="@string/text_create_profile"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_22"
                 android:textStyle="bold" />
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_16"
                 android:layout_marginRight="@dimen/margin_16"
-                android:text="Please create your profile to get best services from us"
+                android:text="@string/text_please_create_your_profile_to_get_best_services_from_us"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_18" />
 
@@ -60,9 +60,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_32"
-                android:text="Department"
+                android:text="@string/text_department"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -75,17 +75,18 @@
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
                 android:gravity="center|start"
-                android:hint="Choose your Specialization"
-                android:paddingLeft="@dimen/padding_12"
+                android:hint="@string/hint_choose_your_specialization"
+                android:paddingStart="@dimen/padding_12"
+                android:paddingEnd="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="Choose Hospital"
+                android:text="@string/text_choose_hospital"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -98,17 +99,18 @@
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
                 android:gravity="center|start"
-                android:hint="Hospital Name"
-                android:paddingLeft="@dimen/padding_12"
+                android:hint="@string/text_hospital_name"
+                android:paddingStart="@dimen/padding_12"
+                android:paddingEnd="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="Set Your Visit Amount"
+                android:text="@string/text_set_your_visit_amount"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -120,12 +122,13 @@
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
-                android:drawableLeft="@drawable/ic_rupee"
+                android:drawableStart="@drawable/ic_rupee"
                 android:drawablePadding="@dimen/padding_8"
                 android:drawableTint="@color/primaryTextColor"
-                android:hint="Amount"
+                android:hint="@string/text_amount"
                 android:inputType="number"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
+                android:paddingEnd="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -133,9 +136,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="Address"
+                android:text="@string/text_address"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -147,19 +150,22 @@
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
-                android:hint="Address (Optional)"
+                android:hint="@string/hint_address_optional"
                 android:inputType="textPostalAddress"
                 android:maxLines="2"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
+                android:paddingEnd="@dimen/padding_12"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_create_doc_profile"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/material_button_height"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_16"
-                android:text="Create Profile"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:textSize="@dimen/button_text_size"
+                android:text="@string/text_create_account"
                 android:textAllCaps="false" />
 
 

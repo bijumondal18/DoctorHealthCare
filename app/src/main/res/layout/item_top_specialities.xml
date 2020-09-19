@@ -43,7 +43,6 @@
             android:lines="2"
             android:background="@color/colorPrimaryTransparent"
             android:maxLines="2"
-            android:text="TextView"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"

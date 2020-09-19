@@ -7,14 +7,13 @@
     android:background="@color/colorPrimary"
     tools:context=".activities.BookingSuccessfulActivity">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Appointment booked\nsuccessfully"
+        android:text="@string/text_appointment_booked_nsuccessfully"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/font_26"
@@ -31,7 +30,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="Your appointment is confirmed"
+        android:text="@string/text_your_appointment_is_confirmed"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/font_16"
@@ -47,8 +46,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/colorWhite"
-        android:text="Done"
+        android:text="@string/btn_done"
         android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

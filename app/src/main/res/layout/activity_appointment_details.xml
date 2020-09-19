@@ -58,9 +58,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="12dp"
-                    android:text="doctor name"
+                    android:text="@string/text_doctor_name"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_doctor_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_doctor_image"
@@ -78,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:text="Date &amp; Time : "
+                android:text="@string/hint_date_and_time"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                android:text="26-09-2020, 12:30pm"
+                android:text="@string/text_date_and_time"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -101,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:text="Hospital details :"
+                android:text="@string/text_hospital_details"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -110,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                android:text="LEED HMS"
+                android:text="@string/text_hospital_name"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -119,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:text="Dhaka"
+                android:text="@string/text_address"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -129,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_4"
-                android:text="+0185478547547"
+                android:text="@string/hint_phone_number"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/font_14" />
 
@@ -144,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:text="Procedure : "
+                android:text="@string/text_procedure"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -153,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                android:text="Consultation"
+                android:text="@string/text_consultation"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -167,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_12"
-                android:text="Appointment for : "
+                android:text="@string/text_appointment_for"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_14" />
 
@@ -182,13 +183,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_prescription"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/material_button_height"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_12"
-                android:text="Add Prescription"
+                android:text="@string/btn_add_prescription"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/font_14"
+                android:textSize="@dimen/button_text_size"
                 android:visibility="gone" />
 
         </LinearLayout>

@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Dr. biju mondal"
+                        android:text="@string/text_doctor_name"
                         android:textAllCaps="true"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="@dimen/font_18" />
@@ -107,7 +107,7 @@
                         android:layout_marginBottom="4dp"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Cardiology"
+                        android:text="@string/text_doctor_department"
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/font_14"
@@ -122,7 +122,7 @@
                         android:drawableTint="@color/secondaryTextColor"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="doctor address"
+                        android:text="@string/text_doctor_address"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="@dimen/font_15" />
 
@@ -148,9 +148,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Consultation fees: 500৳"
+                    android:text="@string/text_consultation_fees"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/font_18"
+                    android:textSize="@dimen/font_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
@@ -163,7 +163,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text="hospitalName \u2022 hospitalAddress"
+                    android:text="@string/text_hospital_name_and_address"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="+015485485485"
+                    android:text="@string/hint_phone_number"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_hospital_name_and_address_booking"
@@ -195,7 +195,7 @@
                     android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
-                    android:text="Choose Date :"
+                    android:text="@string/text_choose_date"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16"
                     android:textStyle="bold" />
@@ -210,7 +210,8 @@
                     android:background="@drawable/edit_text_background_style"
                     android:gravity="center"
                     android:inputType="date"
-                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingStart="@dimen/padding_12"
+                    android:paddingEnd="@dimen/padding_12"
                     android:textAlignment="textStart"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16"
@@ -228,10 +229,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
-                    android:text="Choose Timings :"
+                    android:text="@string/text_choose_timings"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16"
                     android:textStyle="bold" />
@@ -249,9 +250,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
-                    android:text="No time slots found !"
+                    android:text="@string/text_no_timeslots_found"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14"
                     android:visibility="gone" />
@@ -268,9 +269,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:text="Appointment for : "
+                    android:text="@string/text_appointment_for"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_16"
                     android:textStyle="bold" />
@@ -278,9 +279,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:text="Full Name"
+                    android:text="@string/text_full_name"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -292,18 +293,19 @@
                     android:layout_marginTop="@dimen/margin_8"
                     android:layout_marginRight="@dimen/margin_16"
                     android:background="@drawable/edit_text_background_style"
-                    android:hint="Full Name"
+                    android:hint="@string/text_full_name"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingStart="@dimen/padding_12"
+                    android:paddingEnd="@dimen/padding_12"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginStart="@dimen/margin_16"
                     android:layout_marginTop="@dimen/margin_16"
-                    android:text="Phone number"
+                    android:text="@string/hint_phone_number"
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -316,10 +318,11 @@
                     android:layout_marginRight="@dimen/margin_16"
                     android:layout_marginBottom="@dimen/margin_16"
                     android:background="@drawable/edit_text_background_style"
-                    android:hint="Phone number (optional)"
+                    android:hint="@string/text_phone_number_optional"
                     android:inputType="number"
                     android:maxLength="13"
-                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingStart="@dimen/padding_12"
+                    android:paddingEnd="@dimen/padding_12"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/font_14" />
 
@@ -334,12 +337,13 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_confirm_and_pay"
+                    style="@style/AppTheme.RoundedCornerMaterialButton"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/material_button_height"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_16"
-                    android:text="Confirm Appointment"
+                    android:text="@string/btn_confirm_appointment"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/font_14" />
+                    android:textSize="@dimen/button_text_size" />
 
             </LinearLayout>
 

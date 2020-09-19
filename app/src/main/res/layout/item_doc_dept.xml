@@ -19,7 +19,7 @@
         android:drawableTint="@color/secondaryTextColor"
         android:paddingTop="@dimen/padding_12"
         android:paddingBottom="@dimen/padding_12"
-        android:text="doctor department"
+        android:text="@string/text_doctor_department"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/font_15" />
 
@@ -37,7 +37,6 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="@dimen/padding_4"
-        android:text="doctor department desc"
         android:textColor="@color/secondaryTextColor"
         android:textSize="@dimen/font_14"
         android:visibility="gone" />

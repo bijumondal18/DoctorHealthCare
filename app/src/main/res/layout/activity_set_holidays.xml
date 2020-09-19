@@ -39,9 +39,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="Choose Date of Holidays"
+                android:text="@string/text_choose_date_of_holidays"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16" />
 
@@ -54,9 +54,10 @@
                 android:layout_marginRight="@dimen/margin_16"
                 android:background="@drawable/edit_text_background_style"
                 android:gravity="center"
-                android:hint="Choose date"
+                android:hint="@string/text_choose_date"
                 android:inputType="date"
-                android:paddingLeft="@dimen/padding_12"
+                android:paddingStart="@dimen/padding_12"
+                android:paddingEnd="@dimen/padding_12"
                 android:textAlignment="textStart"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16"
@@ -71,7 +72,7 @@
                 android:layout_margin="@dimen/margin_16"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawableTint="@color/colorWhite"
-                android:text="Add Holidays"
+                android:text="@string/btn_add_holidays"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/font_16" />
@@ -85,9 +86,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="My Holidays"
+                android:text="@string/text_my_holidays"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/font_16"
                 android:textStyle="bold" />
@@ -105,9 +106,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_16"
-                android:text="No Holidays found !"
+                android:text="@string/text_no_holidays_found"
                 android:textColor="@color/secondaryTextColor"
                 android:textSize="@dimen/font_16"
                 android:visibility="gone" />
