@@ -8,10 +8,10 @@ object Constants {
     const val API_TIME_FORMAT = "HH:mm:ss"
     const val API_CONTENT_TYPE = "application/json"
 
-    const val API_BASE_URL = "http://helping-world.in/medical/"
-    //const val API_BASE_URL = "http://medicine.leedmeditech.com/"
+    const val API_BASE_URL = "http://helping-world.in/medical/"  //staging url
+    //const val API_BASE_URL = "http://medicine.leedmeditech.com/"  //live url
 
-    //?XDEBUG_SESSION_START=netbeans-xdebug
+    //?XDEBUG_SESSION_START=netbeans-xdebug    //-> add this after url for debug
 
     /*
     * PATIENT
