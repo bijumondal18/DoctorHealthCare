@@ -4,12 +4,12 @@ object Constants {
     const val LOCAL_IMAGE_DIRECTORY = "/DoctorHealthCare"
     const val GALLERY = 1
     const val CAMERA = 2
-    const val API_DATE_FORMAT = "yyyy-MM-dd"
+    const val API_DATE_FORMAT = "dd-MM-yyyy"
     const val API_TIME_FORMAT = "HH:mm:ss"
     const val API_CONTENT_TYPE = "application/json"
 
-    const val API_BASE_URL = "http://helping-world.in/medical/"  //staging url
-    //const val API_BASE_URL = "http://medicine.leedmeditech.com/"  //live url
+    //const val API_BASE_URL = "http://helping-world.in/medical/"  //staging url
+    const val API_BASE_URL = "http://medicine.leedmeditech.com/"  //live url
 
     //?XDEBUG_SESSION_START=netbeans-xdebug    //-> add this after url for debug
 

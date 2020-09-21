@@ -78,8 +78,8 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_margin="@dimen/margin_12"
-                        app:riv_corner_radius="@dimen/radius_8"
-                        android:src="@drawable/ic_avatar" />
+                        android:src="@drawable/ic_avatar"
+                        app:riv_corner_radius="@dimen/radius_8" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -93,11 +93,11 @@
                             android:id="@+id/tv_profile_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:padding="@dimen/padding_2"
                             android:textAllCaps="true"
                             android:textColor="@color/primaryTextColor"
-                            android:textSize="@dimen/font_20" />
+                            android:textSize="@dimen/font_20"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -113,10 +113,12 @@
                 app:cardElevation="@dimen/elevation_0dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_gender_dob_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:background="@drawable/card_background_style"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="3">
 
                     <LinearLayout
@@ -131,10 +133,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
-                            android:textSize="@dimen/font_18" />
+                            android:textSize="@dimen/font_18"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -160,10 +162,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
-                            android:textSize="@dimen/font_18" />
+                            android:textSize="@dimen/font_18"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -189,10 +191,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_16"
-                            android:textStyle="bold"
                             android:textAlignment="center"
                             android:textColor="@color/primaryTextColor"
-                            android:textSize="@dimen/font_18" />
+                            android:textSize="@dimen/font_18"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -220,9 +222,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/card_background_style"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/padding_12"
-                    android:background="@drawable/card_background_style"
                     android:paddingBottom="@dimen/padding_12">
 
                     <TextView

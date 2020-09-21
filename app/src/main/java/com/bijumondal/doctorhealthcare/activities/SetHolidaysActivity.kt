@@ -50,15 +50,12 @@ class SetHolidaysActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_holidays)
-        mPreference = HealthCarePreference(this@SetHolidaysActivity)
-        mRecyclerView = findViewById(R.id.rv_holidays_list)
+
+        initViews()
 
         setupToolbar()
 
-        val currentDate = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formatted = currentDate.format(formatter)
-        edt_holidays.hint = formatted.toString()
+        edt_holidays.hint = Helper.getCurrentDate()
 
         edt_holidays.setOnClickListener {
             showDatePicker()
@@ -75,7 +72,11 @@ class SetHolidaysActivity : AppCompatActivity() {
         val requestHolidaysList = RequestDoctorHolidaysList(mPreference.getUserId().toString())
         fetchHolidaysList(requestHolidaysList)
 
+    }
 
+    private fun initViews() {
+        mPreference = HealthCarePreference(this@SetHolidaysActivity)
+        mRecyclerView = findViewById(R.id.rv_holidays_list)
     }
 
     private fun fetchHolidaysList(request: RequestDoctorHolidaysList) {
@@ -297,9 +298,7 @@ class SetHolidaysActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, dayOfMonth, monthOfYear, year ->
-
-            // Display Selected date in textbox
+        val dpd = DatePickerDialog(this, { view, dayOfMonth, monthOfYear, year ->
             Helper.showLog(TAG, "$dayOfMonth-$monthOfYear-$year")
             dateOfHolidays = "$dayOfMonth-${monthOfYear + 1}-$year"
             edt_holidays.text = dateOfHolidays

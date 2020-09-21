@@ -87,19 +87,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mPreference = HealthCarePreference(this@MainActivity)
-        setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.title = ""
-        actionBar.setDisplayShowTitleEnabled(false)
-        actionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        val inflater = layoutInflater.inflate(R.layout.abs_layout, null)
-        actionBar.setCustomView(
-            inflater, ActionBar.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER
-            )
-        )
+
+        configureToolbar()
 
         initViews()
 
@@ -126,6 +115,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
+        clickListeners()
+
+        fetchProfileDetails()
+
+    }
+
+    private fun initViews() {
+        mPreference = HealthCarePreference(this@MainActivity)
+        navigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+        bannerSliderViewPager = findViewById(R.id.banner_slider_view_pager)
+        allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
+        topSpecialitiesRecyclerView = findViewById(R.id.rv_dr_dept)
+        headerView = nav_view.inflateHeaderView(R.layout.nav_header_main)
+        profileImage = headerView.findViewById(R.id.iv_profile_image_nav_header)
+    }
+
+    private fun configureToolbar() {
+        setSupportActionBar(toolbar_main)
+        val actionBar = supportActionBar
+        actionBar!!.title = ""
+        actionBar.setDisplayShowTitleEnabled(false)
+        actionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        val inflater = layoutInflater.inflate(R.layout.abs_layout, null)
+        actionBar.setCustomView(
+            inflater, ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER
+            )
+        )
+
+    }
+
+    private fun clickListeners() {
+
         card_appointments.setOnClickListener {
             startActivity(Intent(this@MainActivity, MyAppointmentsActivity::class.java))
         }
@@ -138,8 +162,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         card_set_timings.setOnClickListener {
             startActivity(Intent(this@MainActivity, SetTimingsActivity::class.java))
         }
-
-        fetchProfileDetails()
 
     }
 
@@ -426,19 +448,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun initViews() {
-        navigationView = findViewById(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this)
-        bannerSliderViewPager = findViewById(R.id.banner_slider_view_pager)
-        allDoctorsRecyclerView = findViewById(R.id.rv_all_doctors)
-        topSpecialitiesRecyclerView = findViewById(R.id.rv_dr_dept)
-        headerView = nav_view.inflateHeaderView(R.layout.nav_header_main)
-        profileImage = headerView.findViewById(R.id.iv_profile_image_nav_header)
-    }
-
     private fun setDrawerLayout() {
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar,
+            this, drawer_layout, toolbar_main,
             R.string.drawer_open,
             R.string.drawer_close
         )

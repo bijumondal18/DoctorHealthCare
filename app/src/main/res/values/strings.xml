@@ -115,6 +115,7 @@
     <string name="text_full_name">Full Name</string>
     <string name="text_phone_number_optional">Phone number (optional)</string>
     <string name="btn_confirm_appointment">Confirm Appointment</string>
+    <string name="btn_edit_prescription">Edit Prescription</string>
 
 
 </resources>

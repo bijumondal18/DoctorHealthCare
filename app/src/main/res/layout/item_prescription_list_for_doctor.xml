@@ -65,10 +65,10 @@
 
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view3">
@@ -149,6 +149,27 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_edit_prescription"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginBottom="8dp"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/radius_24"
+            android:drawableLeft="@drawable/ic_edit_profile"
+            android:drawableTint="@color/colorPrimary"
+            android:drawablePadding="@dimen/padding_8"
+            android:text="@string/btn_edit_prescription"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:strokeColor="@color/colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

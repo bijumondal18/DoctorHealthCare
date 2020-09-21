@@ -40,6 +40,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class UpdatePatientProfileActivity : AppCompatActivity() {
@@ -64,10 +66,12 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
     var address = ""
 
     var userId = ""
+    var crntDate = ""
     private lateinit var imgProfilePic: CircleImageView
     private lateinit var imgEditProfilePic: ImageView
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_patient_profile)
@@ -87,6 +91,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
         mPreference = HealthCarePreference(this@UpdatePatientProfileActivity)
         imgProfilePic = findViewById(R.id.iv_user_profile_image)
@@ -123,6 +128,12 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
         imgEditProfilePic.setOnClickListener {
             CaptureImage.showPictureDialog(this@UpdatePatientProfileActivity)
         }
+
+        val currentDate = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = currentDate.format(formatter)
+
+        crntDate = formatted.toString()
 
     }
 
@@ -196,8 +207,9 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 if (mData.birthdate != null) {
                                     tv_date.text = mData.birthdate
                                     mPreference.setDOB(mData.birthdate)
+                                }else{
+                                    tv_date.text = crntDate
                                 }
-
 
                             }
 

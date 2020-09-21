@@ -165,6 +165,10 @@ class PatientProfileActivity : AppCompatActivity() {
                                 if (mData.bloodgroup != null) {
                                     tv_blood_group.text = mData.bloodgroup
                                     mPreference.setBloodGroup(mData.bloodgroup)
+                                    ll_gender_dob_layout.visibility = View.VISIBLE
+
+                                } else {
+                                    ll_gender_dob_layout.visibility = View.GONE
                                 }
 
                             }

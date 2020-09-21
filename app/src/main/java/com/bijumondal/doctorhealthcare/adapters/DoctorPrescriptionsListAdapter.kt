@@ -1,12 +1,14 @@
 package com.bijumondal.doctorhealthcare.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.activities.AddPrescriptionsActivity
 import com.bijumondal.doctorhealthcare.models.doctorPrescriptions.Data
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_prescription_list_for_doctor.view.*
@@ -40,6 +42,16 @@ class DoctorPrescriptionsListAdapter(
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForDoctor[position].photo, R.drawable.ic_avatar)
         }
 
+        holder.btnEditPrescription.setOnClickListener {
+            context.startActivity(
+                Intent(context, AddPrescriptionsActivity::class.java)
+                    .putExtra("patientId", prescriptionsListForDoctor[position].patient_id)
+                    .putExtra("note", prescriptionsListForDoctor[position].note)
+                    .putExtra("advice", prescriptionsListForDoctor[position].advice)
+                    .putExtra("symptom", prescriptionsListForDoctor[position].symptom)
+            )
+        }
+
     }
 
     class DoctorPrescriptionsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -49,6 +61,7 @@ class DoctorPrescriptionsListAdapter(
         val medicine = view.tv_medicine
         val advice = view.tv_advice
         val note = view.tv_note
+        val btnEditPrescription = view.btn_edit_prescription
 
     }
 }

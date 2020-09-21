@@ -100,6 +100,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_prescriptions)
 
         initViews()
+
         setupToolbar()
 
         tv_choose_medicine_name.setOnClickListener {
@@ -247,7 +248,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
                                 Helper.showLog(TAG, response.body()!!.data.message)
 
                             } else if (response.body()!!.errors != null) {
-                               // Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.errors)
+                                // Helper.toastShort(this@AddPrescriptionsActivity, response.body()!!.errors)
                                 Helper.showLog(TAG, response.body()!!.errors)
 
                             }
@@ -287,10 +288,22 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             doctorId = mPreference.getUserId().toString()
         }
 
-        val currentDate = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formatted = currentDate.format(formatter)
-        prescriptionDate = formatted.toString()
+        prescriptionDate = Helper.getCurrentDate().toString()
+
+        if (intent.hasExtra("advice") != null) {
+            edt_advice.setText(intent.getStringExtra("advice"))
+            advice = intent.getStringExtra("advice").toString()
+        }
+
+        if (intent.hasExtra("note") != null) {
+            edt_note.setText(intent.getStringExtra("note"))
+            note = intent.getStringExtra("note").toString()
+        }
+
+        if (intent.hasExtra("symptom") != null) {
+            edt_symptom.setText(intent.getStringExtra("symptom"))
+            symptom = intent.getStringExtra("symptom").toString()
+        }
 
     }
 
@@ -366,7 +379,7 @@ class AddPrescriptionsActivity : AppCompatActivity() {
             doSubmitPrescriptions(request)
 
         } else {
-            Helper.toastLong(this@AddPrescriptionsActivity, "empty Field's !")
+            Helper.toastLong(this@AddPrescriptionsActivity, "Fields shouldn't be empty!")
         }
 
     }

@@ -23,6 +23,8 @@ import com.bijumondal.doctorhealthcare.Constants
 import com.bijumondal.doctorhealthcare.R
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.regex.Pattern
 
@@ -195,6 +197,12 @@ class Helper {
             return weekDays!!
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun getCurrentDate(): String? {
+            val currentDate = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            return currentDate.format(formatter)
+        }
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         fun showLoading(context: Context) {
@@ -208,7 +216,6 @@ class Helper {
 
         fun hideLoading() {
             try {
-
                 if (progressDialog.isShowing)
                     progressDialog.dismiss()
 
@@ -314,43 +321,7 @@ class Helper {
             }
         }
 
-        /* fun showAppCloseAlert(context: Context) {
-             val dialog = Dialog(context)
-             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-             dialog.setContentView(R.layout.dialog_alert)
-             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-             dialog.show()
-
-             dialog.findViewById<Button>(R.id.btn_positive).setOnClickListener {
-                 dialog.dismiss()
-                 (context as AppCompatActivity).finish()
-             }
-             dialog.findViewById<Button>(R.id.btn_negative).setOnClickListener {
-                 dialog.dismiss()
-             }
-         }
-
-         fun showMessageDialogOnly(context: Context, msg: String) {
-             val dialog = Dialog(context)
-             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-             dialog.setContentView(R.layout.dialog_alert)
-             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-             dialog.show()
-             dialog.tv_title.text = msg
-             dialog.btn_negative.visibility = View.GONE
-             dialog.findViewById<Button>(R.id.btn_positive).setOnClickListener {
-                 dialog.dismiss()
-                 (context as AppCompatActivity).finish()
-             }
-
-             *//*dialog.findViewById<Button>(R.id.btn_negative).setOnClickListener {
-                dialog.dismiss()
-            }*//*
-        }*/
-
-
-        /*
-        fun showNetworkErrorAlert(context: Context, isForceToFinish: Boolean) {
+        /*fun showNetworkErrorAlert(context: Context, isForceToFinish: Boolean) {
             val dialog = Dialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_internet_error)
