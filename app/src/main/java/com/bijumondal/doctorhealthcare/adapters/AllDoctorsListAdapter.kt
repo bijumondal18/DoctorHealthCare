@@ -39,10 +39,6 @@ class AllDoctorsListAdapter(
         holder.doctorVisitAmount.text = "~ ৳ ${allDoctorsList[position].visit_amount} Consultation fees"
         holder.hospitalNameAndAddress.text = "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}"
 
-        holder.btnVideoConsultant.setOnClickListener {
-            Helper.toastLong(context, "Video calling features coming soon.")
-        }
-
         if (allDoctorsList[position].photo != null) {
             ImageLoader.loadImageFromUrl(holder.doctorImage, allDoctorsList[position].photo, R.drawable.ic_avatar)
         }
@@ -56,6 +52,22 @@ class AllDoctorsListAdapter(
                     .putExtra("doctorId", doctorId)
                     .putExtra("hospitalId", allDoctorsList[position].hospital_id)
                     .putExtra("doctorName", allDoctorsList[position].name)
+                    .putExtra("doctorPhone", allDoctorsList[position].phone)
+                    .putExtra("doctorAddress", allDoctorsList[position].address)
+                    .putExtra("doctorDept", allDoctorsList[position].department)
+                    .putExtra("hospitalPhone", allDoctorsList[position].hospitalphoneno)
+                    .putExtra("doctorVisitAmount", "৳ ${allDoctorsList[position].visit_amount}")
+                    .putExtra("hospitalNameAndAddress", "${allDoctorsList[position].hospitalname} \u25CF ${allDoctorsList[position].hospitaladdress}")
+            )
+        }
+
+        holder.btnVideoConsultant.setOnClickListener {
+            context.startActivity(
+                Intent(context!!, BookingActivity::class.java)
+                    .putExtra("doctorPhoto", allDoctorsList[position].photo)
+                    .putExtra("doctorName", allDoctorsList[position].name)
+                    .putExtra("doctorId", doctorId)
+                    .putExtra("hospitalId", allDoctorsList[position].hospital_id)
                     .putExtra("doctorPhone", allDoctorsList[position].phone)
                     .putExtra("doctorAddress", allDoctorsList[position].address)
                     .putExtra("doctorDept", allDoctorsList[position].department)

@@ -136,7 +136,7 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(docDept)
         ) {
 
-            val request = RequestCreateDoctorProfile(address, docDept, userId, email, photo, phone, "${firstname} ${lastname}", "", hospitalId, visitAmount)
+            val request = RequestCreateDoctorProfile(address, docDept, userId, email, photo, phone, firstname,lastname, "", hospitalId, visitAmount)
             updateDoctorProfile(request)
 
         } else {
@@ -377,20 +377,17 @@ class UpdateDoctorProfileActivity : AppCompatActivity() {
         Helper.showLoading(this@UpdateDoctorProfileActivity)
         val call: Call<ResponseDoctorPhoto> = APIInterface.create().getDoctorProfilePhoto(fileToUpload, mFile)
         call.enqueue(object : Callback<ResponseDoctorPhoto> {
-            override fun onResponse(
-                call: Call<ResponseDoctorPhoto>,
-                response: Response<ResponseDoctorPhoto>
-            ) {
+            override fun onResponse(call: Call<ResponseDoctorPhoto>, response: Response<ResponseDoctorPhoto>) {
                 Helper.hideLoading()
                 if (response.isSuccessful) {
                     Helper.showLog(TAG, "Response : ${response.body()!!}")
                     if (response.body()!!.success) {
                         val mData = response.body()!!.data
                         if (mData != null) {
+
                             if (mData.photo != null) {
                                 photo = mData.photo
                                 mPreference.setProfileImage(photo)
-
                             }
 
                             Helper.hideLoading()

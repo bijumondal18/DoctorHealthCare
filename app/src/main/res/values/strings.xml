@@ -116,6 +116,9 @@
     <string name="text_phone_number_optional">Phone number (optional)</string>
     <string name="btn_confirm_appointment">Confirm Appointment</string>
     <string name="btn_edit_prescription">Edit Prescription</string>
+    <string name="text_video_consultation">Video Consultation</string>
+    <string name="text_booking_type">What would you like to book?</string>
+    <string name="text_in_clinic_appointment">In-clinic Appointment</string>
 
 
 </resources>

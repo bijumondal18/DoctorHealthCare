@@ -17,7 +17,7 @@ class CaptureImage {
             val pictureDialogItems = arrayOf("from Gallery", "from Camera")
             pictureDialog.setItems(
                 pictureDialogItems
-            ) { dialog, which ->
+            ) { _, which ->
                 when (which) {
                     0 -> choosePhotoFromGallery(context)
                     1 -> takePhotoFromCamera(context)

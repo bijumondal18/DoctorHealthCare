@@ -114,9 +114,12 @@ class DoctorProfileActivity : AppCompatActivity() {
                                     ImageLoader.loadCircleImageFromUrl(iv_doc_profile_image, mData.photo, R.drawable.ic_avatar)
                                 }
 
-                                if (mData.name != null) {
-                                    tv_doc_profile_name.text = mData.name
+                                if (mData.firstname != null && mData.lastname != null) {
+                                    tv_doc_profile_name.text = "${mData.firstname} ${mData.lastname}"
+                                    mPreference.setFirstName(mData.firstname)
+                                    mPreference.setLastName(mData.lastname)
                                 }
+
                                 if (mData.phone != null) {
                                     tv_doc_profile_mobile_number.text = mData.phone
                                     tv_doc_profile_mobile_number.visibility = View.VISIBLE

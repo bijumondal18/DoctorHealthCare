@@ -165,7 +165,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             !TextUtils.isEmpty(phone)
         ) {
 
-            val request = RequestCreatePatientProfile(address, photo, "", bloodGroup, mPreference.getDOB().toString(), email, phone, "${firstname} ${lastname}", userId, Helper.getGender(gender!!))
+            val request = RequestCreatePatientProfile(address, photo, "", bloodGroup, mPreference.getDOB().toString(), email, phone, firstname, lastname, userId, Helper.getGender(gender!!))
             updatePatientProfile(request)
 
         } else {
@@ -197,6 +197,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
                                 if (mData.photo != null) {
                                     ImageLoader.loadCircleImageFromUrl(imgProfilePic, mData.photo, R.drawable.ic_avatar)
                                 }
+
                                 if (mData.email != null) {
                                     edt_email.setText(mData.email)
                                 }

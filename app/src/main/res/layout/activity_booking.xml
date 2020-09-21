@@ -164,6 +164,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/text_hospital_name_and_address"
+                    android:textColor="@color/primaryTextColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -181,6 +182,51 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_hospital_name_and_address_booking" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginBottom="@dimen/margin_4"
+                    android:text="@string/text_booking_type"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/font_16"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_consultation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_in_clinic_appointment"
+                    android:textSize="@dimen/font_14"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:textColor="@color/primaryTextColor" />
+
+                <RadioButton
+                    android:id="@+id/rb_video_consultation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_video_consultation"
+                    android:textSize="@dimen/font_14"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:textColor="@color/primaryTextColor" />
+
+                </RadioGroup>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -214,6 +260,7 @@
                     android:paddingEnd="@dimen/padding_12"
                     android:textAlignment="textStart"
                     android:textColor="@color/primaryTextColor"
+                    android:textColorHint="@color/secondaryTextColor"
                     android:textSize="@dimen/font_16"
                     tools:ignore="RtlCompat" />
 
@@ -298,6 +345,7 @@
                     android:paddingStart="@dimen/padding_12"
                     android:paddingEnd="@dimen/padding_12"
                     android:textColor="@color/primaryTextColor"
+                    android:textColorHint="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
                 <TextView
@@ -324,6 +372,7 @@
                     android:paddingStart="@dimen/padding_12"
                     android:paddingEnd="@dimen/padding_12"
                     android:textColor="@color/primaryTextColor"
+                    android:textColorHint="@color/secondaryTextColor"
                     android:textSize="@dimen/font_14" />
 
             </LinearLayout>

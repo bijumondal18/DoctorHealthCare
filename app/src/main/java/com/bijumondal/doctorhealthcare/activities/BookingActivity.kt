@@ -114,14 +114,13 @@ class BookingActivity : AppCompatActivity() {
 
         })
 
-
         btn_confirm_and_pay.setOnClickListener {
             if (dateOfBooking != null && !TextUtils.isEmpty(dateOfBooking)) {
                 if (gender != null && bloodGroup != null) {
                     if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
                         if (!TextUtils.isEmpty(appointmentForName)) {
 
-                            val request = RequestBookAppointment("", dateInString, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId)
+                            val request = RequestBookAppointment("", dateInString, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId,"1")
                             bookAppointment(request)
 
                         } else {

@@ -9,5 +9,6 @@ data class RequestBookAppointment(
     val patient_id: String,
     val sex: String,
     val timeslot: String,
-    val hospital_id: String
+    val hospital_id: String,
+    val type: String
 )

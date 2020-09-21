@@ -56,6 +56,7 @@ import com.bijumondal.doctorhealthcare.models.patientProfileDetails.ResponsePati
 import com.bijumondal.doctorhealthcare.models.patientRegistration.RequestPatientRegistration
 import com.bijumondal.doctorhealthcare.models.patientRegistration.ResponsePatientRegistration
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -69,10 +70,14 @@ import java.util.concurrent.TimeUnit
 interface APIInterface {
     companion object Factory {
         fun create(): APIInterface {
+            val gson: Gson = GsonBuilder()
+                .setLenient()
+                .create()
+
             val retrofit = Retrofit.Builder()
                 .client(provideOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(Constants.API_BASE_URL)
                 .build()
 

@@ -8,7 +8,8 @@ data class RequestCreatePatientProfile(
     val dob: String,
     val email: String,
     val mobile: String,
-    val name: String,
+    val firstname: String,
+    val lastname: String,
     val patient_id: String,
     val sex: String
 )
