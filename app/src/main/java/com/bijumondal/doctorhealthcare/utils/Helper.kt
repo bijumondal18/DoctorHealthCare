@@ -128,6 +128,16 @@ class Helper {
             return getgender!!
         }
 
+        fun getBookingType(type: Int): String {
+            var bookingType: String? = null
+            when (type) {
+                1 -> bookingType = "In-clinic Appointment"
+                2 -> bookingType = "Video Consultation"
+                0 -> bookingType = "Others"
+            }
+            return bookingType!!
+        }
+
         fun bloodGroup(type: Int): String {
             var bloodGroup: String? = null
             when (type) {

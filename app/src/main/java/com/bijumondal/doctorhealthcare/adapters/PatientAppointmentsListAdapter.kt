@@ -58,6 +58,7 @@ class PatientAppointmentsListAdapter(
                     .putExtra("hospitalAddress", appointmentsList[position].hospital_address)
                     .putExtra("hospitalNumber", appointmentsList[position].hospital_phone)
                     .putExtra("appointmentForName", appointmentsList[position].name)
+                    .putExtra("appointmentType", appointmentsList[position].type)
             )
         }
 

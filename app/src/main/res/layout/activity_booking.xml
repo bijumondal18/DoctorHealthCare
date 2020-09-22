@@ -206,23 +206,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <RadioButton
-                    android:id="@+id/rb_consultation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_in_clinic_appointment"
-                    android:textSize="@dimen/font_14"
-                    android:layout_marginStart="@dimen/margin_16"
-                    android:textColor="@color/primaryTextColor" />
+                    <RadioButton
+                        android:id="@+id/rb_appointment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:text="@string/text_in_clinic_appointment"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_14" />
 
-                <RadioButton
-                    android:id="@+id/rb_video_consultation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_video_consultation"
-                    android:textSize="@dimen/font_14"
-                    android:layout_marginStart="@dimen/margin_16"
-                    android:textColor="@color/primaryTextColor" />
+                    <RadioButton
+                        android:id="@+id/rb_video_consultation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_16"
+                        android:text="@string/text_video_consultation"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/font_14" />
 
                 </RadioGroup>
 

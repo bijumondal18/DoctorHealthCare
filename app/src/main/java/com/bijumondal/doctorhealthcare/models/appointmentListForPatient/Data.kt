@@ -14,5 +14,6 @@ data class Data(
     val hospital_address: String,
     val hospital_phone: String,
     val hospital_id: String,
-    val hospital_name: String
+    val hospital_name: String,
+    val type: String
 )

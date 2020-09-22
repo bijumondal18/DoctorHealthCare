@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bijumondal.doctorhealthcare.R
+import com.bijumondal.doctorhealthcare.utils.HealthCarePreference
 import com.bijumondal.doctorhealthcare.utils.ImageLoader
 import kotlinx.android.synthetic.main.item_prescription_list_for_doctor.view.*
 
@@ -16,8 +17,12 @@ class PatientPrescriptionsListAdapter(
 ) :
     RecyclerView.Adapter<PatientPrescriptionsListAdapter.PatientPrescriptionsListAdapterViewHolder>() {
 
+    private lateinit var mPreference: HealthCarePreference
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientPrescriptionsListAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_prescription_list_for_doctor, parent, false)
+        mPreference = HealthCarePreference(context!!)
+
         return PatientPrescriptionsListAdapterViewHolder(view)
     }
 
@@ -39,6 +44,10 @@ class PatientPrescriptionsListAdapter(
             ImageLoader.loadImageFromUrl(holder.patientImage, prescriptionsListForPatient[position].photo, R.drawable.ic_avatar)
         }
 
+        if (mPreference.getUserType() == 1){
+            holder.btnEditPrescription.visibility = View.GONE
+        }
+
     }
 
     class PatientPrescriptionsListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -48,6 +57,7 @@ class PatientPrescriptionsListAdapter(
         val medicine = view.tv_medicine
         val advice = view.tv_advice
         val note = view.tv_note
+        val btnEditPrescription = view.btn_edit_prescription
     }
 
 }

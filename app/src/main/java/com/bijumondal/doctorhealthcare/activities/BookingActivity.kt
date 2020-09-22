@@ -56,6 +56,7 @@ class BookingActivity : AppCompatActivity() {
     var appointmentForName: String = ""
 
     var dayOfWeek = ""
+    var bookingType: Int? = 0
 
     var isSelected: Boolean = false
 
@@ -114,30 +115,43 @@ class BookingActivity : AppCompatActivity() {
 
         })
 
+        if (rb_appointment.isChecked) {
+            bookingType = 1
+        } else if (rb_video_consultation.isChecked) {
+            bookingType = 2
+        } else {
+            bookingType = 0
+        }
+
         btn_confirm_and_pay.setOnClickListener {
-            if (dateOfBooking != null && !TextUtils.isEmpty(dateOfBooking)) {
-                if (gender != null && bloodGroup != null) {
-                    if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
-                        if (!TextUtils.isEmpty(appointmentForName)) {
+            doValidationForBookAppointment()
+        }
 
-                            val request = RequestBookAppointment("", dateInString, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId,"1")
-                            bookAppointment(request)
+    }
 
-                        } else {
-                            Helper.toastLong(this@BookingActivity, "Please enter patient name !")
-                        }
+    private fun doValidationForBookAppointment() {
+        if (dateOfBooking != null && !TextUtils.isEmpty(dateOfBooking)) {
+            if (gender != null && bloodGroup != null) {
+                if (timeslot != null && !TextUtils.isEmpty(timeslot)) {
+                    if (!TextUtils.isEmpty(appointmentForName)) {
+
+                        val request = RequestBookAppointment("", dateInString, bloodGroup, doctorId, appointmentForName, patientId, gender, timeslot, hospitalId, Helper.getBookingType(bookingType!!))
+                        bookAppointment(request)
 
                     } else {
-                        Helper.toastLong(this@BookingActivity, "Please choose a time slot !")
+                        Helper.toastLong(this@BookingActivity, "Please enter patient name !")
                     }
 
                 } else {
-                    Helper.toastLong(this@BookingActivity, "Please update your profile first !")
+                    Helper.toastLong(this@BookingActivity, "Please choose a time slot !")
                 }
 
             } else {
-                Helper.toastLong(this@BookingActivity, "Please choose a date !")
+                Helper.toastLong(this@BookingActivity, "Please update your profile first !")
             }
+
+        } else {
+            Helper.toastLong(this@BookingActivity, "Please choose a date !")
         }
 
     }
@@ -201,9 +215,9 @@ class BookingActivity : AppCompatActivity() {
 
     private fun fetchTimeSlots(request: RequestDoctorTimeSlotsList) {
         if (Helper.isConnectedToInternet(this@BookingActivity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Helper.showLoading(this)
-            }
+            }*/
             val call: Call<ResponseDoctorTimeSlotsList> = APIInterface.create().getDoctorTimeSlotsList(request)
             call.enqueue(object : Callback<ResponseDoctorTimeSlotsList> {
                 override fun onResponse(

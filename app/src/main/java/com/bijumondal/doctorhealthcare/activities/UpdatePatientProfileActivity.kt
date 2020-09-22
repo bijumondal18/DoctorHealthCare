@@ -129,11 +129,7 @@ class UpdatePatientProfileActivity : AppCompatActivity() {
             CaptureImage.showPictureDialog(this@UpdatePatientProfileActivity)
         }
 
-        val currentDate = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formatted = currentDate.format(formatter)
-
-        crntDate = formatted.toString()
+        crntDate = Helper.getCurrentDate().toString()
 
     }
 

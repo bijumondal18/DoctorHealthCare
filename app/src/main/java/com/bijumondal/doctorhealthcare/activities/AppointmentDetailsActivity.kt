@@ -78,7 +78,9 @@ class AppointmentDetailsActivity : AppCompatActivity() {
         if (intent.hasExtra("patientId") != null) {
             patientId = intent.getStringExtra("patientId").toString()
         }
-
+        if (intent.hasExtra("appointmentType") != null) {
+            tv_appointment_type.text = intent.getStringExtra("appointmentType").toString()
+        }
 
     }
 
